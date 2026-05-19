@@ -15,6 +15,7 @@
     "traffic:import:seoul-file": "tsx scripts/import-seoul-file.ts",
     "traffic:collect:its": "tsx scripts/collect-its-realtime.ts",
     "traffic:collect:seoul": "tsx scripts/collect-seoul-realtime.ts",
+    "traffic:collect:ndjson": "tsx scripts/collect-realtime-ndjson.ts",
     "traffic:collect:tdata": "tsx scripts/collect-tdata-hourly-section.ts",
     "traffic:collect:incheon": "tsx scripts/collect-incheon-daily.ts",
     "traffic:export:river-corridors": "tsx scripts/export-river-corridors.ts"

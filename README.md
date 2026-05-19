@@ -31,9 +31,32 @@ npm run traffic:import:seoul-file -- --file ./downloaded-seoul-speed.csv
 npm run traffic:collect:tdata -- --start 2026-01-01 --end 2026-05-19 --road 강변북로 --road-div 도시고속도로
 npm run traffic:collect:its
 npm run traffic:collect:seoul
+npm run traffic:collect:ndjson
 npm run traffic:collect:incheon -- --start 2026-05-01 --end 2026-05-19 --road 경인로
 ```
 
 서울 열린데이터광장 `서울도시고속도로 일별 시간대별 교통소통(속도) 정보` 파일은 반기 단위 공개 파일이며, 현재 공개 파일은 2025년 하반기까지입니다. 2026년처럼 최신 날짜 범위의 시간대별 도로 속도는 T-DATA `1시간 소통정보 (구간별)` 수집기를 사용합니다.
 
 API 키가 없으면 `traffic:seed` 샘플 데이터로 웹 UI와 CSV/XLSX 내보내기를 먼저 확인할 수 있습니다.
+
+## 30분 실시간 NDJSON 수집
+
+GitHub Actions 워크플로우 `.github/workflows/collect-realtime-traffic.yml`가 30분마다 실행되어 현재 교통상황을 월별 NDJSON 파일에 누적합니다.
+
+```text
+data/realtime-traffic-2026-05.ndjson
+```
+
+각 줄은 독립 JSON이며 시간은 `2026-05-19 00:30` 형식의 KST 분 단위 문자열로 저장됩니다. 기본 수집 대상은 `올림픽대로,강변북로`입니다.
+
+GitHub 저장소에 필요한 값:
+
+- Secret `ITS_API_KEY`: ITS 실시간 교통소통정보 API 키
+- Secret `SEOUL_OPENAPI_KEY`: 선택 사항, TOPIS 링크 ID 기반 수집용
+- Secret `SEOUL_LINK_IDS`: 선택 사항, 쉼표로 구분한 TOPIS 링크 ID
+- Variable `TRAFFIC_TARGET_ROADS`: 선택 사항, 기본값 `올림픽대로,강변북로`
+- Variable `TRAFFIC_TARGET_REGIONS`: 선택 사항, 기본값 `서울`
+- Variable `TRAFFIC_TARGET_SECTION_KEYWORDS`: 선택 사항, 구간명/링크 ID 키워드 필터
+- Variable `TRAFFIC_TARGET_LINK_IDS`: 선택 사항, 정확한 링크 ID 필터
+
+수집 커밋은 `data/realtime-traffic-YYYY-MM.ndjson`만 변경합니다. Vercel은 `vercel.json`의 `ignoreCommand`로 데이터 전용 커밋 빌드를 건너뛰도록 설정되어 있습니다.

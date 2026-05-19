@@ -1,6 +1,8 @@
 .next/
 node_modules/
-data/
+/data/*
+!/data/.gitkeep
+!/data/realtime-traffic-*.ndjson
 outputs/
 .env
 .env.local
@@ -8,4 +10,4 @@ outputs/
 coverage/
 tsconfig.tsbuildinfo
 .DS_Store
-.vercel
+.vercel/
