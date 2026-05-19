@@ -86,6 +86,88 @@ describe("traffic repository", () => {
     ]);
   });
 
+  it("counts observations and returns offset pages for virtualized all-data tables", () => {
+    const dir = mkdtempSync(join(tmpdir(), "traffic-db-"));
+    tempDirs.push(dir);
+
+    const repo = createTrafficRepository(join(dir, "traffic.sqlite"));
+    repo.migrate();
+    repo.upsertObservations([
+      {
+        region: "서울",
+        roadName: "강변북로",
+        sectionName: "A-B",
+        linkId: "L-1",
+        roadKind: "urban_expressway",
+        observedAt: "2026-05-01T08:00:00+09:00",
+        observedDate: "2026-05-01",
+        observedHour: 8,
+        granularity: "hour",
+        sourceName: "test",
+        speedKph: 42,
+        travelTimeSeconds: null,
+        trafficVolume: null,
+        occupancy: null,
+        congestionLevel: "slow",
+        congestionLabel: "서행",
+        congestionMethod: "topis-threshold"
+      },
+      {
+        region: "서울",
+        roadName: "올림픽대로",
+        sectionName: "C-D",
+        linkId: "L-2",
+        roadKind: "urban_expressway",
+        observedAt: "2026-05-01T09:00:00+09:00",
+        observedDate: "2026-05-01",
+        observedHour: 9,
+        granularity: "hour",
+        sourceName: "test",
+        speedKph: 55,
+        travelTimeSeconds: null,
+        trafficVolume: null,
+        occupancy: null,
+        congestionLevel: "smooth",
+        congestionLabel: "원활",
+        congestionMethod: "topis-threshold"
+      },
+      {
+        region: "인천",
+        roadName: "경인로",
+        sectionName: "E-F",
+        linkId: "L-3",
+        roadKind: "general_road",
+        observedAt: "2026-05-01T10:00:00+09:00",
+        observedDate: "2026-05-01",
+        observedHour: 10,
+        granularity: "hour",
+        sourceName: "test",
+        speedKph: 24,
+        travelTimeSeconds: null,
+        trafficVolume: null,
+        occupancy: null,
+        congestionLevel: "slow",
+        congestionLabel: "서행",
+        congestionMethod: "threshold-derived"
+      }
+    ]);
+
+    const query = {
+      startDate: "2026-05-01",
+      endDate: "2026-05-01",
+      region: "all" as const,
+      roadName: "",
+      granularity: "all" as const,
+      limit: 50
+    };
+
+    assert.equal(repo.countObservations(query), 3);
+
+    const page = repo.queryObservationsPage(query, { offset: 1, limit: 1 });
+    assert.equal(page.length, 1);
+    assert.equal(page[0].roadName, "올림픽대로");
+  });
+
   it("derives hourly rows from finer-grained observations", () => {
     const dir = mkdtempSync(join(tmpdir(), "traffic-db-"));
     tempDirs.push(dir);

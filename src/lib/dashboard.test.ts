@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { queryFromCoverage, queryFromSearchParams, trafficQueryToSearchParams } from "./dashboard";
+import { ALL_DATA_TRAFFIC_LIMIT, queryFromAllDataSearchParams, queryFromCoverage, queryFromSearchParams, trafficQueryToSearchParams } from "./dashboard";
 
 describe("dashboard query defaults", () => {
   it("uses a sole loaded coverage range when no date range is requested", () => {
@@ -91,6 +91,44 @@ describe("dashboard query defaults", () => {
     const query = queryFromSearchParams(new URLSearchParams("limit=250000"));
 
     assert.equal(query.limit, 100000);
+  });
+
+  it("uses the full loaded coverage range for the all-data table by default", () => {
+    const query = queryFromAllDataSearchParams(new URLSearchParams(), [
+      {
+        sourceName: "its-realtime",
+        minDate: "2026-05-19",
+        maxDate: "2026-05-19",
+        status: "available",
+        message: "realtime public data"
+      },
+      {
+        sourceName: "seoul-urban-file",
+        minDate: "2025-07-01",
+        maxDate: "2025-12-31",
+        status: "available",
+        message: "historical public data"
+      }
+    ]);
+
+    assert.equal(query.startDate, "2025-07-01");
+    assert.equal(query.endDate, "2026-05-19");
+    assert.equal(query.limit, ALL_DATA_TRAFFIC_LIMIT);
+  });
+
+  it("keeps explicit all-data date filters ahead of the full coverage range", () => {
+    const query = queryFromAllDataSearchParams(new URLSearchParams("startDate=2026-05-01&endDate=2026-05-02"), [
+      {
+        sourceName: "seoul-urban-file",
+        minDate: "2025-07-01",
+        maxDate: "2025-12-31",
+        status: "available",
+        message: "historical public data"
+      }
+    ]);
+
+    assert.equal(query.startDate, "2026-05-01");
+    assert.equal(query.endDate, "2026-05-02");
   });
 
   it("serializes traffic query parameters for browser fetches", () => {

@@ -1,19 +1,23 @@
-import { CctvVideoPanel } from "@/components/cctv-video-panel";
-import { RiverCorridorPanel } from "@/components/river-corridor-panel";
-import { buildCctvVideoReport } from "@/lib/cctv";
-import type { RiverCorridorReport } from "@/lib/river-corridors";
-import riverCorridorStaticReport from "@/lib/river-corridor-static-report.json";
+import { TrafficDashboard } from "@/components/traffic-dashboard";
+import { queryFromSearchParams } from "@/lib/dashboard";
+import { getTrafficRepository } from "@/lib/repository";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export default async function Home() {
-  const cctvReport = await buildCctvVideoReport();
-  const riverCorridorReport = riverCorridorStaticReport as RiverCorridorReport;
+  const repo = getTrafficRepository();
+  const coverage = repo.getCoverage();
+  const query = queryFromSearchParams(new URLSearchParams(), coverage);
+  const rows = repo.queryObservations(query);
+  const roadOptions = repo.getRoadOptions();
 
   return (
-    <main className="dashboard-shell">
-      <CctvVideoPanel report={cctvReport} />
-      <RiverCorridorPanel report={riverCorridorReport} />
-    </main>
+    <TrafficDashboard
+      initialRows={rows}
+      initialCoverage={coverage}
+      initialRoadOptions={roadOptions}
+      initialQuery={query}
+    />
   );
 }

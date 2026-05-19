@@ -3,18 +3,33 @@ import type { DataCoverageRow, RegionFilter, TrafficQuery } from "./types";
 
 export const DEFAULT_TRAFFIC_LIMIT = 50000;
 export const MAX_TRAFFIC_LIMIT = 100000;
+export const ALL_DATA_TRAFFIC_LIMIT = Number.MAX_SAFE_INTEGER;
 
 export function queryFromSearchParams(searchParams: URLSearchParams, coverage: DataCoverageRow[] = []): TrafficQuery {
   const defaults = defaultDateRangeFromCoverage(coverage);
+  return queryFromSearchParamsWithDefaults(searchParams, defaults, DEFAULT_TRAFFIC_LIMIT, MAX_TRAFFIC_LIMIT);
+}
+
+export function queryFromAllDataSearchParams(searchParams: URLSearchParams, coverage: DataCoverageRow[] = []): TrafficQuery {
+  const defaults = fullDateRangeFromCoverage(coverage) ?? defaultDateRange();
+  return queryFromSearchParamsWithDefaults(searchParams, defaults, ALL_DATA_TRAFFIC_LIMIT, ALL_DATA_TRAFFIC_LIMIT);
+}
+
+function queryFromSearchParamsWithDefaults(
+  searchParams: URLSearchParams,
+  defaults: { startDate: string; endDate: string },
+  defaultLimit: number,
+  maxLimit: number
+): TrafficQuery {
   const region = searchParams.get("region");
-  const requestedLimit = Number(searchParams.get("limit") || DEFAULT_TRAFFIC_LIMIT);
+  const requestedLimit = Number(searchParams.get("limit") || defaultLimit);
   return {
     startDate: searchParams.get("startDate") || defaults.startDate,
     endDate: searchParams.get("endDate") || defaults.endDate,
     region: region === "서울" || region === "인천" ? region : "all",
     roadName: searchParams.get("roadName") || "",
     granularity: parseGranularity(searchParams.get("granularity")),
-    limit: Math.min(Number.isFinite(requestedLimit) && requestedLimit > 0 ? requestedLimit : DEFAULT_TRAFFIC_LIMIT, MAX_TRAFFIC_LIMIT)
+    limit: Math.min(Number.isFinite(requestedLimit) && requestedLimit > 0 ? requestedLimit : defaultLimit, maxLimit)
   };
 }
 
@@ -52,6 +67,17 @@ function defaultDateRangeFromCoverage(coverage: DataCoverageRow[]): { startDate:
   return {
     startDate: available[0].minDate!,
     endDate: available[0].maxDate!
+  };
+}
+
+function fullDateRangeFromCoverage(coverage: DataCoverageRow[]): { startDate: string; endDate: string } | null {
+  const ranges = coverage.filter(
+    (row): row is DataCoverageRow & { minDate: string; maxDate: string } => row.status === "available" && !!row.minDate && !!row.maxDate
+  );
+  if (!ranges.length) return null;
+  return {
+    startDate: ranges.reduce((min, row) => (row.minDate < min ? row.minDate : min), ranges[0].minDate),
+    endDate: ranges.reduce((max, row) => (row.maxDate > max ? row.maxDate : max), ranges[0].maxDate)
   };
 }
 

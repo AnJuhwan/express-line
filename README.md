@@ -11,7 +11,7 @@ npm run traffic:seed
 npm run dev
 ```
 
-웹 UI는 `http://localhost:3000`에서 확인합니다.
+웹 UI는 `http://localhost:3000`에서 확인합니다. DB 적재 상태를 행 단위로 확인하려면 `http://localhost:3000/data`의 전체 데이터 테이블을 사용합니다.
 
 ## API 키
 

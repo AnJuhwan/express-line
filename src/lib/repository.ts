@@ -10,9 +10,16 @@ export interface TrafficRepository {
   migrate(): void;
   upsertObservations(rows: NormalizedTrafficObservation[]): void;
   queryObservations(query: TrafficQuery): TrafficObservationRow[];
+  queryObservationsPage(query: TrafficQuery, page: ObservationPage): TrafficObservationRow[];
+  countObservations(query: TrafficQuery): number;
   queryObservationsByRoadSections(query: RoadSectionObservationQuery): TrafficObservationRow[];
   getCoverage(): DataCoverageRow[];
   getRoadOptions(): RoadOption[];
+}
+
+export interface ObservationPage {
+  offset: number;
+  limit: number;
 }
 
 export interface RoadSectionObservationQuery {
@@ -132,48 +139,13 @@ export function createTrafficRepository(dbPath: string): TrafficRepository {
       }
     },
     queryObservations(query) {
-      if (query.granularity === "hour" || query.granularity === "day") {
-        return queryAggregatedObservations(db, query, query.granularity);
-      }
-
-      const { clauses, params } = observationWhere(query);
-      if (query.granularity !== "all") {
-        clauses.push("o.granularity = ?");
-        params.push(query.granularity);
-      }
-      params.push(query.limit);
-
-      const rows = db
-        .prepare(`
-          SELECT
-            o.id,
-            o.road_id AS roadId,
-            r.region,
-            r.road_name AS roadName,
-            r.section_name AS sectionName,
-            r.link_id AS linkId,
-            r.road_kind AS roadKind,
-            COALESCE(r.road_div_name, '') AS roadDivName,
-            o.observed_at AS observedAt,
-            o.observed_date AS observedDate,
-            o.observed_hour AS observedHour,
-            o.granularity,
-            o.source_name AS sourceName,
-            o.speed_kph AS speedKph,
-            o.travel_time_seconds AS travelTimeSeconds,
-            o.traffic_volume AS trafficVolume,
-            o.occupancy,
-            o.congestion_level AS congestionLevel,
-            o.congestion_label AS congestionLabel,
-            o.congestion_method AS congestionMethod
-          FROM traffic_observations o
-          JOIN roads r ON r.id = o.road_id
-          WHERE ${clauses.join(" AND ")}
-          ORDER BY o.observed_at ASC, r.road_name ASC, r.section_name ASC
-          LIMIT ?
-        `)
-        .all(...params);
-      return rows.map((row) => ({ ...(row as unknown as TrafficObservationRow) }));
+      return queryObservationsPage(db, query, { offset: 0, limit: query.limit });
+    },
+    queryObservationsPage(query, page) {
+      return queryObservationsPage(db, query, page);
+    },
+    countObservations(query) {
+      return countObservations(db, query);
     },
     queryObservationsByRoadSections(query) {
       if (!query.sections.length) return [];
@@ -241,12 +213,81 @@ function loadDatabaseSync(): DatabaseSyncConstructor {
   throw new Error("node:sqlite is unavailable in this runtime. Use the static corridor report or a Node runtime with SQLite support.");
 }
 
-function queryAggregatedObservations(db: SQLiteDatabaseSync, query: TrafficQuery, bucket: "hour" | "day"): TrafficObservationRow[] {
+function queryObservationsPage(db: SQLiteDatabaseSync, query: TrafficQuery, page: ObservationPage): TrafficObservationRow[] {
+  const safePage = normalizePage(page);
+  if (safePage.limit === 0) return [];
+  if (query.granularity === "hour" || query.granularity === "day") {
+    return queryAggregatedObservations(db, query, query.granularity, safePage);
+  }
+
+  const { clauses, params } = observationWhere(query);
+  if (query.granularity !== "all") {
+    clauses.push("o.granularity = ?");
+    params.push(query.granularity);
+  }
+  params.push(safePage.limit, safePage.offset);
+
+  const rows = db
+    .prepare(`
+      SELECT
+        o.id,
+        o.road_id AS roadId,
+        r.region,
+        r.road_name AS roadName,
+        r.section_name AS sectionName,
+        r.link_id AS linkId,
+        r.road_kind AS roadKind,
+        COALESCE(r.road_div_name, '') AS roadDivName,
+        o.observed_at AS observedAt,
+        o.observed_date AS observedDate,
+        o.observed_hour AS observedHour,
+        o.granularity,
+        o.source_name AS sourceName,
+        o.speed_kph AS speedKph,
+        o.travel_time_seconds AS travelTimeSeconds,
+        o.traffic_volume AS trafficVolume,
+        o.occupancy,
+        o.congestion_level AS congestionLevel,
+        o.congestion_label AS congestionLabel,
+        o.congestion_method AS congestionMethod
+      FROM traffic_observations o
+      JOIN roads r ON r.id = o.road_id
+      WHERE ${clauses.join(" AND ")}
+      ORDER BY o.observed_at ASC, r.road_name ASC, r.section_name ASC
+      LIMIT ? OFFSET ?
+    `)
+    .all(...params);
+  return rows.map((row) => ({ ...(row as unknown as TrafficObservationRow) }));
+}
+
+function countObservations(db: SQLiteDatabaseSync, query: TrafficQuery): number {
+  if (query.granularity === "hour" || query.granularity === "day") {
+    return countAggregatedObservations(db, query, query.granularity);
+  }
+
+  const { clauses, params } = observationWhere(query);
+  if (query.granularity !== "all") {
+    clauses.push("o.granularity = ?");
+    params.push(query.granularity);
+  }
+
+  const row = db
+    .prepare(`
+      SELECT COUNT(*) AS count
+      FROM traffic_observations o
+      JOIN roads r ON r.id = o.road_id
+      WHERE ${clauses.join(" AND ")}
+    `)
+    .get(...params) as { count: number };
+  return row.count;
+}
+
+function queryAggregatedObservations(db: SQLiteDatabaseSync, query: TrafficQuery, bucket: "hour" | "day", page: ObservationPage): TrafficObservationRow[] {
   const { clauses, params } = observationWhere(query);
   if (bucket === "hour") {
     clauses.push("o.granularity <> 'day'");
   }
-  params.push(query.limit);
+  params.push(page.limit, page.offset);
 
   const bucketAt =
     bucket === "day"
@@ -297,11 +338,41 @@ function queryAggregatedObservations(db: SQLiteDatabaseSync, query: TrafficQuery
       WHERE ${clauses.join(" AND ")}
       GROUP BY ${groupBy}
       ORDER BY o.observed_date ASC, observedHour ASC, r.road_name ASC, r.section_name ASC
-      LIMIT ?
+      LIMIT ? OFFSET ?
     `)
     .all(...params);
 
   return rows.map((row) => ({ ...(row as unknown as TrafficObservationRow) }));
+}
+
+function countAggregatedObservations(db: SQLiteDatabaseSync, query: TrafficQuery, bucket: "hour" | "day"): number {
+  const { clauses, params } = observationWhere(query);
+  if (bucket === "hour") {
+    clauses.push("o.granularity <> 'day'");
+  }
+
+  const groupBy = bucket === "day" ? "o.road_id, o.observed_date" : "o.road_id, o.observed_date, o.observed_hour";
+
+  const row = db
+    .prepare(`
+      SELECT COUNT(*) AS count
+      FROM (
+        SELECT 1
+        FROM traffic_observations o
+        JOIN roads r ON r.id = o.road_id
+        WHERE ${clauses.join(" AND ")}
+        GROUP BY ${groupBy}
+      ) grouped
+    `)
+    .get(...params) as { count: number };
+  return row.count;
+}
+
+function normalizePage(page: ObservationPage): ObservationPage {
+  return {
+    offset: Math.max(0, Math.floor(page.offset)),
+    limit: Math.max(0, Math.floor(page.limit))
+  };
 }
 
 function observationWhere(query: TrafficQuery): { clauses: string[]; params: (string | number)[] } {

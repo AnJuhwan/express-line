@@ -160,6 +160,10 @@ h1 {
   margin-bottom: 22px;
 }
 
+.all-data-summary {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
 .metric-card {
   min-height: 110px;
   padding: 18px;
@@ -178,8 +182,14 @@ h1 {
 .metric-card strong {
   display: block;
   margin-top: 18px;
+  overflow-wrap: anywhere;
   font-size: 30px;
   letter-spacing: 0;
+}
+
+.all-data-summary .metric-card strong {
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .data-section {
@@ -207,6 +217,21 @@ h1 {
   color: var(--muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 13px;
+}
+
+.table-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 11px;
+  background: #fbfcfa;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .chart-frame {
@@ -539,12 +564,6 @@ h1 {
   background: #fbfcfa;
 }
 
-.cctv-body {
-  display: grid;
-  gap: 18px;
-  padding: 18px;
-}
-
 .api-link {
   display: inline-flex;
   align-items: center;
@@ -556,158 +575,6 @@ h1 {
   color: var(--ink);
   font-family: var(--font-geist-mono), monospace;
   font-size: 13px;
-  font-weight: 800;
-}
-
-.cctv-warning {
-  display: grid;
-  gap: 7px;
-  padding: 16px;
-  border: 1px solid #ead6b8;
-  border-radius: 8px;
-  background: #fff8ea;
-}
-
-.cctv-warning strong {
-  color: var(--ink);
-  font-size: 18px;
-}
-
-.cctv-warning span {
-  color: #594a32;
-  line-height: 1.5;
-}
-
-.cctv-warning small {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.cctv-source-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.cctv-source-card {
-  display: grid;
-  gap: 8px;
-  min-height: 128px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fbfcfa;
-}
-
-.cctv-source-card.ok {
-  background: #eff8f5;
-}
-
-.cctv-source-card.unavailable,
-.cctv-source-card.missing-key {
-  background: #fff4f1;
-}
-
-.cctv-source-card span,
-.cctv-source-card small {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.cctv-source-card strong {
-  color: var(--ink);
-  overflow-wrap: anywhere;
-  font-size: 24px;
-  line-height: 1.15;
-}
-
-.cctv-route-block {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.cctv-video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  padding: 14px;
-  background: #fbfcfa;
-}
-
-.cctv-card {
-  display: grid;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-}
-
-.cctv-player {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: #101715;
-}
-
-.cctv-player video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #101715;
-  object-fit: cover;
-}
-
-.cctv-open-link,
-.cctv-loading {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  border-radius: 6px;
-  padding: 0 9px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.cctv-loading {
-  pointer-events: none;
-}
-
-.cctv-card-meta {
-  display: grid;
-  gap: 5px;
-  padding: 12px;
-}
-
-.cctv-card-meta strong,
-.cctv-card-meta span,
-.cctv-card-meta small {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.cctv-card-meta strong {
-  color: var(--ink);
-  font-size: 15px;
-}
-
-.cctv-card-meta span,
-.cctv-card-meta small {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.cctv-empty {
-  padding: 18px;
-  color: var(--muted);
   font-weight: 800;
 }
 
@@ -861,10 +728,20 @@ h1 {
   background: #eff7f4;
 }
 
+.virtual-table-row.loading {
+  background: #fbfcfa;
+  color: var(--muted);
+}
+
 .virtual-table-cell {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.virtual-table-cell.span-all {
+  grid-column: 1 / -1;
+  font-weight: 800;
 }
 
 .virtual-table-cell.strong {
@@ -985,8 +862,7 @@ button.coverage-card:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .cctv-source-grid,
-  .cctv-video-grid {
+  .all-data-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -994,8 +870,6 @@ button.coverage-card:disabled {
 @media (max-width: 640px) {
   .filter-panel,
   .summary-grid,
-  .cctv-source-grid,
-  .cctv-video-grid,
   .river-corridor-meta {
     grid-template-columns: 1fr;
   }

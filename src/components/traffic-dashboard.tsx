@@ -1,14 +1,16 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import type { ReactNode } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { CalendarDays, Download, FileSpreadsheet, Filter, RefreshCcw, Search, TrafficCone } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { CalendarDays, Database, Download, FileSpreadsheet, Filter, RefreshCcw, Search, TrafficCone } from "lucide-react";
 import { defaultDateRange } from "@/lib/traffic";
 import { DEFAULT_TRAFFIC_LIMIT, queryFromCoverage, trafficQueryToSearchParams } from "@/lib/dashboard";
-import { TRAFFIC_SECTION_LABEL, coverageMessage, displayRoadDivName, displayRoadName, displaySectionName, sourceLabel } from "@/lib/display";
+import { TRAFFIC_SECTION_LABEL, coverageMessage, displayRoadName, sourceLabel } from "@/lib/display";
 import { HOURS, buildCongestedDaysByHourSummary, buildHourlyRoadSummary } from "@/lib/hourly-summary";
 import type { CongestedDaysByHourRow, HourlyRoadSummaryRow } from "@/lib/hourly-summary";
+import { VirtualTrafficTable } from "@/components/virtual-traffic-table";
 import type { DataCoverageRow, RoadOption, TrafficObservationRow, TrafficQuery } from "@/lib/types";
 
 const SpeedChart = dynamic(() => import("./speed-chart").then((module) => module.SpeedChart), {
@@ -43,10 +45,6 @@ const emptyQuery: TrafficQuery = {
   granularity: "all",
   limit: DEFAULT_TRAFFIC_LIMIT
 };
-
-const VIRTUAL_ROW_HEIGHT = 58;
-const VIRTUAL_VIEWPORT_HEIGHT = 620;
-const VIRTUAL_OVERSCAN = 12;
 
 export function TrafficDashboard({
   initialRows = [],
@@ -144,6 +142,10 @@ export function TrafficDashboard({
           <p className="hero-copy">날짜, 시간 단위, 도로명별 속도와 혼잡도를 한 화면에서 조회하고 CSV/XLSX로 내보냅니다.</p>
         </div>
         <div className="hero-actions">
+          <Link className="icon-button" href="/data" title="전체 데이터 확인">
+            <Database size={18} />
+            전체 데이터
+          </Link>
           <a className="icon-button" href={`/api/export?${exportParams.toString()}&format=csv`} title="CSV 다운로드">
             <Download size={18} />
             CSV
@@ -250,7 +252,7 @@ export function TrafficDashboard({
           <h2>관측 데이터</h2>
           <p>조회 {summary.count.toLocaleString("ko-KR")}행 / 최대 {query.limit.toLocaleString("ko-KR")}행</p>
         </div>
-        <VirtualTrafficTable rows={payload.rows} coverage={payload.coverage} />
+        <VirtualTrafficTable rows={payload.rows} emptyState={<EmptyState coverage={payload.coverage} />} />
       </section>
 
       <section className="coverage-strip">
@@ -389,109 +391,8 @@ function HourlyRoadSummaryTable({ rows, coverage }: { rows: HourlyRoadSummaryRow
   );
 }
 
-function VirtualTrafficTable({ rows, coverage }: { rows: TrafficObservationRow[]; coverage: DataCoverageRow[] }) {
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-  const [scrollTop, setScrollTop] = useState(0);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setScrollTop(0);
-      if (viewportRef.current) viewportRef.current.scrollTop = 0;
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [rows]);
-
-  const virtualRows = useMemo(() => {
-    const startIndex = Math.max(0, Math.floor(scrollTop / VIRTUAL_ROW_HEIGHT) - VIRTUAL_OVERSCAN);
-    const endIndex = Math.min(
-      rows.length,
-      Math.ceil((scrollTop + VIRTUAL_VIEWPORT_HEIGHT) / VIRTUAL_ROW_HEIGHT) + VIRTUAL_OVERSCAN
-    );
-    return {
-      startIndex,
-      endIndex,
-      rows: rows.slice(startIndex, endIndex),
-      totalHeight: rows.length * VIRTUAL_ROW_HEIGHT
-    };
-  }, [rows, scrollTop]);
-
-  if (!rows.length) {
-    return (
-      <div className="table-wrap">
-        <EmptyState coverage={coverage} />
-      </div>
-    );
-  }
-
-  return (
-    <div className="table-wrap">
-      <div className="virtual-table" role="table" aria-rowcount={rows.length + 1}>
-        <div className="virtual-table-header" role="row">
-          <div role="columnheader">날짜</div>
-          <div role="columnheader">시간</div>
-          <div role="columnheader">지역</div>
-          <div role="columnheader">도로명</div>
-          <div role="columnheader">도로구분</div>
-          <div role="columnheader">{TRAFFIC_SECTION_LABEL}</div>
-          <div role="columnheader">속도</div>
-          <div role="columnheader">교통량</div>
-          <div role="columnheader">혼잡</div>
-          <div role="columnheader">원천</div>
-        </div>
-        <div
-          ref={viewportRef}
-          className="virtual-table-body"
-          role="rowgroup"
-          tabIndex={0}
-          onScroll={(event) => setScrollTop(event.currentTarget.scrollTop)}
-        >
-          <div className="virtual-table-spacer" style={{ height: virtualRows.totalHeight }}>
-            {virtualRows.rows.map((row, offset) => {
-              const rowIndex = virtualRows.startIndex + offset;
-              return (
-                <div
-                  key={row.id}
-                  className="virtual-table-row"
-                  role="row"
-                  aria-rowindex={rowIndex + 2}
-                  style={{ height: VIRTUAL_ROW_HEIGHT, transform: `translateY(${rowIndex * VIRTUAL_ROW_HEIGHT}px)` }}
-                >
-                  <div className="virtual-table-cell mono" role="cell" title={row.observedDate}>{row.observedDate}</div>
-                  <div className="virtual-table-cell mono" role="cell">{String(row.observedHour).padStart(2, "0")}</div>
-                  <div className="virtual-table-cell" role="cell">{row.region}</div>
-                  <div className="virtual-table-cell strong" role="cell" title={displayRoadName(row.roadName)}>
-                    {displayRoadName(row.roadName)}
-                  </div>
-                  <div className="virtual-table-cell" role="cell" title={displayRoadDivName(row)}>
-                    {displayRoadDivName(row)}
-                  </div>
-                  <div className="virtual-table-cell" role="cell" title={displaySectionName(row)}>
-                    {displaySectionName(row)}
-                  </div>
-                  <div className="virtual-table-cell mono" role="cell">{formatSpeed(row.speedKph)}</div>
-                  <div className="virtual-table-cell mono" role="cell">{formatOptionalNumber(row.trafficVolume)}</div>
-                  <div className="virtual-table-cell" role="cell">
-                    <span className={`pill ${row.congestionLevel}`}>{row.congestionLabel}</span>
-                  </div>
-                  <div className="virtual-table-cell" role="cell" title={sourceLabel(row.sourceName)}>
-                    {sourceLabel(row.sourceName)}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function formatSpeed(speedKph: number | null): string {
   return speedKph == null ? "-" : `${Number(speedKph.toFixed(1)).toLocaleString("ko-KR")} km/h`;
-}
-
-function formatOptionalNumber(value: number | null): string {
-  return value == null ? "-" : Number(value.toFixed(1)).toLocaleString("ko-KR");
 }
 
 function formatPercent(value: number): string {
