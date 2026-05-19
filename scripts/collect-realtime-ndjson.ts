@@ -1,3 +1,5 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import {
   buildItsTrafficInfoUrl,
   buildSeoulTrafficInfoUrl,
@@ -19,6 +21,8 @@ import {
 import type { NormalizedTrafficObservation } from "../src/lib/types";
 
 loadEnvFiles();
+
+const execFileAsync = promisify(execFile);
 
 const boxes = {
   "서울": {
@@ -106,14 +110,53 @@ async function collectItsRows(regions: Array<"서울" | "인천">): Promise<Norm
   const rows: NormalizedTrafficObservation[] = [];
   for (const region of regions) {
     const url = buildItsTrafficInfoUrl({ apiKey, ...boxes[region] });
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) throw new Error(`ITS request failed for ${region}: ${response.status}`);
-    const text = await response.text();
+    const text = await fetchTextWithCurlFallback(url, `ITS ${region}`);
     const items = text.trim().startsWith("<") ? extractItsTrafficInfoXmlItems(text) : extractPublicDataItems(JSON.parse(text));
     rows.push(...normalizeItsTrafficInfoItems(items, region));
   }
 
   return rows;
+}
+
+async function fetchTextWithCurlFallback(url: URL, label: string): Promise<string> {
+  try {
+    const response = await fetch(url, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(Number(process.env.TRAFFIC_FETCH_TIMEOUT_MS ?? 30000))
+    });
+    if (!response.ok) throw new Error(`${label} request failed: ${response.status}`);
+    return await response.text();
+  } catch (error) {
+    console.warn(`${label} fetch failed. Retrying with curl fallback.`, safeErrorMessage(error));
+    return curlGet(url);
+  }
+}
+
+async function curlGet(url: URL): Promise<string> {
+  try {
+    const { stdout } = await execFileAsync(
+      "curl",
+      [
+        "--ipv4",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--connect-timeout",
+        process.env.TRAFFIC_CURL_CONNECT_TIMEOUT_SECONDS ?? "45",
+        "--max-time",
+        process.env.TRAFFIC_CURL_MAX_TIME_SECONDS ?? "180",
+        "--retry",
+        process.env.TRAFFIC_CURL_RETRIES ?? "2",
+        "--retry-delay",
+        process.env.TRAFFIC_CURL_RETRY_DELAY_SECONDS ?? "3",
+        url.toString()
+      ],
+      { maxBuffer: 64 * 1024 * 1024 }
+    );
+    return stdout;
+  } catch (error) {
+    throw new Error(`curl fallback failed: ${safeErrorMessage(error)}`);
+  }
 }
 
 async function collectWithFallback(
@@ -154,6 +197,12 @@ function parseRegions(value: string): Array<"서울" | "인천"> {
 
 function hasUsableTrafficStatus(row: NormalizedTrafficObservation): boolean {
   return row.speedKph != null && Number.isFinite(row.speedKph) && row.congestionLevel !== "unknown";
+}
+
+function safeErrorMessage(error: unknown): string {
+  if (!(error instanceof Error)) return String(error);
+  const apiKey = process.env.ITS_API_KEY;
+  return apiKey ? error.message.replaceAll(apiKey, "[ITS_API_KEY]") : error.message;
 }
 
 function getArg(name: string): string | null {
