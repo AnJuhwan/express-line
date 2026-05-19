@@ -53,8 +53,8 @@ async function main() {
   const targetLinkIds = parseCsvList(process.env.TRAFFIC_TARGET_LINK_IDS);
 
   const [itsRows, topisRows] = await Promise.all([
-    collectItsRows(targetRegions),
-    collectSeoulTopisRows()
+    collectWithFallback("ITS realtime", () => collectItsRows(targetRegions)),
+    collectWithFallback("Seoul TOPIS realtime", collectSeoulTopisRows)
   ]);
 
   const matchedItsRows = itsRows.filter((row) =>
@@ -112,6 +112,19 @@ async function collectItsRows(regions: Array<"서울" | "인천">): Promise<Norm
   }
 
   return rows;
+}
+
+async function collectWithFallback(
+  label: string,
+  collect: () => Promise<NormalizedTrafficObservation[]>
+): Promise<NormalizedTrafficObservation[]> {
+  try {
+    return await collect();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`${label} collection failed. Continuing with other sources.`, message);
+    return [];
+  }
 }
 
 async function collectSeoulTopisRows(): Promise<NormalizedTrafficObservation[]> {
