@@ -80,7 +80,7 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
     <main className="dashboard-shell requested-home">
       <section className="hero-band requested-hero">
         <div>
-          <p className="eyebrow">Requested traffic extract</p>
+          <p className="eyebrow">요청 구간 추출 리포트</p>
           <h1>요청 구간별 시간대 정체 데이터</h1>
           <p className="hero-copy">
             {report.period} ITS 5분 원천을 표준링크와 매칭해 계양IC, 장수IC, 신월IC, 강변북로 방향별 요약으로 정리했습니다.
@@ -101,7 +101,7 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
       <section className="summary-grid requested-summary">
         <Metric icon={<Route size={18} />} label="요청 구간" value={`${report.totalRoutes.toLocaleString("ko-KR")}개`} />
         <Metric icon={<Database size={18} />} label="5분 관측" value={`${report.totalFiveMinuteRows.toLocaleString("ko-KR")}건`} />
-        <Metric icon={<TrafficCone size={18} />} label="표준링크" value={`${report.totalLinks.toLocaleString("ko-KR")}개`} />
+        <Metric icon={<TrafficCone size={18} />} label="구간 링크" value={`${report.totalLinks.toLocaleString("ko-KR")}개`} />
         <Metric icon={<Timer size={18} />} label="요약 단위" value={report.granularity} />
       </section>
 
