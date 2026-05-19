@@ -48,7 +48,7 @@ afterEach(() => {
 });
 
 describe("realtime NDJSON helpers", () => {
-  it("defaults GitHub Actions collection to the requested Seoul and Incheon roads", () => {
+  it("defaults realtime collection to the requested Seoul and Incheon roads", () => {
     assert.deepEqual([...DEFAULT_REALTIME_TARGET_REGIONS], ["서울", "인천"]);
     assert.ok(DEFAULT_REALTIME_TARGET_ROADS.includes("올림픽대로"));
     assert.ok(DEFAULT_REALTIME_TARGET_ROADS.includes("강변북로"));

@@ -39,9 +39,9 @@ npm run traffic:collect:incheon -- --start 2026-05-01 --end 2026-05-19 --road �
 
 API 키가 없으면 `traffic:seed` 샘플 데이터로 웹 UI와 CSV/XLSX 내보내기를 먼저 확인할 수 있습니다.
 
-## 30분 실시간 NDJSON 수집
+## 실시간 NDJSON 수집
 
-GitHub Actions 워크플로우 `.github/workflows/collect-realtime-traffic.yml`가 30분마다 실행되어 현재 교통상황을 월별 NDJSON 파일에 누적합니다.
+원할 때 `npm run traffic:collect:ndjson`를 실행하면 현재 교통상황을 월별 NDJSON 파일에 누적합니다.
 
 ```text
 data/realtime-traffic-2026-05.ndjson
@@ -49,14 +49,12 @@ data/realtime-traffic-2026-05.ndjson
 
 각 줄은 독립 JSON이며 시간은 `2026-05-19 00:30` 형식의 KST 분 단위 문자열로 저장됩니다. 기본 수집 대상은 `올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로`이며 서울·인천을 함께 조회합니다. 웹사이트는 커밋된 `data/realtime-traffic-*.ndjson` 파일을 시작 시 SQLite에 적재해 조회합니다.
 
-GitHub 저장소에 필요한 값:
+수집에 사용하는 환경변수:
 
-- Secret `ITS_API_KEY`: ITS 실시간 교통소통정보 API 키
-- Secret `SEOUL_OPENAPI_KEY`: 선택 사항, TOPIS 링크 ID 기반 수집용
-- Secret `SEOUL_LINK_IDS`: 선택 사항, 쉼표로 구분한 TOPIS 링크 ID
-- Variable `TRAFFIC_TARGET_ROADS`: 선택 사항, 기본값 `올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로`
-- Variable `TRAFFIC_TARGET_REGIONS`: 선택 사항, 기본값 `서울,인천`
-- Variable `TRAFFIC_TARGET_SECTION_KEYWORDS`: 선택 사항, 구간명/링크 ID 키워드 필터
-- Variable `TRAFFIC_TARGET_LINK_IDS`: 선택 사항, 정확한 링크 ID 필터
-
-수집 커밋은 `data/realtime-traffic-YYYY-MM.ndjson`만 변경합니다. Vercel은 `vercel.json`의 `ignoreCommand`로 데이터 전용 커밋 빌드를 건너뛰도록 설정되어 있습니다.
+- `ITS_API_KEY`: ITS 실시간 교통소통정보 API 키
+- `SEOUL_OPENAPI_KEY`: 선택 사항, TOPIS 링크 ID 기반 수집용
+- `SEOUL_LINK_IDS`: 선택 사항, 쉼표로 구분한 TOPIS 링크 ID
+- `TRAFFIC_TARGET_ROADS`: 선택 사항, 기본값 `올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로`
+- `TRAFFIC_TARGET_REGIONS`: 선택 사항, 기본값 `서울,인천`
+- `TRAFFIC_TARGET_SECTION_KEYWORDS`: 선택 사항, 구간명/링크 ID 키워드 필터
+- `TRAFFIC_TARGET_LINK_IDS`: 선택 사항, 정확한 링크 ID 필터
