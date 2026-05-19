@@ -87,6 +87,10 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
           </p>
         </div>
         <div className="hero-actions">
+          <Link className="icon-button" href="/five-minute" title="5분 전체 데이터 화면">
+            <Timer size={18} />
+            5분 전체
+          </Link>
           <Link className="icon-button" href="/data" title="전체 데이터 화면">
             <Database size={18} />
             전체 데이터

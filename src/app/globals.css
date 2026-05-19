@@ -1012,6 +1012,28 @@ h1 {
   font-size: 13px;
 }
 
+.requested-five-minute-page {
+  max-width: 1560px;
+}
+
+.five-minute-filter-panel {
+  grid-template-columns: minmax(280px, 420px) auto;
+  justify-content: start;
+}
+
+.five-minute-virtual-table,
+.five-minute-virtual-table .virtual-table-header,
+.five-minute-virtual-table .virtual-table-row,
+.five-minute-virtual-table .virtual-table-spacer {
+  min-width: 1720px;
+}
+
+.five-minute-virtual-table .virtual-table-header,
+.five-minute-virtual-table .virtual-table-row {
+  grid-template-columns:
+    170px 112px 74px 132px 170px minmax(260px, 1.35fr) 132px 118px 100px 104px 88px 72px;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

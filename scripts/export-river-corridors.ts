@@ -1,4 +1,4 @@
-import { mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ExcelJS from "exceljs";
 import {
@@ -10,12 +10,13 @@ import {
 } from "../src/lib/river-corridors";
 import { getTrafficRepository } from "../src/lib/repository";
 import type { RiverCorridorHourCell, RiverCorridorReportRow } from "../src/lib/river-corridors";
+import type { CongestionLevel, TrafficObservationRow } from "../src/lib/types";
 
 const outputDir = join(process.cwd(), "data", "exports");
-const outputPath = join(
-  outputDir,
-  `han-river-corridors-${RIVER_CORRIDOR_REPORT_START_DATE}_to_${RIVER_CORRIDOR_REPORT_END_DATE}.xlsx`
-);
+const outputBaseName = `han-river-corridors-${RIVER_CORRIDOR_REPORT_START_DATE}_to_${RIVER_CORRIDOR_REPORT_END_DATE}`;
+const outputPath = join(outputDir, `${outputBaseName}.xlsx`);
+const summaryCsvPath = join(outputDir, `${outputBaseName}-summary.csv`);
+const detailCsvPath = join(outputDir, `${outputBaseName}-detail.csv`);
 
 async function main() {
   const repo = getTrafficRepository();
@@ -38,7 +39,11 @@ async function main() {
 
   await mkdir(outputDir, { recursive: true });
   await workbook.xlsx.writeFile(outputPath);
+  await writeFile(summaryCsvPath, buildSummaryCsv(report.corridors), "utf8");
+  await writeFile(detailCsvPath, buildDetailCsv(report.corridors, rows), "utf8");
   console.log(outputPath);
+  console.log(summaryCsvPath);
+  console.log(detailCsvPath);
 }
 
 function addSummarySheet(workbook: ExcelJS.Workbook, corridors: RiverCorridorReportRow[]) {
@@ -125,6 +130,112 @@ function addCorridorSheet(workbook: ExcelJS.Workbook, corridor: RiverCorridorRep
 function formatCell(cell: RiverCorridorHourCell): string {
   const speed = cell.avgSpeedKph == null ? "-" : `${cell.avgSpeedKph.toLocaleString("ko-KR")} km/h`;
   return `${cell.status}\n${speed}\n${cell.observedSectionCount}/${cell.expectedSectionCount}`;
+}
+
+function buildSummaryCsv(corridors: RiverCorridorReportRow[]): string {
+  const header = [
+    "날짜",
+    "시간",
+    "도로명",
+    "요청구간",
+    "데이터매칭구간",
+    "전체상태",
+    "평균속도(km/h)",
+    "관측구간수",
+    "전체구간수",
+    "원활구간",
+    "서행구간",
+    "정체구간",
+    "정보없음구간",
+    "데이터없음구간"
+  ];
+  const rows = corridors.flatMap((corridor) =>
+    corridor.days.flatMap((day) =>
+      day.hours.map((hour) => [
+        day.date,
+        String(hour.hour).padStart(2, "0"),
+        corridor.roadName,
+        corridor.requestLabel,
+        corridor.matchedLabel,
+        hour.status,
+        formatCsvNumber(hour.avgSpeedKph),
+        String(hour.observedSectionCount),
+        String(hour.expectedSectionCount),
+        hour.smoothSections.join(" | "),
+        hour.slowSections.join(" | "),
+        hour.congestedSections.join(" | "),
+        hour.unknownSections.join(" | "),
+        hour.missingSections.join(" | ")
+      ])
+    )
+  );
+  return toCsv([header, ...rows]);
+}
+
+function buildDetailCsv(corridors: RiverCorridorReportRow[], rows: TrafficObservationRow[]): string {
+  const header = ["날짜", "시간", "도로명", "요청구간", "데이터매칭구간", "구간순서", "측정구간", "상태", "속도(km/h)", "원천"];
+  const buckets = new Map<string, TrafficObservationRow[]>();
+  for (const row of rows) {
+    if (!Number.isInteger(row.observedHour)) continue;
+    const key = detailBucketKey(row.roadName, row.sectionName, row.observedDate, row.observedHour);
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key)!.push(row);
+  }
+
+  const outputRows: string[][] = [];
+  for (const corridor of corridors) {
+    for (const day of corridor.days) {
+      for (const hour of day.hours) {
+        corridor.sections.forEach((section, index) => {
+          const observed = buckets.get(detailBucketKey(corridor.roadName, section, day.date, hour.hour)) ?? [];
+          outputRows.push([
+            day.date,
+            String(hour.hour).padStart(2, "0"),
+            corridor.roadName,
+            corridor.requestLabel,
+            corridor.matchedLabel,
+            String(index + 1),
+            section,
+            detailStatus(observed.map((row) => row.congestionLevel)),
+            formatCsvNumber(average(observed.map((row) => row.speedKph))),
+            [...new Set(observed.map((row) => row.sourceName))].join(" | ")
+          ]);
+        });
+      }
+    }
+  }
+  return toCsv([header, ...outputRows]);
+}
+
+function detailStatus(levels: CongestionLevel[]): string {
+  if (!levels.length) return "데이터없음";
+  if (levels.includes("congested")) return "정체";
+  if (levels.includes("slow")) return "서행";
+  if (levels.every((level) => level === "smooth")) return "원활";
+  return "정보없음";
+}
+
+function average(values: Array<number | null>): number | null {
+  const numbers = values.filter((value): value is number => value != null);
+  if (!numbers.length) return null;
+  return Number((numbers.reduce((sum, value) => sum + value, 0) / numbers.length).toFixed(1));
+}
+
+function formatCsvNumber(value: number | null): string {
+  return value == null ? "" : String(value);
+}
+
+function detailBucketKey(roadName: string, sectionName: string, date: string, hour: number): string {
+  return [roadName, sectionName, date, hour].join("\u0000");
+}
+
+function toCsv(rows: string[][]): string {
+  return `\uFEFF${rows.map((row) => row.map(csvCell).join(",")).join("\n")}\n`;
+}
+
+function csvCell(value: string): string {
+  if (!/[",\n\r]/.test(value)) return value;
+  return `"${value.replace(/"/g, "\"\"")}"`;
 }
 
 function sheetName(corridor: RiverCorridorReportRow): string {
