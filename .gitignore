@@ -1,8 +1,6 @@
 .next/
 node_modules/
 /data/*
-!/data/.gitkeep
-!/data/realtime-traffic-*.ndjson
 outputs/
 .env
 .env.local

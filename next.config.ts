@@ -1,12 +1,11 @@
 import type { NextConfig } from "next";
 
-const realtimeDataFiles = ["./data/realtime-traffic-*.ndjson"];
+const requestedTrafficFiles = ["./data/csv/*.json"];
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
-    "/": realtimeDataFiles,
-    "/data": realtimeDataFiles,
-    "/api/**/*": realtimeDataFiles
+    "/five-minute": requestedTrafficFiles,
+    "/api/requested-traffic/five-minute": requestedTrafficFiles
   }
 };
 

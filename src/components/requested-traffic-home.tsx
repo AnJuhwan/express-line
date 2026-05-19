@@ -91,10 +91,6 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
             <Timer size={18} />
             5분 전체
           </Link>
-          <Link className="icon-button" href="/data" title="전체 데이터 화면">
-            <Database size={18} />
-            전체 데이터
-          </Link>
           <span className="icon-button static-action" title="로컬 JSON 저장 위치">
             <FileJson size={18} />
             data/csv
