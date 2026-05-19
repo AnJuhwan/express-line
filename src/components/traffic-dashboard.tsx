@@ -4,12 +4,14 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
-import { CalendarDays, Database, Download, FileSpreadsheet, Filter, RefreshCcw, Search, TrafficCone } from "lucide-react";
+import { CalendarDays, Database, Download, FileSpreadsheet, Filter, RefreshCcw, Route, Search, TrafficCone } from "lucide-react";
 import { defaultDateRange } from "@/lib/traffic";
 import { DEFAULT_TRAFFIC_LIMIT, queryFromCoverage, trafficQueryToSearchParams } from "@/lib/dashboard";
 import { TRAFFIC_SECTION_LABEL, coverageMessage, displayRoadName, sourceLabel } from "@/lib/display";
 import { HOURS, buildCongestedDaysByHourSummary, buildHourlyRoadSummary } from "@/lib/hourly-summary";
 import type { CongestedDaysByHourRow, HourlyRoadSummaryRow } from "@/lib/hourly-summary";
+import { TRAFFIC_QUICK_VIEWS } from "@/lib/traffic-quick-views";
+import type { TrafficQuickView } from "@/lib/traffic-quick-views";
 import { VirtualTrafficTable } from "@/components/virtual-traffic-table";
 import type { DataCoverageRow, RoadOption, TrafficObservationRow, TrafficQuery } from "@/lib/types";
 
@@ -131,6 +133,19 @@ export function TrafficDashboard({
     });
   }
 
+  function applyQuickView(view: TrafficQuickView) {
+    const nextQuery = {
+      ...query,
+      region: view.query.region,
+      roadName: view.query.roadName,
+      granularity: view.query.granularity
+    };
+    setQuery(nextQuery);
+    startTransition(async () => {
+      await fetchTraffic(nextQuery);
+    });
+  }
+
   const exportParams = trafficQueryToSearchParams(query);
 
   return (
@@ -207,6 +222,18 @@ export function TrafficDashboard({
           <RefreshCcw size={18} />
           {isPending ? "조회 중" : "조회"}
         </button>
+      </section>
+
+      <section className="quick-view-strip" aria-label="관심 구간">
+        {TRAFFIC_QUICK_VIEWS.map((view) => (
+          <button key={view.label} type="button" className="quick-view-button" onClick={() => applyQuickView(view)} disabled={isPending}>
+            <Route size={16} />
+            <span>
+              <strong>{view.label}</strong>
+              <small>{view.description}</small>
+            </span>
+          </button>
+        ))}
       </section>
 
       <section className="summary-grid">

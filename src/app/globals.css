@@ -153,6 +153,68 @@ h1 {
   color: var(--ink);
 }
 
+.quick-view-strip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  margin: -8px 0 22px;
+}
+
+.quick-view-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 62px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 11px;
+  background: #fbfcfa;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.quick-view-button:hover,
+.quick-view-button:focus-visible {
+  border-color: #9bb6aa;
+  background: #ffffff;
+}
+
+.quick-view-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.quick-view-button svg {
+  flex: 0 0 auto;
+  color: var(--green);
+}
+
+.quick-view-button span,
+.quick-view-button strong,
+.quick-view-button small {
+  display: block;
+  min-width: 0;
+}
+
+.quick-view-button strong {
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quick-view-button small {
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -862,6 +924,10 @@ button.coverage-card:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .quick-view-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .all-data-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -869,6 +935,7 @@ button.coverage-card:disabled {
 
 @media (max-width: 640px) {
   .filter-panel,
+  .quick-view-strip,
   .summary-grid,
   .river-corridor-meta {
     grid-template-columns: 1fr;

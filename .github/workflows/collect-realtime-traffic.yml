@@ -36,8 +36,8 @@ jobs:
           ITS_API_KEY: ${{ secrets.ITS_API_KEY }}
           SEOUL_OPENAPI_KEY: ${{ secrets.SEOUL_OPENAPI_KEY }}
           SEOUL_LINK_IDS: ${{ secrets.SEOUL_LINK_IDS }}
-          TRAFFIC_TARGET_ROADS: ${{ vars.TRAFFIC_TARGET_ROADS || '올림픽대로,강변북로' }}
-          TRAFFIC_TARGET_REGIONS: ${{ vars.TRAFFIC_TARGET_REGIONS || '서울' }}
+          TRAFFIC_TARGET_ROADS: ${{ vars.TRAFFIC_TARGET_ROADS || '올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로' }}
+          TRAFFIC_TARGET_REGIONS: ${{ vars.TRAFFIC_TARGET_REGIONS || '서울,인천' }}
           TRAFFIC_TARGET_SECTION_KEYWORDS: ${{ vars.TRAFFIC_TARGET_SECTION_KEYWORDS }}
           TRAFFIC_TARGET_LINK_IDS: ${{ vars.TRAFFIC_TARGET_LINK_IDS }}
 
@@ -50,6 +50,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No realtime traffic changes to commit."
           else
-            git commit -m "chore(data): append realtime traffic [skip ci]"
+            git commit -m "chore(data): append realtime traffic"
             git push
           fi

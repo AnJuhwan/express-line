@@ -40,7 +40,7 @@ describe("river corridor report", () => {
 
     assert.equal(report.startDate, "2026-01-01");
     assert.equal(report.endDate, "2026-01-02");
-    assert.equal(report.corridors.length, 2);
+    assert.equal(report.corridors.length, 4);
     assert.equal(report.corridors[0].days.length, 2);
     assert.equal(report.corridors[0].days[0].hours.length, 24);
     assert.equal(report.corridors[0].days[0].hours[8].status, "데이터없음");
@@ -86,12 +86,14 @@ describe("river corridor report", () => {
     assert.equal(report.corridors[0].days.at(-1)?.date, "2026-05-08");
   });
 
-  it("keeps only the requested river corridors from Banghwa Bridge", () => {
+  it("keeps only the requested river corridors", () => {
     assert.deepEqual(
       RIVER_CORRIDORS.map((corridor) => [corridor.roadName, corridor.requestLabel]),
       [
         ["올림픽대로", "방화대교→잠실대교"],
-        ["강변북로", "방화대교→천호대교"]
+        ["올림픽대로", "잠실대교→방화대교"],
+        ["강변북로", "방화대교→천호대교"],
+        ["강변북로", "천호대교→방화대교"]
       ]
     );
     assert.deepEqual(RIVER_CORRIDORS[0].sections.slice(0, 3), [
@@ -101,10 +103,22 @@ describe("river corridor report", () => {
     ]);
     assert.equal(RIVER_CORRIDORS[0].sections.at(-1), "종합운동장JC→잠실대교남단");
     assert.deepEqual(RIVER_CORRIDORS[1].sections.slice(0, 3), [
-      "방화대교북단→가양대교북단",
-      "가양대교북단→노을공원",
-      "노을공원→월드컵대교북단"
+      "잠실대교남단→종합운동장JC",
+      "종합운동장JC→청담IC",
+      "청담IC→올림픽대로동부간선JC"
     ]);
-    assert.equal(RIVER_CORRIDORS[1].sections.at(-1), "올림픽대교북단→천호대교북단");
+    assert.equal(RIVER_CORRIDORS[1].sections.at(-1), "가양IC→방화대교남단(88JC)");
+    assert.deepEqual(RIVER_CORRIDORS[2].sections.slice(0, 3), [
+      "가양대교북단→노을공원",
+      "노을공원→월드컵대교북단",
+      "월드컵대교북단→성산대교북단"
+    ]);
+    assert.equal(RIVER_CORRIDORS[2].sections.at(-1), "올림픽대교북단→천호대교북단");
+    assert.deepEqual(RIVER_CORRIDORS[3].sections.slice(0, 3), [
+      "천호대교북단→올림픽대교북단",
+      "올림픽대교북단→잠실철교북단",
+      "잠실철교북단→잠실대교북단"
+    ]);
+    assert.equal(RIVER_CORRIDORS[3].sections.at(-1), "노을공원→가양대교북단");
   });
 });

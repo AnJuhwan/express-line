@@ -2,6 +2,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import type { DatabaseSync as SQLiteDatabaseSync } from "node:sqlite";
+import { loadRealtimeNdjsonObservations } from "./realtime-ndjson";
 import type { DataCoverageRow, NormalizedTrafficObservation, RoadKind, RoadOption, TrafficObservationRow, TrafficQuery } from "./types";
 
 type SQLiteModule = typeof import("node:sqlite");
@@ -40,6 +41,7 @@ export function getTrafficRepository(): TrafficRepository {
     const dbPath = process.env.TRAFFIC_DB_PATH ?? defaultTrafficDbPath();
     singleton = createTrafficRepository(dbPath);
     singleton.migrate();
+    importRealtimeNdjsonObservations(singleton);
   }
   return singleton;
 }
@@ -47,6 +49,12 @@ export function getTrafficRepository(): TrafficRepository {
 export function defaultTrafficDbPath(): string {
   if (process.env.VERCEL) return join(tmpdir(), "traffic.sqlite");
   return join(process.cwd(), "data", "traffic.sqlite");
+}
+
+export function importRealtimeNdjsonObservations(repo: TrafficRepository, baseDir?: string): number {
+  const rows = loadRealtimeNdjsonObservations(baseDir);
+  repo.upsertObservations(rows);
+  return rows.length;
 }
 
 export function createTrafficRepository(dbPath: string): TrafficRepository {

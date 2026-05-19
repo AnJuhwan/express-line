@@ -10,6 +10,7 @@ import {
 } from "../src/lib/collectors";
 import { loadEnvFiles } from "../src/lib/env";
 import {
+  DEFAULT_REALTIME_TARGET_REGIONS,
   DEFAULT_REALTIME_TARGET_ROADS,
   appendRealtimeRecords,
   currentKstHalfHourSlot,
@@ -52,7 +53,7 @@ async function main() {
   const targetRoads = parseCsvList(process.env.TRAFFIC_TARGET_ROADS).length
     ? parseCsvList(process.env.TRAFFIC_TARGET_ROADS)
     : [...DEFAULT_REALTIME_TARGET_ROADS];
-  const targetRegions = parseRegions(process.env.TRAFFIC_TARGET_REGIONS ?? "서울");
+  const targetRegions = parseRegions(process.env.TRAFFIC_TARGET_REGIONS ?? DEFAULT_REALTIME_TARGET_REGIONS.join(","));
   const targetSectionKeywords = parseCsvList(process.env.TRAFFIC_TARGET_SECTION_KEYWORDS);
   const targetLinkIds = parseCsvList(process.env.TRAFFIC_TARGET_LINK_IDS);
 
@@ -192,7 +193,7 @@ async function collectSeoulTopisRows(): Promise<NormalizedTrafficObservation[]> 
 
 function parseRegions(value: string): Array<"서울" | "인천"> {
   const regions = parseCsvList(value).filter((region): region is "서울" | "인천" => region === "서울" || region === "인천");
-  return regions.length ? regions : ["서울"];
+  return regions.length ? regions : [...DEFAULT_REALTIME_TARGET_REGIONS];
 }
 
 function hasUsableTrafficStatus(row: NormalizedTrafficObservation): boolean {

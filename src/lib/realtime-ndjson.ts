@@ -1,6 +1,6 @@
-import { appendFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import type { NormalizedTrafficObservation } from "./types";
+import type { CongestionLevel, CongestionMethod, NormalizedTrafficObservation, RoadKind, SourceGranularity } from "./types";
 
 export interface RealtimeTargetFilter {
   roads: string[];
@@ -24,12 +24,14 @@ export interface RealtimeNdjsonRecord {
   occupancy: number | null;
   congestionLevel: string;
   congestionLabel: string;
+  congestionMethod?: string;
   status: string;
   sourceName: string;
   granularity: string;
 }
 
-export const DEFAULT_REALTIME_TARGET_ROADS = ["올림픽대로", "강변북로"] as const;
+export const DEFAULT_REALTIME_TARGET_ROADS = ["올림픽대로", "강변북로", "수도권제1순환고속도로", "남부순환로", "신월여의지하도로"] as const;
+export const DEFAULT_REALTIME_TARGET_REGIONS = ["서울", "인천"] as const;
 
 export function parseCsvList(value: string | null | undefined): string[] {
   const seen = new Set<string>();
@@ -100,6 +102,7 @@ export function toRealtimeNdjsonRecord(
     occupancy: row.occupancy,
     congestionLevel: row.congestionLevel,
     congestionLabel: row.congestionLabel,
+    congestionMethod: row.congestionMethod,
     status: row.congestionLabel,
     sourceName: row.sourceName,
     granularity: row.granularity
@@ -122,6 +125,55 @@ export function appendRealtimeRecords(filePath: string, records: RealtimeNdjsonR
   return nextRecords.length;
 }
 
+export function loadRealtimeNdjsonObservations(baseDir = join(process.cwd(), "data")): NormalizedTrafficObservation[] {
+  if (!existsSync(baseDir)) return [];
+  return readdirSync(baseDir)
+    .filter((fileName) => /^realtime-traffic-\d{4}-\d{2}\.ndjson$/.test(fileName))
+    .flatMap((fileName) => readRealtimeNdjsonFile(join(baseDir, fileName)).map(realtimeRecordToObservation));
+}
+
+export function readRealtimeNdjsonFile(filePath: string): RealtimeNdjsonRecord[] {
+  if (!existsSync(filePath)) return [];
+  const records: RealtimeNdjsonRecord[] = [];
+
+  for (const line of readFileSync(filePath, "utf8").split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    try {
+      const value = JSON.parse(trimmed) as unknown;
+      if (isRealtimeNdjsonRecord(value)) records.push(value);
+    } catch {
+      // Keep the website usable if an appended line is manually edited.
+    }
+  }
+
+  return records;
+}
+
+export function realtimeRecordToObservation(record: RealtimeNdjsonRecord): NormalizedTrafficObservation {
+  const observed = normalizeKstDateTime(record.observedAt || record.collectedAt);
+  return {
+    region: record.region === "인천" ? "인천" : "서울",
+    roadName: record.roadName,
+    sectionName: record.sectionName,
+    linkId: record.linkId,
+    roadKind: roadKindOrDefault(record.roadKind),
+    roadDivName: record.roadDivName,
+    observedAt: observed.observedAt,
+    observedDate: observed.observedDate,
+    observedHour: observed.observedHour,
+    granularity: granularityOrDefault(record.granularity),
+    sourceName: record.sourceName,
+    speedKph: numberOrNull(record.speedKph),
+    travelTimeSeconds: numberOrNull(record.travelTimeSeconds),
+    trafficVolume: numberOrNull(record.trafficVolume),
+    occupancy: numberOrNull(record.occupancy),
+    congestionLevel: congestionLevelOrDefault(record.congestionLevel),
+    congestionLabel: record.congestionLabel || record.status || "정보없음",
+    congestionMethod: congestionMethodOrDefault(record.congestionMethod)
+  };
+}
+
 function loadExistingRealtimeKeys(filePath: string): Set<string> {
   const keys = new Set<string>();
   if (!existsSync(filePath)) return keys;
@@ -137,6 +189,64 @@ function loadExistingRealtimeKeys(filePath: string): Set<string> {
   }
 
   return keys;
+}
+
+function isRealtimeNdjsonRecord(value: unknown): value is RealtimeNdjsonRecord {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.collectedAt === "string" &&
+    typeof record.observedAt === "string" &&
+    typeof record.region === "string" &&
+    typeof record.roadName === "string" &&
+    typeof record.sectionName === "string" &&
+    typeof record.linkId === "string" &&
+    typeof record.sourceName === "string" &&
+    typeof record.granularity === "string"
+  );
+}
+
+function normalizeKstDateTime(value: string): { observedAt: string; observedDate: string; observedHour: number } {
+  const match = value.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?(?:\+09:00)?$/);
+  if (match) {
+    const observedDate = match[1];
+    const hour = match[2];
+    const minute = match[3];
+    const second = match[4] ?? "00";
+    return {
+      observedAt: `${observedDate}T${hour}:${minute}:${second}+09:00`,
+      observedDate,
+      observedHour: Number(hour)
+    };
+  }
+
+  const fallback = formatKstMinute(value);
+  return normalizeKstDateTime(fallback);
+}
+
+function numberOrNull(value: unknown): number | null {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  return value;
+}
+
+function roadKindOrDefault(value: string): RoadKind {
+  if (value === "urban_expressway" || value === "general_road" || value === "expressway") return value;
+  return "general_road";
+}
+
+function granularityOrDefault(value: string): SourceGranularity {
+  if (value === "5min" || value === "hour" || value === "day" || value === "realtime") return value;
+  return "realtime";
+}
+
+function congestionLevelOrDefault(value: string): CongestionLevel {
+  if (value === "smooth" || value === "slow" || value === "congested" || value === "unknown") return value;
+  return "unknown";
+}
+
+function congestionMethodOrDefault(value: string | undefined): CongestionMethod {
+  if (value === "source-provided" || value === "threshold-derived" || value === "topis-threshold") return value;
+  return "topis-threshold";
 }
 
 function kstParts(date: Date): { date: string; hour: number; minute: number } {

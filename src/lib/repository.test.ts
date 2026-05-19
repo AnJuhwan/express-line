@@ -3,7 +3,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { createTrafficRepository, defaultTrafficDbPath } from "./repository";
+import { appendRealtimeRecords, monthlyNdjsonPath } from "./realtime-ndjson";
+import { createTrafficRepository, defaultTrafficDbPath, importRealtimeNdjsonObservations } from "./repository";
 
 let tempDirs: string[] = [];
 
@@ -25,6 +26,49 @@ describe("traffic repository", () => {
       if (originalVercel == null) delete process.env.VERCEL;
       else process.env.VERCEL = originalVercel;
     }
+  });
+
+  it("imports committed realtime NDJSON observations into the queryable repository", () => {
+    const dir = mkdtempSync(join(tmpdir(), "traffic-db-"));
+    tempDirs.push(dir);
+
+    const repo = createTrafficRepository(join(dir, "traffic.sqlite"));
+    repo.migrate();
+    appendRealtimeRecords(monthlyNdjsonPath(dir, "2026-05-19 22:00"), [
+      {
+        collectedAt: "2026-05-19 22:00",
+        observedAt: "2026-05-19 21:55",
+        region: "서울",
+        roadName: "남부순환로",
+        sectionName: "신월IC→화곡고가사거리",
+        linkId: "1140022200",
+        roadKind: "urban_expressway",
+        roadDivName: "도시고속도로",
+        speedKph: 18,
+        travelTimeSeconds: null,
+        trafficVolume: null,
+        occupancy: null,
+        congestionLevel: "congested",
+        congestionLabel: "정체",
+        status: "정체",
+        sourceName: "its-realtime",
+        granularity: "realtime"
+      }
+    ]);
+
+    assert.equal(importRealtimeNdjsonObservations(repo, dir), 1);
+    const rows = repo.queryObservations({
+      startDate: "2026-05-19",
+      endDate: "2026-05-19",
+      region: "서울",
+      roadName: "신월IC",
+      granularity: "realtime",
+      limit: 50
+    });
+
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].sectionName, "신월IC→화곡고가사거리");
+    assert.equal(rows[0].congestionLabel, "정체");
   });
 
   it("stores observations and filters date ranges inclusively", () => {

@@ -18,8 +18,7 @@ const isRealtimeDataOnly =
   changedFiles.every((file) => /^data\/realtime-traffic-\d{4}-\d{2}\.ndjson$/.test(file));
 
 if (isRealtimeDataOnly) {
-  console.log("Skipping Vercel build because this commit only updates realtime NDJSON data.");
-  process.exit(0);
+  console.log("Building realtime data-only commit so the production data explorer stays current.");
 }
 
 process.exit(1);

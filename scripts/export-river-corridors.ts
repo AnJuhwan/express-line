@@ -128,8 +128,10 @@ function formatCell(cell: RiverCorridorHourCell): string {
 }
 
 function sheetName(corridor: RiverCorridorReportRow): string {
-  if (corridor.roadName === "올림픽대로") return "올림픽 방화-잠실";
-  return "강변북로 방화-천호";
+  if (corridor.id === "olympic-banghwa-to-jamsil") return "올림픽 방화-잠실";
+  if (corridor.id === "olympic-jamsil-to-banghwa") return "올림픽 잠실-방화";
+  if (corridor.id === "gangbyeonbuk-banghwa-to-cheonho") return "강변북로 방화-천호";
+  return "강변북로 천호-방화";
 }
 
 function styleHeader(row: ExcelJS.Row) {

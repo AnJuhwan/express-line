@@ -47,15 +47,15 @@ GitHub Actions 워크플로우 `.github/workflows/collect-realtime-traffic.yml`�
 data/realtime-traffic-2026-05.ndjson
 ```
 
-각 줄은 독립 JSON이며 시간은 `2026-05-19 00:30` 형식의 KST 분 단위 문자열로 저장됩니다. 기본 수집 대상은 `올림픽대로,강변북로`입니다.
+각 줄은 독립 JSON이며 시간은 `2026-05-19 00:30` 형식의 KST 분 단위 문자열로 저장됩니다. 기본 수집 대상은 `올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로`이며 서울·인천을 함께 조회합니다. 웹사이트는 커밋된 `data/realtime-traffic-*.ndjson` 파일을 시작 시 SQLite에 적재해 조회합니다.
 
 GitHub 저장소에 필요한 값:
 
 - Secret `ITS_API_KEY`: ITS 실시간 교통소통정보 API 키
 - Secret `SEOUL_OPENAPI_KEY`: 선택 사항, TOPIS 링크 ID 기반 수집용
 - Secret `SEOUL_LINK_IDS`: 선택 사항, 쉼표로 구분한 TOPIS 링크 ID
-- Variable `TRAFFIC_TARGET_ROADS`: 선택 사항, 기본값 `올림픽대로,강변북로`
-- Variable `TRAFFIC_TARGET_REGIONS`: 선택 사항, 기본값 `서울`
+- Variable `TRAFFIC_TARGET_ROADS`: 선택 사항, 기본값 `올림픽대로,강변북로,수도권제1순환고속도로,남부순환로,신월여의지하도로`
+- Variable `TRAFFIC_TARGET_REGIONS`: 선택 사항, 기본값 `서울,인천`
 - Variable `TRAFFIC_TARGET_SECTION_KEYWORDS`: 선택 사항, 구간명/링크 ID 키워드 필터
 - Variable `TRAFFIC_TARGET_LINK_IDS`: 선택 사항, 정확한 링크 ID 필터
 

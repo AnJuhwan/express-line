@@ -1,7 +1,8 @@
 .git
 .next
 node_modules
-data
+data/*
+!data/realtime-traffic-*.ndjson
 outputs
 .env
 .env.local
