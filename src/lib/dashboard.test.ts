@@ -51,8 +51,9 @@ describe("dashboard query defaults", () => {
       }
     ]);
 
-    assert.equal(query.startDate, "2026-01-01");
-    assert.equal(query.endDate, "2026-05-19");
+    const today = todayInKoreaForTest();
+    assert.equal(query.startDate, `${today.slice(0, 4)}-01-01`);
+    assert.equal(query.endDate, today);
   });
 
   it("builds a filter query from a loaded Seoul urban coverage row", () => {
@@ -148,3 +149,17 @@ describe("dashboard query defaults", () => {
   });
 
 });
+
+function todayInKoreaForTest(): string {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(new Date());
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+  assert.ok(year && month && day);
+  return `${year}-${month}-${day}`;
+}

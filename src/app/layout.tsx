@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "서울·인천 도로 혼잡 데이터",
-  description: "서울·인천 주요도로 속도, 혼잡도, 수집 커버리지를 조회하고 내보내는 대시보드"
+  title: "요청 구간별 교통 정체 데이터",
+  description: "계양IC, 장수IC, 신월IC, 강변북로 방향별 시간대 교통 정체 리포트"
 };
 
 export default function RootLayout({
