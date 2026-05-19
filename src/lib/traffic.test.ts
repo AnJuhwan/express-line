@@ -7,6 +7,7 @@ import {
   extractItsTrafficInfoXmlItems,
   extractTDataItems,
   normalizeItsTrafficInfoItems,
+  normalizeSeoulTrafficInfoXml,
   normalizeSeoulUrbanSpeedRows,
   normalizeTDataHourlySectionItems
 } from "./collectors";
@@ -266,6 +267,27 @@ describe("traffic domain helpers", () => {
     assert.equal(rows[0].observedAt, "2026-05-19T14:30:01+09:00");
     assert.equal(rows[0].travelTimeSeconds, 12.5);
     assert.equal(rows[0].congestionLevel, "congested");
+  });
+
+  it("normalizes Seoul TOPIS realtime XML with lowercase response tags", () => {
+    const rows = normalizeSeoulTrafficInfoXml(
+      `
+        <TrafficInfo>
+          <row>
+            <link_id>1220003800</link_id>
+            <prcs_spd>71</prcs_spd>
+            <prcs_trv_time>152</prcs_trv_time>
+          </row>
+        </TrafficInfo>
+      `,
+      "1220003800"
+    );
+
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].linkId, "1220003800");
+    assert.equal(rows[0].speedKph, 71);
+    assert.equal(rows[0].travelTimeSeconds, 152);
+    assert.equal(rows[0].congestionLabel, "원활");
   });
 
   it("extracts ITS trafficInfo XML items when the endpoint ignores getType=json", () => {

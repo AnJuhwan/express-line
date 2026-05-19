@@ -57,15 +57,17 @@ async function main() {
     collectWithFallback("Seoul TOPIS realtime", collectSeoulTopisRows)
   ]);
 
-  const matchedItsRows = itsRows.filter((row) =>
-    matchesRealtimeTargets(row, {
-      roads: targetRoads,
-      sectionKeywords: targetSectionKeywords,
-      linkIds: targetLinkIds,
-      regions: targetRegions
-    })
+  const matchedItsRows = itsRows.filter(
+    (row) =>
+      hasUsableTrafficStatus(row) &&
+      matchesRealtimeTargets(row, {
+        roads: targetRoads,
+        sectionKeywords: targetSectionKeywords,
+        linkIds: targetLinkIds,
+        regions: targetRegions
+      })
   );
-  const matchedTopisRows = topisRows.filter((row) => !targetLinkIds.length || targetLinkIds.includes(row.linkId));
+  const matchedTopisRows = topisRows.filter((row) => hasUsableTrafficStatus(row) && targetLinkIds.includes(row.linkId));
   const records = [...matchedItsRows, ...matchedTopisRows].map((row) => toRealtimeNdjsonRecord(row, collectedAt));
   const filePath = monthlyNdjsonPath(outputDir, collectedAt);
   const appended = appendRealtimeRecords(filePath, records);
@@ -148,6 +150,10 @@ async function collectSeoulTopisRows(): Promise<NormalizedTrafficObservation[]> 
 function parseRegions(value: string): Array<"서울" | "인천"> {
   const regions = parseCsvList(value).filter((region): region is "서울" | "인천" => region === "서울" || region === "인천");
   return regions.length ? regions : ["서울"];
+}
+
+function hasUsableTrafficStatus(row: NormalizedTrafficObservation): boolean {
+  return row.speedKph != null && Number.isFinite(row.speedKph) && row.congestionLevel !== "unknown";
 }
 
 function getArg(name: string): string | null {

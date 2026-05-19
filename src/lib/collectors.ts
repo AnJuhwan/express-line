@@ -379,7 +379,7 @@ function itsCreatedDateToKst(value: string): string {
 }
 
 function tag(xml: string, name: string): string {
-  const match = xml.match(new RegExp(`<${name}>([\\s\\S]*?)<\\/${name}>`));
+  const match = xml.match(new RegExp(`<${name}>([\\s\\S]*?)<\\/${name}>`, "i"));
   return match?.[1]?.trim() ?? "";
 }
 
