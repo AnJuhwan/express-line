@@ -30,16 +30,16 @@ export const TRAFFIC_QUICK_VIEWS: TrafficQuickView[] = [
   {
     label: "계양IC→장수IC",
     description: "수도권제1순환",
-    query: { region: "인천", roadName: "수도권제1순환고속도로", granularity: "realtime" }
+    query: { region: "all", roadName: "수도권제1순환고속도로", granularity: "realtime" }
   },
   {
     label: "장수IC→계양IC",
     description: "수도권제1순환",
-    query: { region: "인천", roadName: "수도권제1순환고속도로", granularity: "realtime" }
+    query: { region: "all", roadName: "수도권제1순환고속도로", granularity: "realtime" }
   },
   {
     label: "신월IC 정체",
     description: "남부순환로 인접",
-    query: { region: "서울", roadName: "신월IC", granularity: "all" }
+    query: { region: "all", roadName: "신월", granularity: "all" }
   }
 ];
