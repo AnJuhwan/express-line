@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import type { DatabaseSync as SQLiteDatabaseSync } from "node:sqlite";
 import type { DataCoverageRow, NormalizedTrafficObservation, RoadKind, RoadOption, TrafficObservationRow, TrafficQuery } from "./types";
@@ -36,11 +37,16 @@ let singleton: TrafficRepository | null = null;
 
 export function getTrafficRepository(): TrafficRepository {
   if (!singleton) {
-    const dbPath = process.env.TRAFFIC_DB_PATH ?? join(process.cwd(), "data", "traffic.sqlite");
+    const dbPath = process.env.TRAFFIC_DB_PATH ?? defaultTrafficDbPath();
     singleton = createTrafficRepository(dbPath);
     singleton.migrate();
   }
   return singleton;
+}
+
+export function defaultTrafficDbPath(): string {
+  if (process.env.VERCEL) return join(tmpdir(), "traffic.sqlite");
+  return join(process.cwd(), "data", "traffic.sqlite");
 }
 
 export function createTrafficRepository(dbPath: string): TrafficRepository {

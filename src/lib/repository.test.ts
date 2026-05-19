@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { createTrafficRepository } from "./repository";
+import { createTrafficRepository, defaultTrafficDbPath } from "./repository";
 
 let tempDirs: string[] = [];
 
@@ -15,6 +15,18 @@ afterEach(() => {
 });
 
 describe("traffic repository", () => {
+  it("uses a writable temporary database path on Vercel", () => {
+    const originalVercel = process.env.VERCEL;
+    process.env.VERCEL = "1";
+    try {
+      assert.match(defaultTrafficDbPath(), /traffic\.sqlite$/);
+      assert.ok(defaultTrafficDbPath().startsWith(tmpdir()));
+    } finally {
+      if (originalVercel == null) delete process.env.VERCEL;
+      else process.env.VERCEL = originalVercel;
+    }
+  });
+
   it("stores observations and filters date ranges inclusively", () => {
     const dir = mkdtempSync(join(tmpdir(), "traffic-db-"));
     tempDirs.push(dir);
