@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { ArrowLeft, Database, Download, RefreshCcw, Route } from "lucide-react";
+import { ArrowLeft, Clock3, Database, Download, RefreshCcw, Route } from "lucide-react";
 import type {
   RequestedTrafficFiveMinutePage,
   RequestedTrafficFiveMinuteRouteMeta,
@@ -23,6 +23,8 @@ interface Props {
   initialWindowSize: number;
   initialTotalCount: number;
   initialDataAvailable: boolean;
+  initialStartHour: number;
+  initialEndHour: number;
 }
 
 const VIRTUAL_ROW_HEIGHT = 56;
@@ -36,7 +38,9 @@ export function RequestedFiveMinuteExplorer({
   initialOffset,
   initialWindowSize,
   initialTotalCount,
-  initialDataAvailable
+  initialDataAvailable,
+  initialStartHour,
+  initialEndHour
 }: Props) {
   const initialPageIndex = Math.floor(initialOffset / REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE);
   const requestedPagesRef = useRef(new Set(initialRows.length ? [initialPageIndex] : []));
@@ -48,6 +52,7 @@ export function RequestedFiveMinuteExplorer({
   const [pages, setPages] = useState<Record<number, RequestedTrafficFiveMinuteRow[]>>(() => ({
     ...(initialRows.length ? { [initialPageIndex]: initialRows } : {})
   }));
+  const [timeWindow, setTimeWindow] = useState({ startHour: initialStartHour, endHour: initialEndHour });
   const [visibleWindow, setVisibleWindow] = useState<VirtualWindow>({
     startIndex: 0,
     endIndex: Math.min(initialWindowSize, initialTotalCount),
@@ -60,22 +65,26 @@ export function RequestedFiveMinuteExplorer({
     if (appliedRouteId === "all") return "전체 요청 구간";
     return routes.find((route) => route.id === appliedRouteId)?.requestLabel ?? "선택 구간";
   }, [appliedRouteId, routes]);
-  const csvHref = `/api/requested-traffic/five-minute?route=${encodeURIComponent(appliedRouteId)}&format=csv`;
+  const timeWindowLabel = `${padHour(timeWindow.startHour)}:00~${padHour(timeWindow.endHour)}:55`;
+  const csvHref = `/api/requested-traffic/five-minute?route=${encodeURIComponent(appliedRouteId)}&startHour=${timeWindow.startHour}&endHour=${timeWindow.endHour}&format=csv`;
 
   const fetchFiveMinutePage = useCallback(async (nextRouteId: string, offset: number) => {
     const params = new URLSearchParams({
       route: nextRouteId,
       offset: String(offset),
-      windowSize: String(REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE)
+      windowSize: String(REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE),
+      startHour: String(timeWindow.startHour),
+      endHour: String(timeWindow.endHour)
     });
     const response = await fetch(`/api/requested-traffic/five-minute?${params.toString()}`, { cache: "no-store" });
     return (await response.json()) as FiveMinutePayload;
-  }, []);
+  }, [timeWindow.endHour, timeWindow.startHour]);
 
   function applyRoute(nextRouteId = routeId) {
     startTransition(async () => {
       const nextPayload = await fetchFiveMinutePage(nextRouteId, 0);
       activeRouteIdRef.current = nextPayload.routeId;
+      setTimeWindow(nextPayload.timeWindow);
       requestedPagesRef.current = new Set(nextPayload.rows.length ? [0] : []);
       setAppliedRouteId(nextPayload.routeId);
       setRouteId(nextPayload.routeId);
@@ -143,6 +152,10 @@ export function RequestedFiveMinuteExplorer({
             <Download size={18} />
             CSV
           </a>
+          <Link className="icon-button" href="/hourly" title="1시간 단위 데이터 화면">
+            <Clock3 size={18} />
+            1시간
+          </Link>
         </div>
       </section>
 
@@ -168,7 +181,8 @@ export function RequestedFiveMinuteExplorer({
 
       <section className="summary-grid all-data-summary">
         <Metric label="선택 범위" value={selectedRouteLabel} />
-        <Metric label="전체 5분 행" value={totalCount.toLocaleString("ko-KR")} />
+        <Metric label="시간 범위" value={timeWindowLabel} />
+        <Metric label="06~18시 5분 행" value={totalCount.toLocaleString("ko-KR")} />
         <Metric label="불러온 행" value={loadedRows.toLocaleString("ko-KR")} />
         <Metric label="요청 구간" value={`${routes.length.toLocaleString("ko-KR")}개`} />
         <Metric label="페이지 크기" value={`${REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE.toLocaleString("ko-KR")}행`} />
@@ -271,7 +285,6 @@ function RequestedFiveMinuteVirtualTable({
           <div role="columnheader">속도</div>
           <div role="columnheader">통행시간</div>
           <div role="columnheader">혼잡</div>
-          <div role="columnheader">막힘</div>
         </div>
         <div
           ref={viewportRef}
@@ -319,7 +332,6 @@ function RequestedFiveMinuteVirtualTable({
                   <div className="virtual-table-cell" role="cell">
                     <span className={`pill ${statusClass(row.congestionLabel)}`}>{row.congestionLabel || "-"}</span>
                   </div>
-                  <div className="virtual-table-cell mono" role="cell">{row.blocked ? "true" : "false"}</div>
                 </div>
               );
             })}
@@ -345,6 +357,10 @@ function formatSpeed(speedKmh: number | null): string {
 
 function formatSeconds(seconds: number | null): string {
   return seconds == null ? "-" : Number(seconds.toFixed(1)).toLocaleString("ko-KR");
+}
+
+function padHour(hour: number): string {
+  return String(hour).padStart(2, "0");
 }
 
 function statusClass(label: string): string {

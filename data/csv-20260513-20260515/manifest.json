@@ -1,0 +1,89 @@
+{
+  "설명": "ITS 교통소통정보 5분 파일에서 요청 구간 LINKID만 추출한 2026-05-13 ~ 2026-05-15, 06~18시 JSON 묶음입니다.",
+  "원천파일": [
+    "/Users/anjuhwan/Downloads/20260513_5Min.csv",
+    "/Users/anjuhwan/Downloads/20260514_5Min.csv",
+    "/Users/anjuhwan/Downloads/20260515_5Min.csv"
+  ],
+  "템플릿디렉터리": "data/csv",
+  "출력디렉터리": "data/csv-20260513-20260515",
+  "스캔통계": [
+    {
+      "파일": "/Users/anjuhwan/Downloads/20260513_5Min.csv",
+      "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
+      "스캔행수": 166662840,
+      "매칭행수": 34441
+    },
+    {
+      "파일": "/Users/anjuhwan/Downloads/20260514_5Min.csv",
+      "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
+      "스캔행수": 166700024,
+      "매칭행수": 34441
+    },
+    {
+      "파일": "/Users/anjuhwan/Downloads/20260515_5Min.csv",
+      "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
+      "스캔행수": 166778955,
+      "매칭행수": 34441
+    }
+  ],
+  "혼잡도기준": {
+    "고속도로/도시고속도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
+    "일반도로": "25km/h 이상 원활, 15~25km/h 서행, 15km/h 미만 정체"
+  },
+  "주의": [
+    "원문 요청의 '광화대교'는 표준링크 파일에 없어 강변북로 서측 기준인 방화대교/가양대교북단 쪽으로 매칭했습니다.",
+    "방화대교 북단 본선 링크가 강변북로 표준링크에서 직접 이어지지 않아 실제 추출 시작/종점은 가양대교북단 또는 가양대교북단IC입니다."
+  ],
+  "파일목록": [
+    {
+      "요청구간": "계양IC → 장수IC",
+      "실제매칭구간": "계양IC남측 → 장수IC남측",
+      "파일": "data/csv-20260513-20260515/geyang_ic_to_jangsu_ic.json",
+      "링크수": 10,
+      "오분단위자료수": 3030
+    },
+    {
+      "요청구간": "장수IC → 계양IC",
+      "실제매칭구간": "장수IC남측 → 계양IC남측",
+      "파일": "data/csv-20260513-20260515/jangsu_ic_to_geyang_ic.json",
+      "링크수": 10,
+      "오분단위자료수": 3030
+    },
+    {
+      "요청구간": "신월 IC",
+      "실제매칭구간": "신월IC 포함 링크 + 신월여의지하도로",
+      "파일": "data/csv-20260513-20260515/sinwol_ic_congestion_area.json",
+      "링크수": 96,
+      "오분단위자료수": 28785
+    },
+    {
+      "요청구간": "강변북로 광화대교 → 천호대교",
+      "실제매칭구간": "가양대교북단 → 천호대교북측",
+      "파일": "data/csv-20260513-20260515/gangbyeonbukro_gwanghwa_to_cheonho.json",
+      "링크수": 54,
+      "오분단위자료수": 16362
+    },
+    {
+      "요청구간": "강변북로 천호대교 → 광화대교",
+      "실제매칭구간": "천호대교북측 → 가양대교북단IC",
+      "파일": "data/csv-20260513-20260515/gangbyeonbukro_cheonho_to_gwanghwa.json",
+      "링크수": 64,
+      "오분단위자료수": 19392
+    },
+    {
+      "요청구간": "강변북로 잠실대교 → 광화대교",
+      "실제매칭구간": "잠실대교북측 → 가양대교북단IC",
+      "파일": "data/csv-20260513-20260515/gangbyeonbukro_jamsil_to_gwanghwa.json",
+      "링크수": 58,
+      "오분단위자료수": 17574
+    },
+    {
+      "요청구간": "강변북로 광화대교 → 잠실대교",
+      "실제매칭구간": "가양대교북단 → 잠실대교북측",
+      "파일": "data/csv-20260513-20260515/gangbyeonbukro_gwanghwa_to_jamsil.json",
+      "링크수": 50,
+      "오분단위자료수": 15150
+    }
+  ]
+}

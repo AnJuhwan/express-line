@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BarChart3, Database, FileJson, Route, Timer, TrafficCone } from "lucide-react";
+import { BarChart3, Clock3, Database, FileJson, Route, Timer, TrafficCone } from "lucide-react";
 
 export interface RequestedTrafficReport {
   period: string;
@@ -54,6 +54,7 @@ interface RequestedRouteHour {
   blocked: boolean;
   sampleCount: number;
   observedLinkCount: number;
+  smoothObservationCount: number;
   slowObservationCount: number;
   congestedObservationCount: number;
   slowLinkCount: number;
@@ -83,7 +84,7 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
           <p className="eyebrow">요청 구간 추출 리포트</p>
           <h1>요청 구간별 시간대 정체 데이터</h1>
           <p className="hero-copy">
-            {report.period} ITS 5분 원천을 표준링크와 매칭해 계양IC, 장수IC, 신월IC, 강변북로 방향별 요약으로 정리했습니다.
+            {report.period} ITS 5분 원천을 표준링크와 매칭해 계양IC, 장수IC, 신월 IC, 강변북로 방향별 요약으로 정리했습니다.
           </p>
         </div>
         <div className="hero-actions">
@@ -91,9 +92,13 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
             <Timer size={18} />
             5분 전체
           </Link>
+          <Link className="icon-button" href="/hourly" title="1시간 단위 데이터 화면">
+            <Clock3 size={18} />
+            1시간
+          </Link>
           <span className="icon-button static-action" title="로컬 JSON 저장 위치">
             <FileJson size={18} />
-            data/csv
+            data/csv-20260513-20260515
           </span>
         </div>
       </section>
@@ -210,6 +215,8 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
 }
 
 function RouteHourMatrix({ route }: { route: RequestedRouteReport }) {
+  const hourHeaders = route.days[0]?.hours ?? [];
+
   return (
     <div className="river-route-block requested-route-block">
       <div className="river-route-title">
@@ -224,8 +231,8 @@ function RouteHourMatrix({ route }: { route: RequestedRouteReport }) {
           <thead>
             <tr>
               <th>날짜</th>
-              {Array.from({ length: 24 }, (_, hour) => (
-                <th key={hour}>{String(hour).padStart(2, "0")}시</th>
+              {hourHeaders.map((hour) => (
+                <th key={hour.hour}>{String(hour.hour).padStart(2, "0")}시</th>
               ))}
             </tr>
           </thead>
@@ -271,6 +278,7 @@ function hourTitle(hour: RequestedRouteHour): string {
     hour.status,
     formatSpeed(hour.avgSpeedKmh),
     `최저 ${formatSpeed(hour.minSpeedKmh)}`,
+    `원활 ${hour.smoothObservationCount.toLocaleString("ko-KR")}건`,
     `정체 ${hour.congestedObservationCount.toLocaleString("ko-KR")}건`,
     `서행 ${hour.slowObservationCount.toLocaleString("ko-KR")}건`,
     `${hour.sampleCount.toLocaleString("ko-KR")}개 5분 관측`,

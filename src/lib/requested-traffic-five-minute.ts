@@ -1,24 +1,33 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE } from "./requested-traffic-five-minute-shared";
+import { REQUESTED_TRAFFIC_ACTIVE_DATA_DIR } from "./requested-traffic-data-config";
+import {
+  REQUESTED_TRAFFIC_DAY_END_HOUR,
+  REQUESTED_TRAFFIC_DAY_START_HOUR,
+  REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE
+} from "./requested-traffic-five-minute-shared";
 import type {
   RequestedTrafficFiveMinutePage,
   RequestedTrafficFiveMinuteRouteMeta,
-  RequestedTrafficFiveMinuteRow
+  RequestedTrafficFiveMinuteRow,
+  RequestedTrafficTimeWindow
 } from "./requested-traffic-five-minute-shared";
 
-export { REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE };
+export { REQUESTED_TRAFFIC_DAY_END_HOUR, REQUESTED_TRAFFIC_DAY_START_HOUR, REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE };
 export type {
   RequestedTrafficFiveMinutePage,
   RequestedTrafficFiveMinuteRouteMeta,
-  RequestedTrafficFiveMinuteRow
+  RequestedTrafficFiveMinuteRow,
+  RequestedTrafficTimeWindow
 };
 
-export const REQUESTED_TRAFFIC_DATA_DIR = join(process.cwd(), "data", "csv");
+export const REQUESTED_TRAFFIC_DATA_DIR = REQUESTED_TRAFFIC_ACTIVE_DATA_DIR;
 
 export interface RequestedFiveMinuteRawRow {
   날짜?: string;
   시간?: string;
+  시?: number | string;
+  분?: number | string;
   일시?: string;
   링크아이디?: string;
   도로명?: string;
@@ -41,6 +50,22 @@ interface PreviewInput {
   route: RequestedTrafficFiveMinuteRouteMeta;
   sourceRows: RequestedFiveMinuteRawRow[];
 }
+
+type FiveMinuteLoadOptions = {
+  routeId?: string;
+  offset?: number;
+  windowSize?: number;
+  baseDir?: string;
+  startHour?: number;
+  endHour?: number;
+};
+
+type FiveMinuteAllRowsOptions = {
+  routeId?: string;
+  baseDir?: string;
+  startHour?: number;
+  endHour?: number;
+};
 
 const sourceRowsCache = new Map<string, RequestedFiveMinuteRawRow[]>();
 
@@ -77,33 +102,32 @@ export function selectRequestedFiveMinutePreview(inputs: PreviewInput[], rowsPer
 
 export function loadRequestedFiveMinutePage(
   routes: RequestedTrafficFiveMinuteRouteMeta[],
-  options: {
-    routeId?: string;
-    offset?: number;
-    windowSize?: number;
-    baseDir?: string;
-  } = {}
+  options: FiveMinuteLoadOptions = {}
 ): RequestedTrafficFiveMinutePage {
   const routeId = normalizeRouteId(options.routeId);
   const offset = Math.max(0, Math.floor(options.offset ?? 0));
   const windowSize = Math.max(0, Math.floor(options.windowSize ?? REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE));
+  const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
   const selectedRoutes = selectableRoutes(routes, routeId, options.baseDir);
-  const totalCount = selectedRoutes.reduce((sum, route) => sum + routeCount(route, options.baseDir), 0);
+  const routeRows = selectedRoutes.map((route) => ({
+    route,
+    rows: filterSourceRowsByHour(readRequestedFiveMinuteSourceRows(route.id, options.baseDir), timeWindow)
+  }));
+  const totalCount = routeRows.reduce((sum, route) => sum + route.rows.length, 0);
   const rows: RequestedTrafficFiveMinuteRow[] = [];
 
   let skipped = offset;
   let remaining = windowSize;
-  for (const route of selectedRoutes) {
+  for (const routeEntry of routeRows) {
     if (remaining <= 0) break;
-    const count = routeCount(route, options.baseDir);
+    const count = routeEntry.rows.length;
     if (skipped >= count) {
       skipped -= count;
       continue;
     }
 
-    const sourceRows = readRequestedFiveMinuteSourceRows(route.id, options.baseDir);
-    const slice = sourceRows.slice(skipped, skipped + remaining);
-    rows.push(...flattenRequestedFiveMinuteRows(route, slice));
+    const slice = routeEntry.rows.slice(skipped, skipped + remaining);
+    rows.push(...flattenRequestedFiveMinuteRows(routeEntry.route, slice));
     remaining -= slice.length;
     skipped = 0;
   }
@@ -114,16 +138,20 @@ export function loadRequestedFiveMinutePage(
     offset,
     windowSize,
     totalCount,
-    dataAvailable: selectedRoutes.length > 0
+    dataAvailable: selectedRoutes.length > 0,
+    timeWindow
   };
 }
 
 export function loadRequestedFiveMinuteRows(
   routes: RequestedTrafficFiveMinuteRouteMeta[],
-  options: { routeId?: string; baseDir?: string } = {}
+  options: FiveMinuteAllRowsOptions = {}
 ): RequestedTrafficFiveMinuteRow[] {
   const selectedRoutes = selectableRoutes(routes, normalizeRouteId(options.routeId), options.baseDir);
-  return selectedRoutes.flatMap((route) => flattenRequestedFiveMinuteRows(route, readRequestedFiveMinuteSourceRows(route.id, options.baseDir)));
+  const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
+  return selectedRoutes.flatMap((route) =>
+    flattenRequestedFiveMinuteRows(route, filterSourceRowsByHour(readRequestedFiveMinuteSourceRows(route.id, options.baseDir), timeWindow))
+  );
 }
 
 export function requestedFiveMinuteRowsToCsv(rows: RequestedTrafficFiveMinuteRow[]): string {
@@ -142,8 +170,7 @@ export function requestedFiveMinuteRowsToCsv(rows: RequestedTrafficFiveMinuteRow
     "구간명",
     "통행속도(km/h)",
     "통행시간(초)",
-    "혼잡상태",
-    "막힘여부"
+    "혼잡상태"
   ];
   const lines = [headers.join(",")];
   for (const row of rows) {
@@ -163,8 +190,7 @@ export function requestedFiveMinuteRowsToCsv(rows: RequestedTrafficFiveMinuteRow
         row.sectionName,
         row.speedKmh ?? "",
         row.travelTimeSeconds ?? "",
-        row.congestionLabel,
-        String(row.blocked)
+        row.congestionLabel
       ]
         .map(csvCell)
         .join(",")
@@ -180,10 +206,6 @@ function normalizeRouteId(routeId: string | null | undefined): string {
 function selectableRoutes(routes: RequestedTrafficFiveMinuteRouteMeta[], routeId: string, baseDir = REQUESTED_TRAFFIC_DATA_DIR) {
   const selected = routeId === "all" ? routes : routes.filter((route) => route.id === routeId);
   return selected.filter((route) => requestedFiveMinuteFileExists(route.id, baseDir));
-}
-
-function routeCount(route: RequestedTrafficFiveMinuteRouteMeta, baseDir = REQUESTED_TRAFFIC_DATA_DIR): number {
-  return route.fiveMinuteRows ?? readRequestedFiveMinuteSourceRows(route.id, baseDir).length;
 }
 
 function readRequestedFiveMinuteSourceRows(routeId: string, baseDir = REQUESTED_TRAFFIC_DATA_DIR): RequestedFiveMinuteRawRow[] {
@@ -214,6 +236,33 @@ function assertSafeRouteId(routeId: string) {
 
 function nullableNumber(value: number | null | undefined): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function normalizeTimeWindow(startHour?: number, endHour?: number): RequestedTrafficTimeWindow {
+  const start = normalizeHour(startHour, REQUESTED_TRAFFIC_DAY_START_HOUR);
+  const end = normalizeHour(endHour, REQUESTED_TRAFFIC_DAY_END_HOUR);
+  return start <= end ? { startHour: start, endHour: end } : { startHour: end, endHour: start };
+}
+
+function normalizeHour(value: number | undefined, fallback: number): number {
+  return typeof value === "number" && Number.isFinite(value) ? Math.min(23, Math.max(0, Math.floor(value))) : fallback;
+}
+
+function filterSourceRowsByHour(
+  rows: RequestedFiveMinuteRawRow[],
+  timeWindow: RequestedTrafficTimeWindow
+): RequestedFiveMinuteRawRow[] {
+  return rows.filter((row) => {
+    const hour = rowHour(row);
+    return hour != null && hour >= timeWindow.startHour && hour <= timeWindow.endHour;
+  });
+}
+
+function rowHour(row: RequestedFiveMinuteRawRow): number | null {
+  const explicit = Number(row.시);
+  if (Number.isInteger(explicit)) return explicit;
+  const match = /^(\d{1,2}):/.exec(text(row.시간));
+  return match ? Number(match[1]) : null;
 }
 
 function text(value: string | number | null | undefined): string {

@@ -6,6 +6,7 @@ import { describe, it } from "node:test";
 import {
   flattenRequestedFiveMinuteRows,
   loadRequestedFiveMinutePage,
+  loadRequestedFiveMinuteRows,
   requestedFiveMinuteRowsToCsv,
   selectRequestedFiveMinutePreview
 } from "./requested-traffic-five-minute";
@@ -106,10 +107,11 @@ describe("requested traffic five-minute data", () => {
 
     assert.equal(
       csv.split("\n")[0],
-      "요청구간,실제매칭구간,날짜,시간,일시,링크아이디,도로명,도로등급,도로권역,시점명,종점명,구간명,통행속도(km/h),통행시간(초),혼잡상태,막힘여부"
+      "요청구간,실제매칭구간,날짜,시간,일시,링크아이디,도로명,도로등급,도로권역,시점명,종점명,구간명,통행속도(km/h),통행시간(초),혼잡상태"
     );
+    assert.doesNotMatch(csv.split("\n")[0], /막힘/);
     assert.match(csv, /계양IC → 장수IC,계양IC남측 → 장수IC남측,2026-05-16,08:05/);
-    assert.match(csv, /서운JC북측 → 서운JC남측,62.1,88,원활,false/);
+    assert.match(csv, /서운JC북측 → 서운JC남측,62.1,88,원활$/m);
     assert.equal(csv.split("\n").length, 3);
   });
 
@@ -140,6 +142,38 @@ describe("requested traffic five-minute data", () => {
         page.rows.map((row) => `${row.routeId}:${row.time}`),
         ["geyang_ic_to_jangsu_ic:08:10", "jangsu_ic_to_geyang_ic:09:00"]
       );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it("filters 5-minute rows to the requested hour window before paging and CSV export", () => {
+    const dir = mkdtempSync(join(tmpdir(), "requested-5min-window-"));
+    try {
+      writeSourceFile(dir, "geyang_ic_to_jangsu_ic", [
+        { ...sourceRows[0], 날짜: "2026-05-13", 시간: "05:55", 일시: "2026-05-13T05:55:00+09:00" },
+        { ...sourceRows[0], 날짜: "2026-05-13", 시간: "06:00", 일시: "2026-05-13T06:00:00+09:00" },
+        { ...sourceRows[1], 날짜: "2026-05-13", 시간: "18:55", 일시: "2026-05-13T18:55:00+09:00" },
+        { ...sourceRows[1], 날짜: "2026-05-13", 시간: "19:00", 일시: "2026-05-13T19:00:00+09:00" }
+      ]);
+
+      const page = loadRequestedFiveMinutePage([{ ...route, fiveMinuteRows: 4 }], {
+        baseDir: dir,
+        startHour: 6,
+        endHour: 18,
+        offset: 0,
+        windowSize: 10
+      });
+
+      assert.equal(page.totalCount, 2);
+      assert.deepEqual(page.rows.map((row) => row.time), ["06:00", "18:55"]);
+
+      const rows = loadRequestedFiveMinuteRows([{ ...route, fiveMinuteRows: 4 }], {
+        baseDir: dir,
+        startHour: 6,
+        endHour: 18
+      });
+      assert.equal(requestedFiveMinuteRowsToCsv(rows).split("\n").length, 3);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

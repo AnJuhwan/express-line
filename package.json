@@ -7,6 +7,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
+    "build:traffic-data": "node scripts/build-requested-traffic-data.mjs",
     "lint": "eslint .",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "test:watch": "node --import tsx --test --watch \"src/**/*.test.ts\""

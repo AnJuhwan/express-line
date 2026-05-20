@@ -665,22 +665,94 @@ h1 {
   max-width: 1560px;
 }
 
+.requested-hourly-page {
+  max-width: 1560px;
+}
+
 .five-minute-filter-panel {
   grid-template-columns: minmax(280px, 420px) auto;
   justify-content: start;
+}
+
+.hourly-filter-panel {
+  grid-template-columns: minmax(280px, 420px) auto;
+  justify-content: start;
+}
+
+.hourly-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .five-minute-virtual-table,
 .five-minute-virtual-table .virtual-table-header,
 .five-minute-virtual-table .virtual-table-row,
 .five-minute-virtual-table .virtual-table-spacer {
-  min-width: 1720px;
+  min-width: 1648px;
 }
 
 .five-minute-virtual-table .virtual-table-header,
 .five-minute-virtual-table .virtual-table-row {
   grid-template-columns:
-    170px 112px 74px 132px 170px minmax(260px, 1.35fr) 132px 118px 100px 104px 88px 72px;
+    170px 112px 74px 132px 170px minmax(260px, 1.35fr) 132px 118px 100px 104px 88px;
+}
+
+.hourly-table-wrap {
+  max-height: 680px;
+  overflow: auto;
+}
+
+.hourly-table {
+  width: 100%;
+  min-width: 1420px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.hourly-table th,
+.hourly-table td {
+  height: 52px;
+  border-right: 1px solid #edf0ed;
+  border-bottom: 1px solid #edf0ed;
+  padding: 0 14px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hourly-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 42px;
+  background: #f7faf8;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.hourly-table td {
+  background: var(--panel);
+}
+
+.hourly-table tr:nth-child(even) td {
+  background: #fbfcfa;
+}
+
+.hourly-table tr:hover td {
+  background: #eff7f4;
+}
+
+.hourly-table .strong {
+  max-width: 220px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.hourly-table .mono {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
 }
 
 .pill {
@@ -790,12 +862,17 @@ h1 {
   .all-data-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .hourly-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
   .filter-panel,
   .summary-grid,
   .requested-summary,
+  .hourly-summary,
   .route-highlight-grid,
   .route-card-grid,
   .blocked-section-grid {
