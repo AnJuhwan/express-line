@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BarChart3, Clock3, Database, FileJson, Route, Timer, TrafficCone } from "lucide-react";
+import { BarChart3, CalendarDays, Clock3, Database, FileJson, Route, Timer, TrafficCone } from "lucide-react";
 
 export interface RequestedTrafficReport {
   period: string;
@@ -74,7 +74,21 @@ interface RequestedBlockedSection {
 
 type TrafficStatus = "원활" | "서행" | "정체" | "정보없음" | "데이터없음";
 
-export function RequestedTrafficHome({ report }: { report: RequestedTrafficReport }) {
+interface RequestedTrafficHomeProps {
+  report: RequestedTrafficReport;
+  fiveMinuteHref?: string;
+  hourlyHref?: string;
+  dataLabel?: string;
+  relatedLinks?: Array<{ href: string; label: string; title: string }>;
+}
+
+export function RequestedTrafficHome({
+  report,
+  fiveMinuteHref = "/five-minute",
+  hourlyHref = "/hourly",
+  dataLabel = "data/csv-20260513-20260515",
+  relatedLinks = []
+}: RequestedTrafficHomeProps) {
   const mostBlockedRoutes = [...report.routes].sort((a, b) => b.blockedHourCount - a.blockedHourCount).slice(0, 3);
 
   return (
@@ -84,21 +98,27 @@ export function RequestedTrafficHome({ report }: { report: RequestedTrafficRepor
           <p className="eyebrow">요청 구간 추출 리포트</p>
           <h1>요청 구간별 시간대 정체 데이터</h1>
           <p className="hero-copy">
-            {report.period} ITS 5분 원천을 표준링크와 매칭해 계양IC, 장수IC, 신월 IC, 강변북로 방향별 요약으로 정리했습니다.
+            {report.period} ITS 5분 원천을 표준링크와 매칭해 요청 구간별 5분 단위와 1시간 단위 요약으로 정리했습니다.
           </p>
         </div>
         <div className="hero-actions">
-          <Link className="icon-button" href="/five-minute" title="5분 전체 데이터 화면">
+          <Link className="icon-button" href={fiveMinuteHref} title="5분 전체 데이터 화면">
             <Timer size={18} />
             5분 전체
           </Link>
-          <Link className="icon-button" href="/hourly" title="1시간 단위 데이터 화면">
+          <Link className="icon-button" href={hourlyHref} title="1시간 단위 데이터 화면">
             <Clock3 size={18} />
             1시간
           </Link>
+          {relatedLinks.map((link) => (
+            <Link className="icon-button" href={link.href} title={link.title} key={link.href}>
+              <CalendarDays size={18} />
+              {link.label}
+            </Link>
+          ))}
           <span className="icon-button static-action" title="로컬 JSON 저장 위치">
             <FileJson size={18} />
-            data/csv-20260513-20260515
+            {dataLabel}
           </span>
         </div>
       </section>

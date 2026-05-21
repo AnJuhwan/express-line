@@ -1,29 +1,15 @@
 {
-  "설명": "ITS 교통소통정보 5분 파일에서 요청 구간 LINKID만 추출한 2026-05-13 ~ 2026-05-15, 06~18시 JSON 묶음입니다.",
+  "설명": "ITS 교통소통정보 5분 파일에서 요청 구간 LINKID만 추출한 2026-05-20 ~ 2026-05-20, 06~18시 JSON 묶음입니다.",
   "원천파일": [
-    "/Users/anjuhwan/Downloads/20260513_5Min.csv",
-    "/Users/anjuhwan/Downloads/20260514_5Min.csv",
-    "/Users/anjuhwan/Downloads/20260515_5Min.csv"
+    "/Users/anjuhwan/Downloads/20260520_5Min.csv"
   ],
   "템플릿디렉터리": "data/csv",
-  "출력디렉터리": "data/csv-20260513-20260515",
+  "출력디렉터리": "data/csv-20260520",
   "스캔통계": [
     {
-      "파일": "/Users/anjuhwan/Downloads/20260513_5Min.csv",
+      "파일": "/Users/anjuhwan/Downloads/20260520_5Min.csv",
       "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
-      "스캔행수": 166662840,
-      "매칭행수": 27371
-    },
-    {
-      "파일": "/Users/anjuhwan/Downloads/20260514_5Min.csv",
-      "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
-      "스캔행수": 166700024,
-      "매칭행수": 27371
-    },
-    {
-      "파일": "/Users/anjuhwan/Downloads/20260515_5Min.csv",
-      "헤더": "CREATDE,CREATHM,LINKID,ROADINSTTCD,PASNGSPED,PASNGTIME",
-      "스캔행수": 166778955,
+      "스캔행수": 167047561,
       "매칭행수": 27371
     }
   ],
@@ -39,58 +25,58 @@
     {
       "요청구간": "계양IC → 장수IC",
       "실제매칭구간": "계양IC남측 → 장수IC남측",
-      "파일": "data/csv-20260513-20260515/geyang_ic_to_jangsu_ic.json",
+      "파일": "data/csv-20260520/geyang_ic_to_jangsu_ic.json",
       "링크수": 10,
-      "오분단위자료수": 3030
+      "오분단위자료수": 1010
     },
     {
       "요청구간": "장수IC → 계양IC",
       "실제매칭구간": "장수IC남측 → 계양IC남측",
-      "파일": "data/csv-20260513-20260515/jangsu_ic_to_geyang_ic.json",
+      "파일": "data/csv-20260520/jangsu_ic_to_geyang_ic.json",
       "링크수": 10,
-      "오분단위자료수": 3030
+      "오분단위자료수": 1010
     },
     {
       "요청구간": "인천 요금소 → 목동지하차도",
       "실제매칭구간": "인천TG → 목동지하차도서측",
-      "파일": "data/csv-20260513-20260515/incheon_toll_to_mokdong_underpass.json",
+      "파일": "data/csv-20260520/incheon_toll_to_mokdong_underpass.json",
       "링크수": 13,
-      "오분단위자료수": 3939
+      "오분단위자료수": 1313
     },
     {
       "요청구간": "목동지하차도 → 인천 요금소",
       "실제매칭구간": "목동지하차도서측 → 인천TG",
-      "파일": "data/csv-20260513-20260515/mokdong_underpass_to_incheon_toll.json",
+      "파일": "data/csv-20260520/mokdong_underpass_to_incheon_toll.json",
       "링크수": 13,
-      "오분단위자료수": 3636
+      "오분단위자료수": 1212
     },
     {
       "요청구간": "강변북로 광화대교 → 천호대교",
       "실제매칭구간": "가양대교북단 → 천호대교북측",
-      "파일": "data/csv-20260513-20260515/gangbyeonbukro_gwanghwa_to_cheonho.json",
+      "파일": "data/csv-20260520/gangbyeonbukro_gwanghwa_to_cheonho.json",
       "링크수": 54,
-      "오분단위자료수": 16362
+      "오분단위자료수": 5454
     },
     {
       "요청구간": "강변북로 천호대교 → 광화대교",
       "실제매칭구간": "천호대교북측 → 가양대교북단IC",
-      "파일": "data/csv-20260513-20260515/gangbyeonbukro_cheonho_to_gwanghwa.json",
+      "파일": "data/csv-20260520/gangbyeonbukro_cheonho_to_gwanghwa.json",
       "링크수": 64,
-      "오분단위자료수": 19392
+      "오분단위자료수": 6464
     },
     {
       "요청구간": "강변북로 잠실대교 → 광화대교",
       "실제매칭구간": "잠실대교북측 → 가양대교북단IC",
-      "파일": "data/csv-20260513-20260515/gangbyeonbukro_jamsil_to_gwanghwa.json",
+      "파일": "data/csv-20260520/gangbyeonbukro_jamsil_to_gwanghwa.json",
       "링크수": 58,
-      "오분단위자료수": 17574
+      "오분단위자료수": 5858
     },
     {
       "요청구간": "강변북로 광화대교 → 잠실대교",
       "실제매칭구간": "가양대교북단 → 잠실대교북측",
-      "파일": "data/csv-20260513-20260515/gangbyeonbukro_gwanghwa_to_jamsil.json",
+      "파일": "data/csv-20260520/gangbyeonbukro_gwanghwa_to_jamsil.json",
       "링크수": 50,
-      "오분단위자료수": 15150
+      "오분단위자료수": 5050
     }
   ]
 }

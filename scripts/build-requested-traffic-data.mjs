@@ -1,11 +1,12 @@
 import { createReadStream } from "node:fs";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
-import { basename, join } from "node:path";
+import { basename, isAbsolute, join, relative } from "node:path";
 
 const ROOT_DIR = process.cwd();
 const TEMPLATE_DIR = join(ROOT_DIR, "data", "csv");
-const OUTPUT_DIR = join(ROOT_DIR, "data", "csv-20260513-20260515");
-const REPORT_PATH = join(ROOT_DIR, "src", "lib", "requested-traffic-home-report.json");
+const DEFAULT_OUTPUT_DIR = join(ROOT_DIR, "data", "csv-20260513-20260515");
+const DEFAULT_REPORT_PATH = join(ROOT_DIR, "src", "lib", "requested-traffic-home-report.json");
+const DEFAULT_TEMPLATE_REPORT_PATH = DEFAULT_REPORT_PATH;
 const DEFAULT_SOURCE_FILES = [
   "/Users/anjuhwan/Downloads/20260513_5Min.csv",
   "/Users/anjuhwan/Downloads/20260514_5Min.csv",
@@ -14,18 +15,71 @@ const DEFAULT_SOURCE_FILES = [
 const START_HOUR = 6;
 const END_HOUR = 18;
 const SEOUL_TZ_OFFSET = "+09:00";
-const ROUTE_LABEL_OVERRIDES = new Map([["sinwol_ic_congestion_area", "신월 IC"]]);
+const SINWOL_REPLACEMENT_ROUTE_ID = "sinwol_ic_congestion_area";
+const ROAD_RANK_LABELS = new Map([
+  ["101", "고속도로"],
+  ["102", "도시고속화도로"],
+  ["104", "특별/광역시도"]
+]);
+const INCHEON_TOLL_MOKDONG_ROUTES = [
+  {
+    id: "incheon_toll_to_mokdong_underpass",
+    requestLabel: "인천 요금소 → 목동지하차도",
+    matchedLabel: "인천TG → 목동지하차도서측",
+    description: "표준링크 그래프에서 경인고속도로와 국회대로를 따라 인천TG에서 목동지하차도서측까지 매칭",
+    links: [
+      link("1660003701", "경인고속도로", "101", "인천광역시", "인천TG", "서운JC서측", 371.9168024),
+      link("1660003500", "경인고속도로", "101", "인천광역시", "서운JC서측", "서운JC동측", 795.5368687),
+      link("2420062200", "경인고속도로", "101", "경기도", "서운JC동측", "부천IC서측", 1123.293528),
+      link("2420085200", "경인고속도로", "101", "경기도", "부천IC서측", "부천IC동측", 505.982493),
+      link("2420269300", "경인고속도로", "101", "경기도", "부천IC동측", "부천시-양천구", 4090.534854),
+      link("1140278700", "경인고속도로", "101", "서울특별시", "부천시-양천구", "신월IC", 555.1318456),
+      link("1140000202", "경인고속도로", "101", "서울특별시", "신월IC", "신월IC", 177.7643904),
+      link("1140000203", "국회대로", "104", "서울특별시", "신월IC", "속성변화점", 85.79233417),
+      link("1140022201", "국회대로", "104", "서울특별시", "속성변화점", "신월IC", 99.80294878),
+      link("1140281001", "경인고속도로", "101", "서울특별시", "신월IC", "신월JC", 173.7078471),
+      link("1140281801", "경인고속도로", "101", "서울특별시", "신월JC", "신월IC", 264.9885228),
+      link("1140282401", "국회대로", "102", "서울특별시", "신월IC", "경인2지하차도서측", 429.1998161),
+      link("1140026201", "국회대로", "104", "서울특별시", "경인2지하차도서측", "목동지하차도서측", 1392.926282)
+    ]
+  },
+  {
+    id: "mokdong_underpass_to_incheon_toll",
+    requestLabel: "목동지하차도 → 인천 요금소",
+    matchedLabel: "목동지하차도서측 → 인천TG",
+    description: "표준링크 그래프에서 국회대로와 경인고속도로를 따라 목동지하차도서측에서 인천TG까지 매칭",
+    links: [
+      link("1140040503", "국회대로", "104", "서울특별시", "목동지하차도서측", "경인2지하차도서측", 1394.132159),
+      link("1150437701", "국회대로", "102", "서울특별시", "경인2지하차도서측", "신월IC", 429.0965474),
+      link("1140281701", "경인고속도로", "101", "서울특별시", "신월IC", "신월JC", 265.101721),
+      link("1140280801", "경인고속도로", "101", "서울특별시", "신월JC", "신월IC", 204.3928316),
+      link("1140040501", "국회대로", "104", "서울특별시", "신월IC", "속성변화점", 73.58722143),
+      link("1140000103", "국회대로", "104", "서울특별시", "속성변화점", "신월IC", 79.93413519),
+      link("1140000102", "경인고속도로", "101", "서울특별시", "신월IC", "신월IC", 181.5156391),
+      link("1140278800", "경인고속도로", "101", "서울특별시", "신월IC", "부천시-양천구", 539.9833643),
+      link("2420269400", "경인고속도로", "101", "경기도", "부천시-양천구", "부천IC동측", 4086.945664),
+      link("2420085300", "경인고속도로", "101", "경기도", "부천IC동측", "부천IC서측", 509.5466629),
+      link("2420062100", "경인고속도로", "101", "경기도", "부천IC서측", "서운JC동측", 1123.270609),
+      link("1660003600", "경인고속도로", "101", "인천광역시", "서운JC동측", "서운JC서측", 795.2993756),
+      link("1660003801", "경인고속도로", "101", "인천광역시", "서운JC서측", "인천TG", 371.3757133)
+    ]
+  }
+];
 const TRAFFIC_THRESHOLDS = {
   express: { smooth: 50, slow: 30 },
   local: { smooth: 25, slow: 15 }
 };
 
-const sourceFiles = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT_SOURCE_FILES;
+const options = parseCliArgs(process.argv.slice(2));
+const OUTPUT_DIR = absoluteFromRoot(options.outputDir);
+const REPORT_PATH = absoluteFromRoot(options.reportPath);
+const TEMPLATE_REPORT_PATH = absoluteFromRoot(options.templateReportPath);
+const sourceFiles = options.sourceFiles.length ? options.sourceFiles : DEFAULT_SOURCE_FILES;
 const sourceDates = sourceFiles.map(dateFromSourcePath).filter(Boolean).sort();
 
 await mkdir(OUTPUT_DIR, { recursive: true });
 
-const reportTemplate = JSON.parse(await readFile(REPORT_PATH, "utf8"));
+const reportTemplate = JSON.parse(await readFile(TEMPLATE_REPORT_PATH, "utf8"));
 const routeTemplates = await loadRouteTemplates(reportTemplate);
 const linkToRoutes = buildLinkToRoutes(routeTemplates);
 const scanStats = [];
@@ -39,16 +93,86 @@ for (const csvPath of sourceFiles) {
 for (const route of routeTemplates) {
   writeRouteAggregates(route, sourceDates);
   await writeFile(join(OUTPUT_DIR, `${route.id}.json`), JSON.stringify(route.output), "utf8");
-  console.log(`Wrote data/csv-20260513-20260515/${route.id}.json`);
+  console.log(`Wrote ${relativeFromRoot(join(OUTPUT_DIR, `${route.id}.json`))}`);
 }
 
 const manifest = buildManifest(reportTemplate, routeTemplates, scanStats);
 await writeFile(join(OUTPUT_DIR, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-console.log("Wrote data/csv-20260513-20260515/manifest.json");
+console.log(`Wrote ${relativeFromRoot(join(OUTPUT_DIR, "manifest.json"))}`);
 
 const homeReport = buildHomeReport(reportTemplate, routeTemplates);
 await writeFile(REPORT_PATH, `${JSON.stringify(homeReport, null, 2)}\n`, "utf8");
-console.log("Wrote src/lib/requested-traffic-home-report.json");
+console.log(`Wrote ${relativeFromRoot(REPORT_PATH)}`);
+
+function parseCliArgs(args) {
+  const parsed = {
+    outputDir: DEFAULT_OUTPUT_DIR,
+    reportPath: DEFAULT_REPORT_PATH,
+    templateReportPath: DEFAULT_TEMPLATE_REPORT_PATH,
+    sourceFiles: []
+  };
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === "--output-dir") {
+      parsed.outputDir = requiredOptionValue(args, ++index, arg);
+    } else if (arg === "--report-path") {
+      parsed.reportPath = requiredOptionValue(args, ++index, arg);
+    } else if (arg === "--template-report-path") {
+      parsed.templateReportPath = requiredOptionValue(args, ++index, arg);
+    } else if (arg === "--help") {
+      printUsageAndExit();
+    } else {
+      parsed.sourceFiles.push(arg);
+    }
+  }
+
+  return parsed;
+}
+
+function requiredOptionValue(args, index, flag) {
+  const value = args[index];
+  if (!value || value.startsWith("--")) {
+    throw new Error(`${flag} requires a path value`);
+  }
+  return value;
+}
+
+function printUsageAndExit() {
+  console.log(
+    [
+      "Usage: node scripts/build-requested-traffic-data.mjs [options] [source-csv ...]",
+      "",
+      "Options:",
+      "  --output-dir <path>           JSON data output directory",
+      "  --report-path <path>          report JSON output path",
+      "  --template-report-path <path> report JSON used for notes and route order"
+    ].join("\n")
+  );
+  process.exit(0);
+}
+
+function absoluteFromRoot(filePath) {
+  return isAbsolute(filePath) ? filePath : join(ROOT_DIR, filePath);
+}
+
+function relativeFromRoot(filePath) {
+  const relativePath = relative(ROOT_DIR, filePath);
+  return relativePath && !relativePath.startsWith("..") ? relativePath : filePath;
+}
+
+function link(linkId, roadName, roadRankCode, roadArea, fromName, toName, lengthMeters) {
+  return {
+    "링크아이디": linkId,
+    "도로명": roadName,
+    "도로등급": ROAD_RANK_LABELS.get(roadRankCode) ?? roadRankCode,
+    "도로권역": roadArea,
+    "시점명": fromName,
+    "종점명": toName,
+    "구간명": `${fromName} → ${toName}`,
+    "연장_m": roundThree(lengthMeters)
+  };
+}
 
 async function loadRouteTemplates(reportTemplate) {
   const routeOrder = new Map((reportTemplate.routes ?? []).map((route, index) => [route.id, index]));
@@ -57,30 +181,63 @@ async function loadRouteTemplates(reportTemplate) {
     .sort((a, b) => {
       const aId = basename(a, ".json");
       const bId = basename(b, ".json");
-      return (routeOrder.get(aId) ?? 999) - (routeOrder.get(bId) ?? 999) || a.localeCompare(b);
+      return routeSortOrder(routeOrder, aId) - routeSortOrder(routeOrder, bId) || a.localeCompare(b);
     });
 
-  return Promise.all(
-    files.map(async (file) => {
-      const id = basename(file, ".json");
-      const source = JSON.parse(await readFile(join(TEMPLATE_DIR, file), "utf8"));
-      const links = Array.isArray(source["구간목록"]) ? source["구간목록"] : [];
-      const requestLabel = ROUTE_LABEL_OVERRIDES.get(id) ?? source["메타"]?.["요청구간"] ?? id;
-      const matchedLabel = source["메타"]?.["실제매칭구간"] ?? requestLabel;
-      const linkOrder = new Map(links.map((link, index) => [String(link["링크아이디"]), index]));
+  const routes = [];
+  for (const file of files) {
+    const id = basename(file, ".json");
+    const source = JSON.parse(await readFile(join(TEMPLATE_DIR, file), "utf8"));
+    if (id === SINWOL_REPLACEMENT_ROUTE_ID) {
+      routes.push(...INCHEON_TOLL_MOKDONG_ROUTES.map(syntheticRouteTemplate));
+      continue;
+    }
+    routes.push(routeTemplateFromSource(id, source));
+  }
 
-      return {
-        id,
-        requestLabel,
-        matchedLabel,
-        source,
-        links,
-        linkOrder,
-        rows: [],
-        output: null
-      };
-    })
-  );
+  return routes.sort((a, b) => routeSortOrder(routeOrder, a.id) - routeSortOrder(routeOrder, b.id) || a.id.localeCompare(b.id));
+}
+
+function syntheticRouteTemplate(definition) {
+  const source = {
+    "메타": {
+      "요청구간": definition.requestLabel,
+      "실제매칭구간": definition.matchedLabel,
+      "설명": definition.description
+    },
+    "구간목록": definition.links.map((routeLink, index) => ({
+      "순번": index + 1,
+      ...routeLink
+    }))
+  };
+  return routeTemplateFromSource(definition.id, source);
+}
+
+function routeTemplateFromSource(id, source) {
+  const links = Array.isArray(source["구간목록"]) ? source["구간목록"] : [];
+  const requestLabel = source["메타"]?.["요청구간"] ?? id;
+  const matchedLabel = source["메타"]?.["실제매칭구간"] ?? requestLabel;
+  const linkOrder = new Map(links.map((routeLink, index) => [String(routeLink["링크아이디"]), index]));
+
+  return {
+    id,
+    requestLabel,
+    matchedLabel,
+    source,
+    links,
+    linkOrder,
+    rows: [],
+    output: null
+  };
+}
+
+function routeSortOrder(routeOrder, id) {
+  if (routeOrder.has(id)) return routeOrder.get(id);
+  const syntheticIndex = INCHEON_TOLL_MOKDONG_ROUTES.findIndex((route) => route.id === id);
+  if (syntheticIndex !== -1) {
+    return (routeOrder.get(SINWOL_REPLACEMENT_ROUTE_ID) ?? 999) + syntheticIndex / 10;
+  }
+  return 999;
 }
 
 function buildLinkToRoutes(routes) {
@@ -340,10 +497,10 @@ function buildSectionRows(route) {
 
 function buildManifest(reportTemplate, routes, scanStats) {
   return {
-    "설명": "ITS 교통소통정보 5분 파일에서 요청 구간 LINKID만 추출한 2026-05-13 ~ 2026-05-15, 06~18시 JSON 묶음입니다.",
+    "설명": `ITS 교통소통정보 5분 파일에서 요청 구간 LINKID만 추출한 ${reportPeriod(sourceDates)}, 06~18시 JSON 묶음입니다.`,
     "원천파일": sourceFiles,
-    "템플릿디렉터리": "data/csv",
-    "출력디렉터리": "data/csv-20260513-20260515",
+    "템플릿디렉터리": relativeFromRoot(TEMPLATE_DIR),
+    "출력디렉터리": relativeFromRoot(OUTPUT_DIR),
     "스캔통계": scanStats.map((stats) => ({
       "파일": stats.file,
       "헤더": stats.header,
@@ -358,7 +515,7 @@ function buildManifest(reportTemplate, routes, scanStats) {
     "파일목록": routes.map((route) => ({
       "요청구간": route.requestLabel,
       "실제매칭구간": route.matchedLabel,
-      "파일": `data/csv-20260513-20260515/${route.id}.json`,
+      "파일": relativeFromRoot(join(OUTPUT_DIR, `${route.id}.json`)),
       "링크수": route.links.length,
       "오분단위자료수": route.rows.length
     }))
@@ -504,6 +661,10 @@ function sum(values) {
 
 function roundOne(value) {
   return value == null ? null : Math.round(value * 10) / 10;
+}
+
+function roundThree(value) {
+  return value == null ? null : Math.round(value * 1000) / 1000;
 }
 
 function nullableNumber(value) {

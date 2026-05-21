@@ -21,6 +21,10 @@ interface Props {
   initialDataAvailable: boolean;
   initialStartHour: number;
   initialEndHour: number;
+  datasetId?: string;
+  reportHref?: string;
+  fiveMinuteHref?: string;
+  periodLabel?: string;
 }
 
 export function RequestedHourlyExplorer({
@@ -30,7 +34,11 @@ export function RequestedHourlyExplorer({
   initialTotalCount,
   initialDataAvailable,
   initialStartHour,
-  initialEndHour
+  initialEndHour,
+  datasetId,
+  reportHref = "/",
+  fiveMinuteHref = "/five-minute",
+  periodLabel = "선택 기간"
 }: Props) {
   const [routeId, setRouteId] = useState(initialRouteId);
   const [appliedRouteId, setAppliedRouteId] = useState(initialRouteId);
@@ -45,15 +53,27 @@ export function RequestedHourlyExplorer({
     return routes.find((route) => route.id === appliedRouteId)?.requestLabel ?? "선택 구간";
   }, [appliedRouteId, routes]);
   const timeWindowLabel = `${padHour(timeWindow.startHour)}:00~${padHour(timeWindow.endHour)}:00`;
-  const csvHref = `/api/requested-traffic/hourly?route=${encodeURIComponent(appliedRouteId)}&startHour=${timeWindow.startHour}&endHour=${timeWindow.endHour}&format=csv`;
+  const csvHref = requestedTrafficApiHref(
+    "/api/requested-traffic/hourly",
+    {
+      route: appliedRouteId,
+      startHour: String(timeWindow.startHour),
+      endHour: String(timeWindow.endHour),
+      format: "csv"
+    },
+    datasetId
+  );
 
   function applyRoute(nextRouteId = routeId) {
     startTransition(async () => {
-      const params = new URLSearchParams({
-        route: nextRouteId,
-        startHour: String(timeWindow.startHour),
-        endHour: String(timeWindow.endHour)
-      });
+      const params = requestedTrafficSearchParams(
+        {
+          route: nextRouteId,
+          startHour: String(timeWindow.startHour),
+          endHour: String(timeWindow.endHour)
+        },
+        datasetId
+      );
       const response = await fetch(`/api/requested-traffic/hourly?${params.toString()}`, { cache: "no-store" });
       const nextPayload = (await response.json()) as HourlyPayload;
       setAppliedRouteId(nextPayload.routeId);
@@ -72,15 +92,15 @@ export function RequestedHourlyExplorer({
           <p className="eyebrow">Hourly traffic records</p>
           <h1>1시간 단위 데이터</h1>
           <p className="hero-copy">
-            2026-05-13부터 2026-05-15까지, 오전 6시부터 오후 6시까지의 요청 구간별 시간 요약입니다.
+            {periodLabel}, 오전 6시부터 오후 6시까지의 요청 구간별 시간 요약입니다.
           </p>
         </div>
         <div className="hero-actions">
-          <Link className="icon-button" href="/" title="리포트로 돌아가기">
+          <Link className="icon-button" href={reportHref} title="리포트로 돌아가기">
             <ArrowLeft size={18} />
             리포트
           </Link>
-          <Link className="icon-button" href="/five-minute" title="5분 단위 데이터 화면">
+          <Link className="icon-button" href={fiveMinuteHref} title="5분 단위 데이터 화면">
             <Timer size={18} />
             5분
           </Link>
@@ -211,4 +231,14 @@ function statusClass(label: string): string {
 
 function padHour(hour: number): string {
   return String(hour).padStart(2, "0");
+}
+
+function requestedTrafficApiHref(endpoint: string, params: Record<string, string>, datasetId?: string): string {
+  return `${endpoint}?${requestedTrafficSearchParams(params, datasetId).toString()}`;
+}
+
+function requestedTrafficSearchParams(params: Record<string, string>, datasetId?: string): URLSearchParams {
+  const searchParams = new URLSearchParams(params);
+  if (datasetId) searchParams.set("dataset", datasetId);
+  return searchParams;
 }

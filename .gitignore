@@ -1,6 +1,11 @@
 .next/
 node_modules/
 /data/*
+!/data/csv-20260513-20260515/
+!/data/csv-20260513-20260515/incheon_toll_to_mokdong_underpass.json
+!/data/csv-20260513-20260515/mokdong_underpass_to_incheon_toll.json
+!/data/csv-20260520/
+!/data/csv-20260520/*.json
 outputs/
 .env
 .env.local

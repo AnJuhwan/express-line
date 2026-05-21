@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import requestedTrafficReport from "@/lib/requested-traffic-home-report.json";
+import {
+  getRequestedTrafficDataset,
+  requestedTrafficRoutesForReport
+} from "@/lib/requested-traffic-datasets";
 import {
   REQUESTED_TRAFFIC_DAY_END_HOUR,
   REQUESTED_TRAFFIC_DAY_START_HOUR,
@@ -8,33 +11,28 @@ import {
   loadRequestedFiveMinuteRows,
   requestedFiveMinuteRowsToCsv
 } from "@/lib/requested-traffic-five-minute";
-import type { RequestedTrafficFiveMinuteRouteMeta } from "@/lib/requested-traffic-five-minute";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const MAX_WINDOW_SIZE = 2000;
-const routes = (requestedTrafficReport.routes as RequestedTrafficFiveMinuteRouteMeta[]).map((route) => ({
-  id: route.id,
-  requestLabel: route.requestLabel,
-  matchedLabel: route.matchedLabel,
-  fiveMinuteRows: route.fiveMinuteRows
-}));
 
 export async function GET(request: Request) {
   const searchParams = new URL(request.url).searchParams;
+  const dataset = getRequestedTrafficDataset(searchParams.get("dataset"));
+  const routes = requestedTrafficRoutesForReport(dataset.report);
   const routeId = searchParams.get("route") || "all";
   const format = searchParams.get("format");
   const startHour = parseHour(searchParams.get("startHour"), REQUESTED_TRAFFIC_DAY_START_HOUR);
   const endHour = parseHour(searchParams.get("endHour"), REQUESTED_TRAFFIC_DAY_END_HOUR);
 
   if (format === "csv") {
-    const rows = loadRequestedFiveMinuteRows(routes, { routeId, startHour, endHour });
+    const rows = loadRequestedFiveMinuteRows(routes, { routeId, baseDir: dataset.dataDir, startHour, endHour });
     const csv = requestedFiveMinuteRowsToCsv(rows);
     return new Response(`\uFEFF${csv}`, {
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="${csvFileName(routeId, startHour, endHour)}"`
+        "Content-Disposition": `attachment; filename="${csvFileName(dataset.id, routeId, startHour, endHour)}"`
       }
     });
   }
@@ -48,6 +46,7 @@ export async function GET(request: Request) {
     routeId,
     offset,
     windowSize,
+    baseDir: dataset.dataDir,
     startHour,
     endHour
   });
@@ -71,9 +70,10 @@ function parseHour(value: string | null, fallback: number): number {
   return Math.min(23, Math.max(0, Math.floor(parsed)));
 }
 
-function csvFileName(routeId: string, startHour: number, endHour: number): string {
+function csvFileName(datasetId: string, routeId: string, startHour: number, endHour: number): string {
   const safeRouteId = /^[a-z0-9_]+$/.test(routeId) ? routeId : "all";
-  return `requested-traffic-5min-${safeRouteId}-${padHour(startHour)}-${padHour(endHour)}.csv`;
+  const safeDatasetId = /^[a-z0-9_]+$/.test(datasetId) ? datasetId : "default";
+  return `requested-traffic-5min-${safeDatasetId}-${safeRouteId}-${padHour(startHour)}-${padHour(endHour)}.csv`;
 }
 
 function padHour(hour: number): string {

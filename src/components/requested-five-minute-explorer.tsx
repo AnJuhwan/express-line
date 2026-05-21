@@ -25,6 +25,10 @@ interface Props {
   initialDataAvailable: boolean;
   initialStartHour: number;
   initialEndHour: number;
+  datasetId?: string;
+  reportHref?: string;
+  hourlyHref?: string;
+  periodLabel?: string;
 }
 
 const VIRTUAL_ROW_HEIGHT = 56;
@@ -40,7 +44,11 @@ export function RequestedFiveMinuteExplorer({
   initialTotalCount,
   initialDataAvailable,
   initialStartHour,
-  initialEndHour
+  initialEndHour,
+  datasetId,
+  reportHref = "/",
+  hourlyHref = "/hourly",
+  periodLabel = "선택 기간"
 }: Props) {
   const initialPageIndex = Math.floor(initialOffset / REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE);
   const requestedPagesRef = useRef(new Set(initialRows.length ? [initialPageIndex] : []));
@@ -66,19 +74,31 @@ export function RequestedFiveMinuteExplorer({
     return routes.find((route) => route.id === appliedRouteId)?.requestLabel ?? "선택 구간";
   }, [appliedRouteId, routes]);
   const timeWindowLabel = `${padHour(timeWindow.startHour)}:00~${padHour(timeWindow.endHour)}:55`;
-  const csvHref = `/api/requested-traffic/five-minute?route=${encodeURIComponent(appliedRouteId)}&startHour=${timeWindow.startHour}&endHour=${timeWindow.endHour}&format=csv`;
+  const csvHref = requestedTrafficApiHref(
+    "/api/requested-traffic/five-minute",
+    {
+      route: appliedRouteId,
+      startHour: String(timeWindow.startHour),
+      endHour: String(timeWindow.endHour),
+      format: "csv"
+    },
+    datasetId
+  );
 
   const fetchFiveMinutePage = useCallback(async (nextRouteId: string, offset: number) => {
-    const params = new URLSearchParams({
-      route: nextRouteId,
-      offset: String(offset),
-      windowSize: String(REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE),
-      startHour: String(timeWindow.startHour),
-      endHour: String(timeWindow.endHour)
-    });
+    const params = requestedTrafficSearchParams(
+      {
+        route: nextRouteId,
+        offset: String(offset),
+        windowSize: String(REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE),
+        startHour: String(timeWindow.startHour),
+        endHour: String(timeWindow.endHour)
+      },
+      datasetId
+    );
     const response = await fetch(`/api/requested-traffic/five-minute?${params.toString()}`, { cache: "no-store" });
     return (await response.json()) as FiveMinutePayload;
-  }, [timeWindow.endHour, timeWindow.startHour]);
+  }, [datasetId, timeWindow.endHour, timeWindow.startHour]);
 
   function applyRoute(nextRouteId = routeId) {
     startTransition(async () => {
@@ -140,11 +160,11 @@ export function RequestedFiveMinuteExplorer({
           <p className="eyebrow">Five-minute traffic records</p>
           <h1>5분 단위 전체 데이터</h1>
           <p className="hero-copy">
-            기존 리포트 구조는 유지하고, ITS 5분 원천 행 전체를 서버 페이징과 가상스크롤로 탐색합니다.
+            {periodLabel}, 오전 6시부터 오후 6시까지의 ITS 5분 원천 행을 서버 페이징과 가상스크롤로 탐색합니다.
           </p>
         </div>
         <div className="hero-actions">
-          <Link className="icon-button" href="/" title="리포트로 돌아가기">
+          <Link className="icon-button" href={reportHref} title="리포트로 돌아가기">
             <ArrowLeft size={18} />
             리포트
           </Link>
@@ -152,7 +172,7 @@ export function RequestedFiveMinuteExplorer({
             <Download size={18} />
             CSV
           </a>
-          <Link className="icon-button" href="/hourly" title="1시간 단위 데이터 화면">
+          <Link className="icon-button" href={hourlyHref} title="1시간 단위 데이터 화면">
             <Clock3 size={18} />
             1시간
           </Link>
@@ -361,6 +381,16 @@ function formatSeconds(seconds: number | null): string {
 
 function padHour(hour: number): string {
   return String(hour).padStart(2, "0");
+}
+
+function requestedTrafficApiHref(endpoint: string, params: Record<string, string>, datasetId?: string): string {
+  return `${endpoint}?${requestedTrafficSearchParams(params, datasetId).toString()}`;
+}
+
+function requestedTrafficSearchParams(params: Record<string, string>, datasetId?: string): URLSearchParams {
+  const searchParams = new URLSearchParams(params);
+  if (datasetId) searchParams.set("dataset", datasetId);
+  return searchParams;
 }
 
 function statusClass(label: string): string {
