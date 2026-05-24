@@ -19,6 +19,7 @@ const SINWOL_REPLACEMENT_ROUTE_ID = "sinwol_ic_congestion_area";
 const ROAD_RANK_LABELS = new Map([
   ["101", "고속도로"],
   ["102", "도시고속화도로"],
+  ["103", "일반국도"],
   ["104", "특별/광역시도"]
 ]);
 const INCHEON_TOLL_MOKDONG_ROUTES = [
@@ -441,7 +442,7 @@ function hourSummary(date, hour, group, route) {
     "관측링크수": group.observedLinkIds.size,
     "평균속도_kmh": roundOne(avgSpeed),
     "최저속도_kmh": roundOne(minSpeed),
-    "시간대혼잡상태": trafficStatus(avgSpeed, dominantRoadRank(route)),
+    "시간대혼잡상태": hourTrafficStatus(avgSpeed, dominantRoadRank(route), slowObservationCount, congestedObservationCount),
     "막힘여부": slowObservationCount > 0 || congestedObservationCount > 0,
     "원활관측수": smoothObservationCount,
     "서행관측수": slowObservationCount,
@@ -643,6 +644,14 @@ function trafficStatus(speed, roadRank) {
   if (speed >= thresholds.smooth) return "원활";
   if (speed >= thresholds.slow) return "서행";
   return "정체";
+}
+
+function hourTrafficStatus(avgSpeed, roadRank, slowObservationCount, congestedObservationCount) {
+  const averageStatus = trafficStatus(avgSpeed, roadRank);
+  if (averageStatus === "원활" && (slowObservationCount > 0 || congestedObservationCount > 0)) {
+    return "서행";
+  }
+  return averageStatus;
 }
 
 function isExpressRoad(roadRank) {

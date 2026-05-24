@@ -17,10 +17,10 @@
   - `계양IC → 장수IC`
   - `장수IC → 계양IC`
   - `서울시내 신월IC 막히는 구간`
-  - `강변북로 광화대교 → 천호대교`
-  - `강변북로 천호대교 → 광화대교`
-  - `강변북로 잠실대교 → 광화대교`
-  - `강변북로 광화대교 → 잠실대교`
+  - `강변북로 방화대교 → 천호대교`
+  - `강변북로 천호대교 → 방화대교`
+  - `강변북로 잠실대교 → 방화대교`
+  - `강변북로 방화대교 → 잠실대교`
 - Do not delete or overwrite the existing `data/csv/*.json` files.
 - Reuse each current route JSON's `구간목록` only as the route/link definition source. This avoids reparsing the CP949 link-info CSV during execution and preserves the existing matched section names, but the generated observations must come only from `/Users/anjuhwan/Downloads/20260513_5Min.csv`, `/Users/anjuhwan/Downloads/20260514_5Min.csv`, and `/Users/anjuhwan/Downloads/20260515_5Min.csv`.
 
