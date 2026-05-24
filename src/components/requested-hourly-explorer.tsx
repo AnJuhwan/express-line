@@ -74,7 +74,7 @@ export function RequestedHourlyExplorer({
         },
         datasetId
       );
-      const response = await fetch(`/api/requested-traffic/hourly?${params.toString()}`, { cache: "no-store" });
+      const response = await fetch(`/api/requested-traffic/hourly?${params.toString()}`, { cache: "force-cache" });
       const nextPayload = (await response.json()) as HourlyPayload;
       setAppliedRouteId(nextPayload.routeId);
       setRouteId(nextPayload.routeId);
@@ -172,6 +172,7 @@ function RequestedHourlyTable({ rows, dataAvailable }: { rows: RequestedTrafficH
       <table className="hourly-table">
         <thead>
           <tr>
+            <th>시간묶음</th>
             <th>요청구간</th>
             <th>날짜</th>
             <th>시간대</th>
@@ -188,6 +189,7 @@ function RequestedHourlyTable({ rows, dataAvailable }: { rows: RequestedTrafficH
         <tbody>
           {rows.map((row) => (
             <tr key={`${row.routeId}-${row.date}-${row.hour}`}>
+              <td className="hour-group-cell mono">{formatHourGroup(row.hour)}</td>
               <td className="strong" title={row.requestLabel}>{row.requestLabel}</td>
               <td className="mono">{row.date}</td>
               <td className="mono">{row.label}</td>
@@ -220,6 +222,10 @@ function Metric({ label, value }: { label: string; value: string }) {
 
 function formatSpeed(speedKmh: number | null): string {
   return speedKmh == null ? "-" : `${Number(speedKmh.toFixed(1)).toLocaleString("ko-KR")} km/h`;
+}
+
+function formatHourGroup(hour: number): string {
+  return `${String(hour).padStart(2, "0")}시`;
 }
 
 function statusClass(label: string): string {

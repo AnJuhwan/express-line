@@ -10,7 +10,6 @@ import {
   loadRequestedFiveMinutePage
 } from "@/lib/requested-traffic-five-minute";
 
-export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default function FiveMinutePage() {

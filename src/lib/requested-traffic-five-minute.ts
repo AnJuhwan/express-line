@@ -68,30 +68,36 @@ type FiveMinuteAllRowsOptions = {
 };
 
 const sourceRowsCache = new Map<string, RequestedFiveMinuteRawRow[]>();
+const sortedRowsCache = new Map<string, RequestedTrafficFiveMinuteRow[]>();
 
 export function flattenRequestedFiveMinuteRows(
   route: RequestedTrafficFiveMinuteRouteMeta,
   sourceRows: RequestedFiveMinuteRawRow[]
 ): RequestedTrafficFiveMinuteRow[] {
-  return sourceRows.map((row) => ({
-    routeId: route.id,
-    requestLabel: route.requestLabel,
-    matchedLabel: route.matchedLabel,
-    date: text(row.날짜),
-    time: text(row.시간),
-    timestamp: text(row.일시),
-    linkId: text(row.링크아이디),
-    roadName: text(row.도로명),
-    roadRank: text(row.도로등급),
-    roadArea: text(row.도로권역),
-    fromName: text(row.시점명),
-    toName: text(row.종점명),
-    sectionName: text(row.구간명),
-    speedKmh: nullableNumber(row.통행속도_kmh),
-    travelTimeSeconds: nullableNumber(row.통행시간_초),
-    congestionLabel: text(row.혼잡상태),
-    blocked: row.막힘여부 === true
-  }));
+  return sourceRows.map((row) => {
+    const hour = rowHour(row);
+
+    return {
+      routeId: route.id,
+      requestLabel: route.requestLabel,
+      matchedLabel: route.matchedLabel,
+      date: text(row.날짜),
+      hour: hour ?? 0,
+      time: text(row.시간),
+      timestamp: text(row.일시),
+      linkId: text(row.링크아이디),
+      roadName: text(row.도로명),
+      roadRank: text(row.도로등급),
+      roadArea: text(row.도로권역),
+      fromName: text(row.시점명),
+      toName: text(row.종점명),
+      sectionName: text(row.구간명),
+      speedKmh: nullableNumber(row.통행속도_kmh),
+      travelTimeSeconds: nullableNumber(row.통행시간_초),
+      congestionLabel: text(row.혼잡상태),
+      blocked: row.막힘여부 === true
+    };
+  });
 }
 
 export function selectRequestedFiveMinutePreview(inputs: PreviewInput[], rowsPerRoute: number): RequestedTrafficFiveMinuteRow[] {
@@ -109,35 +115,14 @@ export function loadRequestedFiveMinutePage(
   const windowSize = Math.max(0, Math.floor(options.windowSize ?? REQUESTED_TRAFFIC_FIVE_MINUTE_PAGE_SIZE));
   const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
   const selectedRoutes = selectableRoutes(routes, routeId, options.baseDir);
-  const routeRows = selectedRoutes.map((route) => ({
-    route,
-    rows: filterSourceRowsByHour(readRequestedFiveMinuteSourceRows(route.id, options.baseDir), timeWindow)
-  }));
-  const totalCount = routeRows.reduce((sum, route) => sum + route.rows.length, 0);
-  const rows: RequestedTrafficFiveMinuteRow[] = [];
-
-  let skipped = offset;
-  let remaining = windowSize;
-  for (const routeEntry of routeRows) {
-    if (remaining <= 0) break;
-    const count = routeEntry.rows.length;
-    if (skipped >= count) {
-      skipped -= count;
-      continue;
-    }
-
-    const slice = routeEntry.rows.slice(skipped, skipped + remaining);
-    rows.push(...flattenRequestedFiveMinuteRows(routeEntry.route, slice));
-    remaining -= slice.length;
-    skipped = 0;
-  }
+  const allRows = sortedFiveMinuteRows(selectedRoutes, timeWindow, options.baseDir);
 
   return {
     routeId,
-    rows,
+    rows: allRows.slice(offset, offset + windowSize),
     offset,
     windowSize,
-    totalCount,
+    totalCount: allRows.length,
     dataAvailable: selectedRoutes.length > 0,
     timeWindow
   };
@@ -149,9 +134,7 @@ export function loadRequestedFiveMinuteRows(
 ): RequestedTrafficFiveMinuteRow[] {
   const selectedRoutes = selectableRoutes(routes, normalizeRouteId(options.routeId), options.baseDir);
   const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
-  return selectedRoutes.flatMap((route) =>
-    flattenRequestedFiveMinuteRows(route, filterSourceRowsByHour(readRequestedFiveMinuteSourceRows(route.id, options.baseDir), timeWindow))
-  );
+  return sortedFiveMinuteRows(selectedRoutes, timeWindow, options.baseDir).slice();
 }
 
 export function requestedFiveMinuteRowsToCsv(rows: RequestedTrafficFiveMinuteRow[]): string {
@@ -226,6 +209,40 @@ function readRequestedFiveMinuteSourceRows(routeId: string, baseDir = REQUESTED_
 function requestedFiveMinuteFileExists(routeId: string, baseDir: string): boolean {
   assertSafeRouteId(routeId);
   return existsSync(join(baseDir, `${routeId}.json`));
+}
+
+function sortedFiveMinuteRows(
+  routes: RequestedTrafficFiveMinuteRouteMeta[],
+  timeWindow: RequestedTrafficTimeWindow,
+  baseDir = REQUESTED_TRAFFIC_DATA_DIR
+): RequestedTrafficFiveMinuteRow[] {
+  const cacheKey = `${baseDir}:${routes.map((route) => route.id).join(",")}:${timeWindow.startHour}-${timeWindow.endHour}`;
+  const cached = sortedRowsCache.get(cacheKey);
+  if (cached) return cached;
+
+  const routeOrder = new Map(routes.map((route, index) => [route.id, index]));
+  const rows = routes
+    .flatMap((route) =>
+      flattenRequestedFiveMinuteRows(route, filterSourceRowsByHour(readRequestedFiveMinuteSourceRows(route.id, baseDir), timeWindow))
+    )
+    .sort((first, second) => compareFiveMinuteRows(first, second, routeOrder));
+  sortedRowsCache.set(cacheKey, rows);
+  return rows;
+}
+
+function compareFiveMinuteRows(
+  first: RequestedTrafficFiveMinuteRow,
+  second: RequestedTrafficFiveMinuteRow,
+  routeOrder: Map<string, number>
+): number {
+  return (
+    first.hour - second.hour ||
+    first.date.localeCompare(second.date) ||
+    first.time.localeCompare(second.time) ||
+    (routeOrder.get(first.routeId) ?? 0) - (routeOrder.get(second.routeId) ?? 0) ||
+    first.linkId.localeCompare(second.linkId) ||
+    first.sectionName.localeCompare(second.sectionName)
+  );
 }
 
 function assertSafeRouteId(routeId: string) {

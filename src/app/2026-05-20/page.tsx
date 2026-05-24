@@ -10,7 +10,10 @@ export default function May20RequestedTrafficPage() {
       fiveMinuteHref={dataset.fiveMinuteHref}
       hourlyHref={dataset.hourlyHref}
       dataLabel={dataset.dataLabel}
-      relatedLinks={[{ href: "/", label: "5/13~5/15", title: "2026년 5월 13일부터 15일 리포트" }]}
+      relatedLinks={[
+        { href: "/2026-05-20/maps", label: "지도", title: "2026년 5월 20일 막히는 구간 지도" },
+        { href: "/", label: "5/13~5/15", title: "2026년 5월 13일부터 15일 리포트" }
+      ]}
     />
   );
 }

@@ -62,6 +62,7 @@ describe("requested traffic five-minute data", () => {
       requestLabel: "계양IC → 장수IC",
       matchedLabel: "계양IC남측 → 장수IC남측",
       date: "2026-05-16",
+      hour: 8,
       time: "08:05",
       timestamp: "2026-05-16T08:05:00+09:00",
       linkId: "1670002900",
@@ -141,6 +142,40 @@ describe("requested traffic five-minute data", () => {
       assert.deepEqual(
         page.rows.map((row) => `${row.routeId}:${row.time}`),
         ["geyang_ic_to_jangsu_ic:08:10", "jangsu_ic_to_geyang_ic:09:00"]
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it("orders all-route pages by hour before route so same-hour rows stay together", () => {
+    const dir = mkdtempSync(join(tmpdir(), "requested-5min-hour-groups-"));
+    try {
+      writeSourceFile(dir, "geyang_ic_to_jangsu_ic", [
+        { ...sourceRows[0], 날짜: "2026-05-13", 시간: "06:00", 일시: "2026-05-13T06:00:00+09:00" },
+        { ...sourceRows[0], 날짜: "2026-05-13", 시간: "07:00", 일시: "2026-05-13T07:00:00+09:00" }
+      ]);
+      writeSourceFile(dir, "jangsu_ic_to_geyang_ic", [
+        { ...sourceRows[1], 날짜: "2026-05-13", 시간: "06:05", 일시: "2026-05-13T06:05:00+09:00" },
+        { ...sourceRows[1], 날짜: "2026-05-13", 시간: "07:05", 일시: "2026-05-13T07:05:00+09:00" }
+      ]);
+
+      const page = loadRequestedFiveMinutePage(
+        [
+          { ...route, fiveMinuteRows: 2 },
+          { id: "jangsu_ic_to_geyang_ic", requestLabel: "장수IC → 계양IC", matchedLabel: "장수IC남측 → 계양IC남측", fiveMinuteRows: 2 }
+        ],
+        { baseDir: dir, offset: 0, windowSize: 10 }
+      );
+
+      assert.deepEqual(
+        page.rows.map((row) => `${row.time}:${row.routeId}`),
+        [
+          "06:00:geyang_ic_to_jangsu_ic",
+          "06:05:jangsu_ic_to_geyang_ic",
+          "07:00:geyang_ic_to_jangsu_ic",
+          "07:05:jangsu_ic_to_geyang_ic"
+        ]
       );
     } finally {
       rmSync(dir, { recursive: true, force: true });

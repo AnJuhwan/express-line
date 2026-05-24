@@ -50,6 +50,7 @@ type RequestedHourlyOptions = {
 };
 
 const hourlyRowsCache = new Map<string, RequestedHourlyRawRow[]>();
+const sortedRowsCache = new Map<string, RequestedTrafficHourlyRow[]>();
 
 export function loadRequestedHourlyRows(
   routes: RequestedTrafficFiveMinuteRouteMeta[],
@@ -59,9 +60,7 @@ export function loadRequestedHourlyRows(
   const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
   const selectedRoutes = selectableRoutes(routes, routeId, options.baseDir);
 
-  return selectedRoutes.flatMap((route) =>
-    flattenRequestedHourlyRows(route, filterHourlyRowsByHour(readRequestedHourlySourceRows(route.id, options.baseDir), timeWindow))
-  );
+  return sortedHourlyRows(selectedRoutes, timeWindow, options.baseDir).slice();
 }
 
 export function loadRequestedHourlyPage(
@@ -71,9 +70,7 @@ export function loadRequestedHourlyPage(
   const routeId = normalizeRouteId(options.routeId);
   const timeWindow = normalizeTimeWindow(options.startHour, options.endHour);
   const selectedRoutes = selectableRoutes(routes, routeId, options.baseDir);
-  const rows = selectedRoutes.flatMap((route) =>
-    flattenRequestedHourlyRows(route, filterHourlyRowsByHour(readRequestedHourlySourceRows(route.id, options.baseDir), timeWindow))
-  );
+  const rows = sortedHourlyRows(selectedRoutes, timeWindow, options.baseDir).slice();
 
   return {
     routeId,
@@ -187,6 +184,38 @@ function readRequestedHourlySourceRows(routeId: string, baseDir = REQUESTED_TRAF
 function requestedHourlyFileExists(routeId: string, baseDir: string): boolean {
   assertSafeRouteId(routeId);
   return existsSync(join(baseDir, `${routeId}.json`));
+}
+
+function sortedHourlyRows(
+  routes: RequestedTrafficFiveMinuteRouteMeta[],
+  timeWindow: RequestedTrafficTimeWindow,
+  baseDir = REQUESTED_TRAFFIC_HOURLY_DATA_DIR
+): RequestedTrafficHourlyRow[] {
+  const cacheKey = `${baseDir}:${routes.map((route) => route.id).join(",")}:${timeWindow.startHour}-${timeWindow.endHour}`;
+  const cached = sortedRowsCache.get(cacheKey);
+  if (cached) return cached;
+
+  const routeOrder = new Map(routes.map((route, index) => [route.id, index]));
+  const rows = routes
+    .flatMap((route) =>
+      flattenRequestedHourlyRows(route, filterHourlyRowsByHour(readRequestedHourlySourceRows(route.id, baseDir), timeWindow))
+    )
+    .sort((first, second) => compareHourlyRows(first, second, routeOrder));
+  sortedRowsCache.set(cacheKey, rows);
+  return rows;
+}
+
+function compareHourlyRows(
+  first: RequestedTrafficHourlyRow,
+  second: RequestedTrafficHourlyRow,
+  routeOrder: Map<string, number>
+): number {
+  return (
+    first.hour - second.hour ||
+    first.date.localeCompare(second.date) ||
+    (routeOrder.get(first.routeId) ?? 0) - (routeOrder.get(second.routeId) ?? 0) ||
+    first.requestLabel.localeCompare(second.requestLabel)
+  );
 }
 
 function assertSafeRouteId(routeId: string) {

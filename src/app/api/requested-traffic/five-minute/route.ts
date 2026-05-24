@@ -16,6 +16,9 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const MAX_WINDOW_SIZE = 2000;
+const IMMUTABLE_DATA_HEADERS = {
+  "Cache-Control": "public, max-age=31536000, immutable"
+};
 
 export async function GET(request: Request) {
   const searchParams = new URL(request.url).searchParams;
@@ -31,6 +34,7 @@ export async function GET(request: Request) {
     const csv = requestedFiveMinuteRowsToCsv(rows);
     return new Response(`\uFEFF${csv}`, {
       headers: {
+        ...IMMUTABLE_DATA_HEADERS,
         "Content-Type": "text/csv; charset=utf-8",
         "Content-Disposition": `attachment; filename="${csvFileName(dataset.id, routeId, startHour, endHour)}"`
       }
@@ -51,10 +55,13 @@ export async function GET(request: Request) {
     endHour
   });
 
-  return NextResponse.json({
-    ...page,
-    routes
-  });
+  return NextResponse.json(
+    {
+      ...page,
+      routes
+    },
+    { headers: IMMUTABLE_DATA_HEADERS }
+  );
 }
 
 function parseNonNegativeInt(value: string | null, fallback: number): number {

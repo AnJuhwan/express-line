@@ -9,7 +9,6 @@ import {
 } from "@/lib/requested-traffic-five-minute";
 import { loadRequestedHourlyPage } from "@/lib/requested-traffic-hourly";
 
-export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default function HourlyPage() {

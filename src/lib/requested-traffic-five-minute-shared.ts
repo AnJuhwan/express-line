@@ -19,6 +19,7 @@ export interface RequestedTrafficFiveMinuteRow {
   requestLabel: string;
   matchedLabel: string;
   date: string;
+  hour: number;
   time: string;
   timestamp: string;
   linkId: string;

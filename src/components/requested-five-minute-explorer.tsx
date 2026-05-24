@@ -96,7 +96,7 @@ export function RequestedFiveMinuteExplorer({
       },
       datasetId
     );
-    const response = await fetch(`/api/requested-traffic/five-minute?${params.toString()}`, { cache: "no-store" });
+    const response = await fetch(`/api/requested-traffic/five-minute?${params.toString()}`, { cache: "force-cache" });
     return (await response.json()) as FiveMinutePayload;
   }, [datasetId, timeWindow.endHour, timeWindow.startHour]);
 
@@ -294,6 +294,7 @@ function RequestedFiveMinuteVirtualTable({
     <div className="table-wrap five-minute-table-wrap">
       <div className="virtual-table five-minute-virtual-table" role="table" aria-rowcount={rowCount + 1}>
         <div className="virtual-table-header" role="row">
+          <div role="columnheader">시간묶음</div>
           <div role="columnheader">요청구간</div>
           <div role="columnheader">날짜</div>
           <div role="columnheader">시간</div>
@@ -339,6 +340,7 @@ function RequestedFiveMinuteVirtualTable({
                   aria-rowindex={rowIndex + 2}
                   style={{ height: VIRTUAL_ROW_HEIGHT, transform: `translateY(${rowIndex * VIRTUAL_ROW_HEIGHT}px)` }}
                 >
+                  <div className="virtual-table-cell hour-group-cell mono" role="cell">{formatHourGroup(row.hour)}</div>
                   <div className="virtual-table-cell strong" role="cell" title={row.requestLabel}>{row.requestLabel}</div>
                   <div className="virtual-table-cell mono" role="cell">{row.date}</div>
                   <div className="virtual-table-cell mono" role="cell" title={row.timestamp}>{row.time}</div>
@@ -381,6 +383,10 @@ function formatSeconds(seconds: number | null): string {
 
 function padHour(hour: number): string {
   return String(hour).padStart(2, "0");
+}
+
+function formatHourGroup(hour: number): string {
+  return `${padHour(hour)}시`;
 }
 
 function requestedTrafficApiHref(endpoint: string, params: Record<string, string>, datasetId?: string): string {

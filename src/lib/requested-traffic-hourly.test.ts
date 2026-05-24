@@ -55,75 +55,107 @@ describe("requested traffic hourly data", () => {
       rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  it("orders all-route rows by hour before route so each hour appears as a group", () => {
+    const dir = mkdtempSync(join(tmpdir(), "requested-hourly-groups-"));
+    try {
+      writeHourlySourceFile(dir, "geyang_ic_to_jangsu_ic", [
+        hourlyRow({ 시: 6, 시간대: "06:00", 평균속도_kmh: 61 }),
+        hourlyRow({ 시: 7, 시간대: "07:00", 평균속도_kmh: 42 })
+      ]);
+      writeHourlySourceFile(dir, "jangsu_ic_to_geyang_ic", [
+        hourlyRow({ 시: 6, 시간대: "06:00", 평균속도_kmh: 55 }),
+        hourlyRow({ 시: 7, 시간대: "07:00", 평균속도_kmh: 37 })
+      ]);
+
+      const page = loadRequestedHourlyPage(
+        [
+          { ...route, fiveMinuteRows: 2 },
+          { id: "jangsu_ic_to_geyang_ic", requestLabel: "장수IC → 계양IC", matchedLabel: "장수IC남측 → 계양IC남측", fiveMinuteRows: 2 }
+        ],
+        { baseDir: dir, startHour: 6, endHour: 7 }
+      );
+
+      assert.deepEqual(
+        page.rows.map((row) => `${row.label}:${row.routeId}`),
+        [
+          "06:00:geyang_ic_to_jangsu_ic",
+          "06:00:jangsu_ic_to_geyang_ic",
+          "07:00:geyang_ic_to_jangsu_ic",
+          "07:00:jangsu_ic_to_geyang_ic"
+        ]
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
 
-function writeHourlySourceFile(dir: string, routeId: string) {
+function writeHourlySourceFile(dir: string, routeId: string, rows = [
+  hourlyRow({
+    시: 5,
+    시간대: "05:00",
+    평균속도_kmh: 72.1,
+    최저속도_kmh: 55.5,
+    시간대혼잡상태: "원활",
+    막힘여부: false,
+    서행관측수: 0,
+    정체관측수: 0,
+    서행구간수: 0,
+    정체구간수: 0
+  }),
+  hourlyRow({
+    시: 6,
+    시간대: "06:00",
+    평균속도_kmh: 62.5,
+    최저속도_kmh: 38.2,
+    시간대혼잡상태: "서행",
+    막힘여부: true,
+    서행관측수: 3,
+    정체관측수: 0,
+    서행구간수: 1,
+    정체구간수: 0
+  }),
+  hourlyRow({
+    시: 18,
+    시간대: "18:00",
+    평균속도_kmh: 24.1,
+    최저속도_kmh: 12.3,
+    시간대혼잡상태: "정체",
+    막힘여부: true,
+    서행관측수: 2,
+    정체관측수: 5,
+    서행구간수: 1,
+    정체구간수: 1
+  }),
+  hourlyRow({
+    시: 19,
+    시간대: "19:00",
+    평균속도_kmh: 50.1,
+    최저속도_kmh: 42.4,
+    시간대혼잡상태: "원활",
+    막힘여부: false,
+    서행관측수: 0,
+    정체관측수: 0,
+    서행구간수: 0,
+    정체구간수: 0
+  })
+]) {
   writeFileSync(
     join(dir, `${routeId}.json`),
     JSON.stringify({
-      시간별요약: [
-        {
-          날짜: "2026-05-13",
-          시: 5,
-          시간대: "05:00",
-          평균속도_kmh: 72.1,
-          최저속도_kmh: 55.5,
-          시간대혼잡상태: "원활",
-          막힘여부: false,
-          자료수: 12,
-          관측링크수: 1,
-          서행관측수: 0,
-          정체관측수: 0,
-          서행구간수: 0,
-          정체구간수: 0
-        },
-        {
-          날짜: "2026-05-13",
-          시: 6,
-          시간대: "06:00",
-          평균속도_kmh: 62.5,
-          최저속도_kmh: 38.2,
-          시간대혼잡상태: "서행",
-          막힘여부: true,
-          자료수: 12,
-          관측링크수: 1,
-          서행관측수: 3,
-          정체관측수: 0,
-          서행구간수: 1,
-          정체구간수: 0
-        },
-        {
-          날짜: "2026-05-13",
-          시: 18,
-          시간대: "18:00",
-          평균속도_kmh: 24.1,
-          최저속도_kmh: 12.3,
-          시간대혼잡상태: "정체",
-          막힘여부: true,
-          자료수: 12,
-          관측링크수: 1,
-          서행관측수: 2,
-          정체관측수: 5,
-          서행구간수: 1,
-          정체구간수: 1
-        },
-        {
-          날짜: "2026-05-13",
-          시: 19,
-          시간대: "19:00",
-          평균속도_kmh: 50.1,
-          최저속도_kmh: 42.4,
-          시간대혼잡상태: "원활",
-          막힘여부: false,
-          자료수: 12,
-          관측링크수: 1,
-          서행관측수: 0,
-          정체관측수: 0,
-          서행구간수: 0,
-          정체구간수: 0
-        }
-      ]
+      시간별요약: rows
     }),
     "utf8"
   );
+}
+
+function hourlyRow(row: Record<string, string | number | boolean | null>) {
+  return {
+    날짜: "2026-05-13",
+    자료수: 12,
+    관측링크수: 1,
+    원활관측수: undefined,
+    ...row
+  };
 }
