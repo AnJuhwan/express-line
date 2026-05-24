@@ -1,5 +1,5 @@
 import { createReadStream } from "node:fs";
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, unlink, writeFile } from "node:fs/promises";
 import { basename, isAbsolute, join, relative } from "node:path";
 
 const ROOT_DIR = process.cwd();
@@ -91,6 +91,8 @@ for (const csvPath of sourceFiles) {
   console.log(`Scanned ${csvPath}: ${stats.scannedRows.toLocaleString("en-US")} rows, ${stats.matchedRows.toLocaleString("en-US")} matched`);
 }
 
+await removeExistingJsonOutputs(OUTPUT_DIR);
+
 for (const route of routeTemplates) {
   writeRouteAggregates(route, sourceDates);
   await writeFile(join(OUTPUT_DIR, `${route.id}.json`), JSON.stringify(route.output), "utf8");
@@ -160,6 +162,13 @@ function absoluteFromRoot(filePath) {
 function relativeFromRoot(filePath) {
   const relativePath = relative(ROOT_DIR, filePath);
   return relativePath && !relativePath.startsWith("..") ? relativePath : filePath;
+}
+
+async function removeExistingJsonOutputs(outputDir) {
+  if (outputDir === TEMPLATE_DIR) return;
+
+  const files = await readdir(outputDir);
+  await Promise.all(files.filter((file) => file.endsWith(".json")).map((file) => unlink(join(outputDir, file))));
 }
 
 function link(linkId, roadName, roadRankCode, roadArea, fromName, toName, lengthMeters) {
