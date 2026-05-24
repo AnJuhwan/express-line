@@ -578,7 +578,7 @@ If `linkId` is in `linkToRouteIds`, create one row per matched route using exist
 Rules:
 
 ```js
-if (rank includes "고속도로" or "도시고속도로"):
+if (rank includes "고속도로" or "도시고속도로" or "도시고속화도로"):
   speed >= 50 => "원활"
   speed >= 30 => "서행"
   otherwise => "정체"

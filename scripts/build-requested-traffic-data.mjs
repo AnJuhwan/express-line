@@ -358,7 +358,7 @@ function writeRouteAggregates(route, dates) {
       "자료주기": "5분",
       "시간범위": "06:00 ~ 18:55",
       "원천": "ITS 교통소통정보 5분 파일 + 표준노드링크 도로구간정보",
-      "혼잡도기준": "고속도로/도시고속도로 50/30km/h, 일반도로 25/15km/h 기준"
+      "혼잡도기준": "고속도로/도시고속화도로 50/30km/h, 일반도로 25/15km/h 기준"
     },
     "관측요약": {
       "전체링크수": route.links.length,
@@ -509,7 +509,7 @@ function buildManifest(reportTemplate, routes, scanStats) {
       "매칭행수": stats.matchedRows
     })),
     "혼잡도기준": {
-      "고속도로/도시고속도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
+      "고속도로/도시고속화도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
       "일반도로": "25km/h 이상 원활, 15~25km/h 서행, 15km/h 미만 정체"
     },
     "주의": reportTemplate.notes ?? [],
@@ -534,7 +534,7 @@ function buildHomeReport(reportTemplate, routes) {
     "totalLinks": sum(routeReports.map((route) => route.linkCount)),
     "notes": reportTemplate.notes ?? [],
     "thresholds": {
-      "고속도로/도시고속도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
+      "고속도로/도시고속화도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
       "일반도로": "25km/h 이상 원활, 15~25km/h 서행, 15km/h 미만 정체"
     },
     "routes": routeReports
@@ -656,7 +656,7 @@ function hourTrafficStatus(avgSpeed, roadRank, slowObservationCount, congestedOb
 
 function isExpressRoad(roadRank) {
   const rank = text(roadRank);
-  return rank.includes("고속도로") || rank.includes("도시고속도로");
+  return rank.includes("고속도로") || rank.includes("도시고속도로") || rank.includes("도시고속화도로");
 }
 
 function average(values) {

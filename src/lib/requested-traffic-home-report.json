@@ -9,7 +9,7 @@
     "방화대교 구간은 표준링크의 방화대교 노드에서 시작/종료하고, 자유로 연결부를 거쳐 강변북로 본선으로 이어지는 경로로 매칭했습니다."
   ],
   "thresholds": {
-    "고속도로/도시고속도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
+    "고속도로/도시고속화도로": "50km/h 이상 원활, 30~50km/h 서행, 30km/h 미만 정체",
     "일반도로": "25km/h 이상 원활, 15~25km/h 서행, 15km/h 미만 정체"
   },
   "routes": [
@@ -1406,8 +1406,8 @@
         "hour": 8,
         "avgSpeedKmh": 20.5,
         "status": "정체",
-        "slowObservationCount": 16,
-        "congestedObservationCount": 58
+        "slowObservationCount": 14,
+        "congestedObservationCount": 60
       },
       "topBlockedSections": [
         {
@@ -1419,6 +1419,16 @@
           "slowObservationCount": 279,
           "congestedObservationCount": 19,
           "blockedObservationCount": 298
+        },
+        {
+          "linkId": "1140282401",
+          "roadName": "국회대로",
+          "sectionName": "신월IC → 경인2지하차도서측",
+          "avgSpeedKmh": 33,
+          "minSpeedKmh": 6,
+          "slowObservationCount": 169,
+          "congestedObservationCount": 120,
+          "blockedObservationCount": 289
         },
         {
           "linkId": "1140281001",
@@ -1459,16 +1469,6 @@
           "slowObservationCount": 96,
           "congestedObservationCount": 74,
           "blockedObservationCount": 170
-        },
-        {
-          "linkId": "1140282401",
-          "roadName": "국회대로",
-          "sectionName": "신월IC → 경인2지하차도서측",
-          "avgSpeedKmh": 33,
-          "minSpeedKmh": 6,
-          "slowObservationCount": 57,
-          "congestedObservationCount": 44,
-          "blockedObservationCount": 101
         }
       ],
       "days": [
@@ -1484,9 +1484,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 50,
-              "slowObservationCount": 27,
-              "congestedObservationCount": 14,
+              "smoothObservationCount": 46,
+              "slowObservationCount": 29,
+              "congestedObservationCount": 16,
               "slowLinkCount": 7,
               "congestedLinkCount": 5
             },
@@ -1499,11 +1499,11 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 28,
-              "slowObservationCount": 23,
-              "congestedObservationCount": 40,
+              "smoothObservationCount": 24,
+              "slowObservationCount": 21,
+              "congestedObservationCount": 46,
               "slowLinkCount": 7,
-              "congestedLinkCount": 8
+              "congestedLinkCount": 9
             },
             {
               "hour": 8,
@@ -1515,9 +1515,9 @@
               "sampleCount": 91,
               "observedLinkCount": 13,
               "smoothObservationCount": 17,
-              "slowObservationCount": 16,
-              "congestedObservationCount": 58,
-              "slowLinkCount": 6,
+              "slowObservationCount": 14,
+              "congestedObservationCount": 60,
+              "slowLinkCount": 5,
               "congestedLinkCount": 11
             },
             {
@@ -1544,11 +1544,11 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 58,
-              "slowObservationCount": 31,
-              "congestedObservationCount": 15,
+              "smoothObservationCount": 56,
+              "slowObservationCount": 27,
+              "congestedObservationCount": 21,
               "slowLinkCount": 8,
-              "congestedLinkCount": 5
+              "congestedLinkCount": 6
             },
             {
               "hour": 11,
@@ -1559,9 +1559,9 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 75,
-              "slowObservationCount": 22,
-              "congestedObservationCount": 7,
+              "smoothObservationCount": 70,
+              "slowObservationCount": 23,
+              "congestedObservationCount": 11,
               "slowLinkCount": 6,
               "congestedLinkCount": 6
             },
@@ -1574,10 +1574,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 84,
-              "slowObservationCount": 18,
+              "smoothObservationCount": 78,
+              "slowObservationCount": 24,
               "congestedObservationCount": 2,
-              "slowLinkCount": 3,
+              "slowLinkCount": 4,
               "congestedLinkCount": 2
             },
             {
@@ -1589,11 +1589,11 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 81,
-              "slowObservationCount": 21,
-              "congestedObservationCount": 2,
-              "slowLinkCount": 4,
-              "congestedLinkCount": 2
+              "smoothObservationCount": 73,
+              "slowObservationCount": 28,
+              "congestedObservationCount": 3,
+              "slowLinkCount": 5,
+              "congestedLinkCount": 3
             },
             {
               "hour": 14,
@@ -1604,10 +1604,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 87,
-              "slowObservationCount": 15,
+              "smoothObservationCount": 80,
+              "slowObservationCount": 22,
               "congestedObservationCount": 2,
-              "slowLinkCount": 3,
+              "slowLinkCount": 4,
               "congestedLinkCount": 2
             },
             {
@@ -1619,10 +1619,10 @@
               "blocked": true,
               "sampleCount": 156,
               "observedLinkCount": 13,
-              "smoothObservationCount": 126,
-              "slowObservationCount": 29,
+              "smoothObservationCount": 116,
+              "slowObservationCount": 39,
               "congestedObservationCount": 1,
-              "slowLinkCount": 4,
+              "slowLinkCount": 5,
               "congestedLinkCount": 1
             },
             {
@@ -1634,10 +1634,10 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 62,
-              "slowObservationCount": 22,
+              "smoothObservationCount": 55,
+              "slowObservationCount": 29,
               "congestedObservationCount": 7,
-              "slowLinkCount": 5,
+              "slowLinkCount": 6,
               "congestedLinkCount": 2
             },
             {
@@ -1649,11 +1649,11 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 48,
-              "slowObservationCount": 32,
-              "congestedObservationCount": 11,
+              "smoothObservationCount": 45,
+              "slowObservationCount": 31,
+              "congestedObservationCount": 15,
               "slowLinkCount": 6,
-              "congestedLinkCount": 2
+              "congestedLinkCount": 3
             },
             {
               "hour": 18,
@@ -1664,9 +1664,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 53,
-              "slowObservationCount": 26,
-              "congestedObservationCount": 12,
+              "smoothObservationCount": 49,
+              "slowObservationCount": 27,
+              "congestedObservationCount": 15,
               "slowLinkCount": 7,
               "congestedLinkCount": 4
             }
@@ -1684,9 +1684,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 46,
-              "slowObservationCount": 30,
-              "congestedObservationCount": 15,
+              "smoothObservationCount": 42,
+              "slowObservationCount": 31,
+              "congestedObservationCount": 18,
               "slowLinkCount": 9,
               "congestedLinkCount": 4
             },
@@ -1699,9 +1699,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 32,
-              "slowObservationCount": 22,
-              "congestedObservationCount": 37,
+              "smoothObservationCount": 28,
+              "slowObservationCount": 23,
+              "congestedObservationCount": 40,
               "slowLinkCount": 8,
               "congestedLinkCount": 8
             },
@@ -1714,9 +1714,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 34,
-              "slowObservationCount": 21,
-              "congestedObservationCount": 36,
+              "smoothObservationCount": 33,
+              "slowObservationCount": 20,
+              "congestedObservationCount": 38,
               "slowLinkCount": 8,
               "congestedLinkCount": 8
             },
@@ -1729,9 +1729,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 42,
-              "slowObservationCount": 32,
-              "congestedObservationCount": 17,
+              "smoothObservationCount": 39,
+              "slowObservationCount": 33,
+              "congestedObservationCount": 19,
               "slowLinkCount": 11,
               "congestedLinkCount": 5
             },
@@ -1744,9 +1744,9 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 56,
-              "slowObservationCount": 31,
-              "congestedObservationCount": 17,
+              "smoothObservationCount": 53,
+              "slowObservationCount": 30,
+              "congestedObservationCount": 21,
               "slowLinkCount": 7,
               "congestedLinkCount": 6
             },
@@ -1759,10 +1759,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 82,
-              "slowObservationCount": 20,
+              "smoothObservationCount": 76,
+              "slowObservationCount": 26,
               "congestedObservationCount": 2,
-              "slowLinkCount": 4,
+              "slowLinkCount": 5,
               "congestedLinkCount": 1
             },
             {
@@ -1774,10 +1774,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 84,
-              "slowObservationCount": 20,
+              "smoothObservationCount": 76,
+              "slowObservationCount": 28,
               "congestedObservationCount": 0,
-              "slowLinkCount": 3,
+              "slowLinkCount": 4,
               "congestedLinkCount": 0
             },
             {
@@ -1789,11 +1789,11 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 78,
-              "slowObservationCount": 25,
-              "congestedObservationCount": 1,
-              "slowLinkCount": 5,
-              "congestedLinkCount": 1
+              "smoothObservationCount": 70,
+              "slowObservationCount": 31,
+              "congestedObservationCount": 3,
+              "slowLinkCount": 6,
+              "congestedLinkCount": 2
             },
             {
               "hour": 14,
@@ -1804,11 +1804,11 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 79,
-              "slowObservationCount": 23,
-              "congestedObservationCount": 2,
+              "smoothObservationCount": 72,
+              "slowObservationCount": 29,
+              "congestedObservationCount": 3,
               "slowLinkCount": 6,
-              "congestedLinkCount": 2
+              "congestedLinkCount": 3
             },
             {
               "hour": 15,
@@ -1819,10 +1819,10 @@
               "blocked": true,
               "sampleCount": 156,
               "observedLinkCount": 13,
-              "smoothObservationCount": 120,
-              "slowObservationCount": 34,
+              "smoothObservationCount": 108,
+              "slowObservationCount": 46,
               "congestedObservationCount": 2,
-              "slowLinkCount": 5,
+              "slowLinkCount": 6,
               "congestedLinkCount": 2
             },
             {
@@ -1834,10 +1834,10 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 57,
-              "slowObservationCount": 25,
+              "smoothObservationCount": 50,
+              "slowObservationCount": 32,
               "congestedObservationCount": 9,
-              "slowLinkCount": 5,
+              "slowLinkCount": 6,
               "congestedLinkCount": 3
             },
             {
@@ -1849,11 +1849,11 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 45,
-              "slowObservationCount": 34,
-              "congestedObservationCount": 12,
+              "smoothObservationCount": 43,
+              "slowObservationCount": 31,
+              "congestedObservationCount": 17,
               "slowLinkCount": 7,
-              "congestedLinkCount": 3
+              "congestedLinkCount": 4
             },
             {
               "hour": 18,
@@ -1864,9 +1864,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 47,
-              "slowObservationCount": 31,
-              "congestedObservationCount": 13,
+              "smoothObservationCount": 44,
+              "slowObservationCount": 29,
+              "congestedObservationCount": 18,
               "slowLinkCount": 6,
               "congestedLinkCount": 4
             }
@@ -1884,10 +1884,10 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 50,
-              "slowObservationCount": 28,
+              "smoothObservationCount": 44,
+              "slowObservationCount": 34,
               "congestedObservationCount": 13,
-              "slowLinkCount": 6,
+              "slowLinkCount": 7,
               "congestedLinkCount": 4
             },
             {
@@ -1899,9 +1899,9 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 28,
-              "slowObservationCount": 31,
-              "congestedObservationCount": 32,
+              "smoothObservationCount": 26,
+              "slowObservationCount": 29,
+              "congestedObservationCount": 36,
               "slowLinkCount": 9,
               "congestedLinkCount": 8
             },
@@ -1915,9 +1915,9 @@
               "sampleCount": 91,
               "observedLinkCount": 13,
               "smoothObservationCount": 24,
-              "slowObservationCount": 28,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 9,
+              "slowObservationCount": 24,
+              "congestedObservationCount": 43,
+              "slowLinkCount": 8,
               "congestedLinkCount": 10
             },
             {
@@ -1930,9 +1930,9 @@
               "sampleCount": 91,
               "observedLinkCount": 13,
               "smoothObservationCount": 34,
-              "slowObservationCount": 25,
-              "congestedObservationCount": 32,
-              "slowLinkCount": 8,
+              "slowObservationCount": 23,
+              "congestedObservationCount": 34,
+              "slowLinkCount": 7,
               "congestedLinkCount": 9
             },
             {
@@ -1944,9 +1944,9 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 63,
-              "slowObservationCount": 28,
-              "congestedObservationCount": 13,
+              "smoothObservationCount": 59,
+              "slowObservationCount": 31,
+              "congestedObservationCount": 14,
               "slowLinkCount": 8,
               "congestedLinkCount": 6
             },
@@ -1959,10 +1959,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 80,
-              "slowObservationCount": 23,
+              "smoothObservationCount": 72,
+              "slowObservationCount": 31,
               "congestedObservationCount": 1,
-              "slowLinkCount": 3,
+              "slowLinkCount": 4,
               "congestedLinkCount": 1
             },
             {
@@ -1974,10 +1974,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 87,
-              "slowObservationCount": 17,
+              "smoothObservationCount": 81,
+              "slowObservationCount": 23,
               "congestedObservationCount": 0,
-              "slowLinkCount": 5,
+              "slowLinkCount": 6,
               "congestedLinkCount": 0
             },
             {
@@ -1989,10 +1989,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 79,
-              "slowObservationCount": 24,
+              "smoothObservationCount": 71,
+              "slowObservationCount": 32,
               "congestedObservationCount": 1,
-              "slowLinkCount": 5,
+              "slowLinkCount": 6,
               "congestedLinkCount": 1
             },
             {
@@ -2004,10 +2004,10 @@
               "blocked": true,
               "sampleCount": 104,
               "observedLinkCount": 13,
-              "smoothObservationCount": 85,
-              "slowObservationCount": 18,
+              "smoothObservationCount": 80,
+              "slowObservationCount": 23,
               "congestedObservationCount": 1,
-              "slowLinkCount": 3,
+              "slowLinkCount": 4,
               "congestedLinkCount": 1
             },
             {
@@ -2019,11 +2019,11 @@
               "blocked": true,
               "sampleCount": 156,
               "observedLinkCount": 13,
-              "smoothObservationCount": 105,
-              "slowObservationCount": 44,
-              "congestedObservationCount": 7,
+              "smoothObservationCount": 95,
+              "slowObservationCount": 50,
+              "congestedObservationCount": 11,
               "slowLinkCount": 7,
-              "congestedLinkCount": 2
+              "congestedLinkCount": 3
             },
             {
               "hour": 16,
@@ -2034,11 +2034,11 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 54,
-              "slowObservationCount": 27,
-              "congestedObservationCount": 10,
+              "smoothObservationCount": 49,
+              "slowObservationCount": 30,
+              "congestedObservationCount": 12,
               "slowLinkCount": 7,
-              "congestedLinkCount": 3
+              "congestedLinkCount": 4
             },
             {
               "hour": 17,
@@ -2049,11 +2049,11 @@
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
-              "smoothObservationCount": 51,
-              "slowObservationCount": 25,
-              "congestedObservationCount": 15,
+              "smoothObservationCount": 45,
+              "slowObservationCount": 29,
+              "congestedObservationCount": 17,
               "slowLinkCount": 6,
-              "congestedLinkCount": 5
+              "congestedLinkCount": 6
             },
             {
               "hour": 18,
@@ -2065,9 +2065,9 @@
               "sampleCount": 91,
               "observedLinkCount": 13,
               "smoothObservationCount": 40,
-              "slowObservationCount": 29,
-              "congestedObservationCount": 22,
-              "slowLinkCount": 6,
+              "slowObservationCount": 27,
+              "congestedObservationCount": 24,
+              "slowLinkCount": 5,
               "congestedLinkCount": 5
             }
           ]
@@ -2773,26 +2773,46 @@
       "avgSpeedKmh": 34.4,
       "minSpeedKmh": 5,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 31,
+      "congestedHourCount": 8,
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 15,
         "avgSpeedKmh": 30.7,
         "status": "서행",
-        "slowObservationCount": 90,
-        "congestedObservationCount": 108
+        "slowObservationCount": 93,
+        "congestedObservationCount": 225
       },
       "topBlockedSections": [
+        {
+          "linkId": "1020000101",
+          "roadName": "강변북로",
+          "sectionName": "장미맨션 → 동작대교북측",
+          "avgSpeedKmh": 24.7,
+          "minSpeedKmh": 7,
+          "slowObservationCount": 73,
+          "congestedObservationCount": 223,
+          "blockedObservationCount": 296
+        },
         {
           "linkId": "1020000501",
           "roadName": "강변북로",
           "sectionName": "노들직녀카페 → 장미맨션",
           "avgSpeedKmh": 19.1,
           "minSpeedKmh": 6,
-          "slowObservationCount": 163,
-          "congestedObservationCount": 99,
-          "blockedObservationCount": 262
+          "slowObservationCount": 11,
+          "congestedObservationCount": 283,
+          "blockedObservationCount": 294
+        },
+        {
+          "linkId": "1130007400",
+          "roadName": "강변북로",
+          "sectionName": "마포구-고양시덕양구 → 가양검문소",
+          "avgSpeedKmh": 28.9,
+          "minSpeedKmh": 12,
+          "slowObservationCount": 126,
+          "congestedObservationCount": 160,
+          "blockedObservationCount": 286
         },
         {
           "linkId": "1020000702",
@@ -2800,9 +2820,19 @@
           "sectionName": "이촌우성아파트 → 노들직녀카페",
           "avgSpeedKmh": 20.4,
           "minSpeedKmh": 5,
-          "slowObservationCount": 150,
-          "congestedObservationCount": 111,
-          "blockedObservationCount": 261
+          "slowObservationCount": 10,
+          "congestedObservationCount": 269,
+          "blockedObservationCount": 279
+        },
+        {
+          "linkId": "1130006902",
+          "roadName": "강변북로",
+          "sectionName": "가양대교 → 한강공원난지지구",
+          "avgSpeedKmh": 32.7,
+          "minSpeedKmh": 16,
+          "slowObservationCount": 136,
+          "congestedObservationCount": 142,
+          "blockedObservationCount": 278
         },
         {
           "linkId": "1020000701",
@@ -2810,39 +2840,9 @@
           "sectionName": "에린집 → 이촌우성아파트",
           "avgSpeedKmh": 21.2,
           "minSpeedKmh": 6,
-          "slowObservationCount": 152,
-          "congestedObservationCount": 108,
-          "blockedObservationCount": 260
-        },
-        {
-          "linkId": "1020001100",
-          "roadName": "강변북로",
-          "sectionName": "원효대교북측 → 에린집",
-          "avgSpeedKmh": 22.1,
-          "minSpeedKmh": 5,
-          "slowObservationCount": 161,
-          "congestedObservationCount": 92,
-          "blockedObservationCount": 253
-        },
-        {
-          "linkId": "1020001301",
-          "roadName": "강변북로",
-          "sectionName": "원효대교북측 → 원효대교북측",
-          "avgSpeedKmh": 27.8,
-          "minSpeedKmh": 8,
-          "slowObservationCount": 138,
-          "congestedObservationCount": 62,
-          "blockedObservationCount": 200
-        },
-        {
-          "linkId": "1020001304",
-          "roadName": "강변북로",
-          "sectionName": "용산구-마포구 → 청암동170",
-          "avgSpeedKmh": 28.6,
-          "minSpeedKmh": 8,
-          "slowObservationCount": 129,
-          "congestedObservationCount": 62,
-          "blockedObservationCount": 191
+          "slowObservationCount": 7,
+          "congestedObservationCount": 267,
+          "blockedObservationCount": 274
         }
       ],
       "days": [
@@ -2858,11 +2858,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 354,
-              "slowObservationCount": 66,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 276,
+              "slowObservationCount": 59,
+              "congestedObservationCount": 85,
+              "slowLinkCount": 28,
+              "congestedLinkCount": 28
             },
             {
               "hour": 7,
@@ -2873,11 +2873,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 258,
-              "slowObservationCount": 154,
-              "congestedObservationCount": 8,
-              "slowLinkCount": 37,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 168,
+              "slowObservationCount": 58,
+              "congestedObservationCount": 194,
+              "slowLinkCount": 28,
+              "congestedLinkCount": 38
             },
             {
               "hour": 8,
@@ -2888,26 +2888,26 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 255,
-              "slowObservationCount": 153,
-              "congestedObservationCount": 12,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 172,
+              "slowObservationCount": 57,
+              "congestedObservationCount": 191,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 39
             },
             {
               "hour": 9,
               "label": "09:00",
               "avgSpeedKmh": 27.2,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 235,
-              "slowObservationCount": 115,
-              "congestedObservationCount": 70,
-              "slowLinkCount": 34,
-              "congestedLinkCount": 23
+              "smoothObservationCount": 143,
+              "slowObservationCount": 63,
+              "congestedObservationCount": 214,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 42
             },
             {
               "hour": 10,
@@ -2918,11 +2918,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 323,
-              "slowObservationCount": 119,
-              "congestedObservationCount": 38,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 17
+              "smoothObservationCount": 225,
+              "slowObservationCount": 75,
+              "congestedObservationCount": 180,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 34
             },
             {
               "hour": 11,
@@ -2933,11 +2933,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 405,
-              "slowObservationCount": 71,
-              "congestedObservationCount": 4,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 3
+              "smoothObservationCount": 295,
+              "slowObservationCount": 76,
+              "congestedObservationCount": 109,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 27
             },
             {
               "hour": 12,
@@ -2948,11 +2948,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 439,
-              "slowObservationCount": 39,
-              "congestedObservationCount": 2,
-              "slowLinkCount": 15,
-              "congestedLinkCount": 2
+              "smoothObservationCount": 363,
+              "slowObservationCount": 54,
+              "congestedObservationCount": 63,
+              "slowLinkCount": 20,
+              "congestedLinkCount": 18
             },
             {
               "hour": 13,
@@ -2963,11 +2963,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 419,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 26,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 292,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 93,
+              "slowLinkCount": 28,
+              "congestedLinkCount": 28
             },
             {
               "hour": 14,
@@ -2978,11 +2978,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 405,
-              "slowObservationCount": 72,
-              "congestedObservationCount": 3,
-              "slowLinkCount": 18,
-              "congestedLinkCount": 3
+              "smoothObservationCount": 309,
+              "slowObservationCount": 63,
+              "congestedObservationCount": 108,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 23
             },
             {
               "hour": 15,
@@ -2993,11 +2993,11 @@
               "blocked": true,
               "sampleCount": 720,
               "observedLinkCount": 60,
-              "smoothObservationCount": 571,
-              "slowObservationCount": 138,
-              "congestedObservationCount": 11,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 443,
+              "slowObservationCount": 98,
+              "congestedObservationCount": 179,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 26
             },
             {
               "hour": 16,
@@ -3008,26 +3008,26 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 331,
-              "slowObservationCount": 49,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 264,
+              "slowObservationCount": 54,
+              "congestedObservationCount": 102,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 24
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 26.4,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 278,
-              "slowObservationCount": 57,
-              "congestedObservationCount": 85,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 20
+              "smoothObservationCount": 190,
+              "slowObservationCount": 59,
+              "congestedObservationCount": 171,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 37
             },
             {
               "hour": 18,
@@ -3038,11 +3038,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 316,
-              "slowObservationCount": 60,
-              "congestedObservationCount": 44,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 13
+              "smoothObservationCount": 202,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 123,
+              "slowLinkCount": 27,
+              "congestedLinkCount": 30
             }
           ]
         },
@@ -3058,11 +3058,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 364,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 25,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 254,
+              "slowObservationCount": 81,
+              "congestedObservationCount": 85,
+              "slowLinkCount": 33,
+              "congestedLinkCount": 27
             },
             {
               "hour": 7,
@@ -3073,11 +3073,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 283,
-              "slowObservationCount": 134,
-              "congestedObservationCount": 3,
-              "slowLinkCount": 36,
-              "congestedLinkCount": 2
+              "smoothObservationCount": 208,
+              "slowObservationCount": 42,
+              "congestedObservationCount": 170,
+              "slowLinkCount": 21,
+              "congestedLinkCount": 37
             },
             {
               "hour": 8,
@@ -3088,11 +3088,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 251,
-              "slowObservationCount": 156,
-              "congestedObservationCount": 13,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 128,
+              "slowObservationCount": 78,
+              "congestedObservationCount": 214,
+              "slowLinkCount": 31,
+              "congestedLinkCount": 39
             },
             {
               "hour": 9,
@@ -3103,26 +3103,26 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 278,
-              "slowObservationCount": 129,
-              "congestedObservationCount": 13,
-              "slowLinkCount": 29,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 194,
+              "slowObservationCount": 60,
+              "congestedObservationCount": 166,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 35
             },
             {
               "hour": 10,
               "label": "10:00",
               "avgSpeedKmh": 29.5,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 307,
-              "slowObservationCount": 122,
-              "congestedObservationCount": 51,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 17
+              "smoothObservationCount": 202,
+              "slowObservationCount": 82,
+              "congestedObservationCount": 196,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 33
             },
             {
               "hour": 11,
@@ -3133,11 +3133,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 361,
-              "slowObservationCount": 84,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 274,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 139,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 23
             },
             {
               "hour": 12,
@@ -3148,11 +3148,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 386,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 32,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 306,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 107,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 29
             },
             {
               "hour": 13,
@@ -3163,11 +3163,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 418,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 1,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 1
+              "smoothObservationCount": 302,
+              "slowObservationCount": 91,
+              "congestedObservationCount": 87,
+              "slowLinkCount": 33,
+              "congestedLinkCount": 28
             },
             {
               "hour": 14,
@@ -3178,11 +3178,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 358,
-              "slowObservationCount": 94,
-              "congestedObservationCount": 28,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 282,
+              "slowObservationCount": 55,
+              "congestedObservationCount": 143,
+              "slowLinkCount": 18,
+              "congestedLinkCount": 23
             },
             {
               "hour": 15,
@@ -3193,11 +3193,11 @@
               "blocked": true,
               "sampleCount": 720,
               "observedLinkCount": 60,
-              "smoothObservationCount": 607,
-              "slowObservationCount": 107,
-              "congestedObservationCount": 6,
-              "slowLinkCount": 26,
-              "congestedLinkCount": 5
+              "smoothObservationCount": 410,
+              "slowObservationCount": 143,
+              "congestedObservationCount": 167,
+              "slowLinkCount": 41,
+              "congestedLinkCount": 30
             },
             {
               "hour": 16,
@@ -3208,41 +3208,41 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 293,
-              "slowObservationCount": 94,
-              "congestedObservationCount": 33,
+              "smoothObservationCount": 222,
+              "slowObservationCount": 55,
+              "congestedObservationCount": 143,
               "slowLinkCount": 24,
-              "congestedLinkCount": 13
+              "congestedLinkCount": 28
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 29.4,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 273,
-              "slowObservationCount": 101,
-              "congestedObservationCount": 46,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 14
+              "smoothObservationCount": 159,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 166,
+              "slowLinkCount": 33,
+              "congestedLinkCount": 34
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 27.9,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 293,
-              "slowObservationCount": 55,
-              "congestedObservationCount": 72,
-              "slowLinkCount": 18,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 208,
+              "slowObservationCount": 73,
+              "congestedObservationCount": 139,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 28
             }
           ]
         },
@@ -3258,11 +3258,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 399,
-              "slowObservationCount": 21,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 277,
+              "slowObservationCount": 94,
+              "congestedObservationCount": 49,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 20
             },
             {
               "hour": 7,
@@ -3273,11 +3273,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 313,
-              "slowObservationCount": 107,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 206,
+              "slowObservationCount": 52,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 33
             },
             {
               "hour": 8,
@@ -3288,11 +3288,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 290,
-              "slowObservationCount": 126,
-              "congestedObservationCount": 4,
-              "slowLinkCount": 31,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 180,
+              "slowObservationCount": 75,
+              "congestedObservationCount": 165,
+              "slowLinkCount": 29,
+              "congestedLinkCount": 37
             },
             {
               "hour": 9,
@@ -3303,11 +3303,11 @@
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 303,
-              "slowObservationCount": 113,
-              "congestedObservationCount": 4,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 192,
+              "slowObservationCount": 87,
+              "congestedObservationCount": 141,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 30
             },
             {
               "hour": 10,
@@ -3318,11 +3318,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 341,
-              "slowObservationCount": 105,
-              "congestedObservationCount": 34,
-              "slowLinkCount": 31,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 242,
+              "slowObservationCount": 71,
+              "congestedObservationCount": 167,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 32
             },
             {
               "hour": 11,
@@ -3333,11 +3333,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 393,
-              "slowObservationCount": 52,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 14
+              "smoothObservationCount": 302,
+              "slowObservationCount": 76,
+              "congestedObservationCount": 102,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 23
             },
             {
               "hour": 12,
@@ -3348,11 +3348,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 386,
-              "slowObservationCount": 58,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 18,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 307,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 106,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 20
             },
             {
               "hour": 13,
@@ -3363,11 +3363,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 412,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 7,
-              "slowLinkCount": 20,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 297,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 88,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 23
             },
             {
               "hour": 14,
@@ -3378,11 +3378,11 @@
               "blocked": true,
               "sampleCount": 480,
               "observedLinkCount": 60,
-              "smoothObservationCount": 338,
-              "slowObservationCount": 117,
-              "congestedObservationCount": 25,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 269,
+              "slowObservationCount": 51,
+              "congestedObservationCount": 160,
+              "slowLinkCount": 19,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
@@ -3393,56 +3393,56 @@
               "blocked": true,
               "sampleCount": 720,
               "observedLinkCount": 60,
-              "smoothObservationCount": 522,
-              "slowObservationCount": 90,
-              "congestedObservationCount": 108,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 402,
+              "slowObservationCount": 93,
+              "congestedObservationCount": 225,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 29
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 26,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 290,
-              "slowObservationCount": 59,
-              "congestedObservationCount": 71,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 19
+              "smoothObservationCount": 215,
+              "slowObservationCount": 56,
+              "congestedObservationCount": 149,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 33
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 23,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 236,
-              "slowObservationCount": 107,
-              "congestedObservationCount": 77,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 25
+              "smoothObservationCount": 151,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 202,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 38
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 23.3,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 420,
               "observedLinkCount": 60,
-              "smoothObservationCount": 242,
-              "slowObservationCount": 109,
-              "congestedObservationCount": 69,
-              "slowLinkCount": 42,
-              "congestedLinkCount": 22
+              "smoothObservationCount": 140,
+              "slowObservationCount": 72,
+              "congestedObservationCount": 208,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 45
             }
           ]
         }
@@ -3460,15 +3460,15 @@
       "avgSpeedKmh": 33.3,
       "minSpeedKmh": 4,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 27,
+      "congestedHourCount": 12,
       "peakBlockedHour": {
         "date": "2026-05-15",
-        "hour": 18,
-        "avgSpeedKmh": 21.7,
+        "hour": 15,
+        "avgSpeedKmh": 32.4,
         "status": "서행",
-        "slowObservationCount": 117,
-        "congestedObservationCount": 159
+        "slowObservationCount": 257,
+        "congestedObservationCount": 332
       },
       "topBlockedSections": [
         {
@@ -3477,8 +3477,8 @@
           "sectionName": "잠두봉지하차도 → 잠두봉지하차도",
           "avgSpeedKmh": 12,
           "minSpeedKmh": 6,
-          "slowObservationCount": 45,
-          "congestedObservationCount": 258,
+          "slowObservationCount": 0,
+          "congestedObservationCount": 303,
           "blockedObservationCount": 303
         },
         {
@@ -3487,8 +3487,8 @@
           "sectionName": "잠두봉지하차도 → 잠두봉지하차도",
           "avgSpeedKmh": 12,
           "minSpeedKmh": 6,
-          "slowObservationCount": 45,
-          "congestedObservationCount": 258,
+          "slowObservationCount": 0,
+          "congestedObservationCount": 303,
           "blockedObservationCount": 303
         },
         {
@@ -3497,19 +3497,9 @@
           "sectionName": "서강8경아트홀 → 월드메르디앙아파트",
           "avgSpeedKmh": 15,
           "minSpeedKmh": 8,
-          "slowObservationCount": 125,
-          "congestedObservationCount": 168,
-          "blockedObservationCount": 293
-        },
-        {
-          "linkId": "1130001002",
-          "roadName": "강변북로",
-          "sectionName": "월드메르디앙아파트 → 상수리버베르빌아파트",
-          "avgSpeedKmh": 15.6,
-          "minSpeedKmh": 7,
-          "slowObservationCount": 75,
-          "congestedObservationCount": 197,
-          "blockedObservationCount": 272
+          "slowObservationCount": 5,
+          "congestedObservationCount": 298,
+          "blockedObservationCount": 303
         },
         {
           "linkId": "1130036500",
@@ -3517,9 +3507,19 @@
           "sectionName": "서강대교북측 → 서강대교북측",
           "avgSpeedKmh": 14.5,
           "minSpeedKmh": 10,
-          "slowObservationCount": 44,
-          "congestedObservationCount": 227,
-          "blockedObservationCount": 271
+          "slowObservationCount": 20,
+          "congestedObservationCount": 283,
+          "blockedObservationCount": 303
+        },
+        {
+          "linkId": "1130001002",
+          "roadName": "강변북로",
+          "sectionName": "월드메르디앙아파트 → 상수리버베르빌아파트",
+          "avgSpeedKmh": 15.6,
+          "minSpeedKmh": 7,
+          "slowObservationCount": 23,
+          "congestedObservationCount": 279,
+          "blockedObservationCount": 302
         },
         {
           "linkId": "1130001013",
@@ -3527,9 +3527,9 @@
           "sectionName": "상수리버베르빌아파트 → 잠두봉지하차도",
           "avgSpeedKmh": 18.7,
           "minSpeedKmh": 11,
-          "slowObservationCount": 72,
-          "congestedObservationCount": 173,
-          "blockedObservationCount": 245
+          "slowObservationCount": 53,
+          "congestedObservationCount": 249,
+          "blockedObservationCount": 302
         }
       ],
       "days": [
@@ -3545,11 +3545,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 433,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 414,
+              "slowObservationCount": 18,
+              "congestedObservationCount": 79,
+              "slowLinkCount": 11,
+              "congestedLinkCount": 13
             },
             {
               "hour": 7,
@@ -3560,26 +3560,26 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 395,
-              "slowObservationCount": 78,
-              "congestedObservationCount": 38,
-              "slowLinkCount": 19,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 309,
+              "slowObservationCount": 65,
+              "congestedObservationCount": 137,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 30
             },
             {
               "hour": 8,
               "label": "08:00",
               "avgSpeedKmh": 29.3,
               "minSpeedKmh": 10,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 365,
-              "slowObservationCount": 91,
-              "congestedObservationCount": 55,
-              "slowLinkCount": 20,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 214,
+              "slowObservationCount": 135,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 36,
+              "congestedLinkCount": 33
             },
             {
               "hour": 9,
@@ -3590,11 +3590,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 375,
-              "slowObservationCount": 82,
-              "congestedObservationCount": 54,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 244,
+              "slowObservationCount": 122,
+              "congestedObservationCount": 145,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 29
             },
             {
               "hour": 10,
@@ -3605,11 +3605,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 432,
-              "slowObservationCount": 81,
-              "congestedObservationCount": 71,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 288,
+              "slowObservationCount": 136,
+              "congestedObservationCount": 160,
+              "slowLinkCount": 44,
+              "congestedLinkCount": 32
             },
             {
               "hour": 11,
@@ -3620,11 +3620,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 422,
-              "slowObservationCount": 75,
-              "congestedObservationCount": 87,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 33
+              "smoothObservationCount": 291,
+              "slowObservationCount": 121,
+              "congestedObservationCount": 172,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 42
             },
             {
               "hour": 12,
@@ -3635,11 +3635,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 465,
-              "slowObservationCount": 83,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 25,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 344,
+              "slowObservationCount": 119,
+              "congestedObservationCount": 121,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 24
             },
             {
               "hour": 13,
@@ -3650,11 +3650,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 492,
-              "slowObservationCount": 53,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 17,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 335,
+              "slowObservationCount": 145,
+              "congestedObservationCount": 104,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 26
             },
             {
               "hour": 14,
@@ -3665,11 +3665,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 484,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 38,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 272,
+              "slowObservationCount": 202,
+              "congestedObservationCount": 110,
+              "slowLinkCount": 44,
+              "congestedLinkCount": 32
             },
             {
               "hour": 15,
@@ -3680,56 +3680,56 @@
               "blocked": true,
               "sampleCount": 876,
               "observedLinkCount": 73,
-              "smoothObservationCount": 717,
-              "slowObservationCount": 111,
-              "congestedObservationCount": 48,
-              "slowLinkCount": 30,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 372,
+              "slowObservationCount": 291,
+              "congestedObservationCount": 213,
+              "slowLinkCount": 43,
+              "congestedLinkCount": 42
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 29.3,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 357,
-              "slowObservationCount": 121,
-              "congestedObservationCount": 33,
+              "smoothObservationCount": 148,
+              "slowObservationCount": 168,
+              "congestedObservationCount": 195,
               "slowLinkCount": 42,
-              "congestedLinkCount": 13
+              "congestedLinkCount": 48
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 25.5,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 270,
-              "slowObservationCount": 176,
-              "congestedObservationCount": 65,
-              "slowLinkCount": 46,
-              "congestedLinkCount": 28
+              "smoothObservationCount": 127,
+              "slowObservationCount": 89,
+              "congestedObservationCount": 295,
+              "slowLinkCount": 31,
+              "congestedLinkCount": 51
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 25.7,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 260,
-              "slowObservationCount": 121,
-              "congestedObservationCount": 130,
-              "slowLinkCount": 39,
-              "congestedLinkCount": 30
+              "smoothObservationCount": 160,
+              "slowObservationCount": 65,
+              "congestedObservationCount": 286,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 52
             }
           ]
         },
@@ -3745,11 +3745,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 435,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 7,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 418,
+              "slowObservationCount": 17,
+              "congestedObservationCount": 76,
+              "slowLinkCount": 9,
+              "congestedLinkCount": 12
             },
             {
               "hour": 7,
@@ -3760,41 +3760,41 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 395,
-              "slowObservationCount": 80,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 301,
+              "slowObservationCount": 79,
+              "congestedObservationCount": 131,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 31
             },
             {
               "hour": 8,
               "label": "08:00",
               "avgSpeedKmh": 23.2,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 344,
-              "slowObservationCount": 92,
-              "congestedObservationCount": 75,
-              "slowLinkCount": 34,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 188,
+              "slowObservationCount": 143,
+              "congestedObservationCount": 180,
+              "slowLinkCount": 44,
+              "congestedLinkCount": 41
             },
             {
               "hour": 9,
               "label": "09:00",
               "avgSpeedKmh": 29.7,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 369,
-              "slowObservationCount": 74,
-              "congestedObservationCount": 68,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 16
+              "smoothObservationCount": 229,
+              "slowObservationCount": 130,
+              "congestedObservationCount": 152,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 33
             },
             {
               "hour": 10,
@@ -3805,11 +3805,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 448,
-              "slowObservationCount": 78,
-              "congestedObservationCount": 58,
-              "slowLinkCount": 19,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 267,
+              "slowObservationCount": 169,
+              "congestedObservationCount": 148,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 27
             },
             {
               "hour": 11,
@@ -3820,11 +3820,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 489,
-              "slowObservationCount": 55,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 346,
+              "slowObservationCount": 138,
+              "congestedObservationCount": 100,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 19
             },
             {
               "hour": 12,
@@ -3835,11 +3835,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 498,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 45,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 377,
+              "slowObservationCount": 115,
+              "congestedObservationCount": 92,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 17
             },
             {
               "hour": 13,
@@ -3850,11 +3850,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 499,
-              "slowObservationCount": 42,
-              "congestedObservationCount": 43,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 352,
+              "slowObservationCount": 137,
+              "congestedObservationCount": 95,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 22
             },
             {
               "hour": 14,
@@ -3865,11 +3865,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 486,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 20,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 256,
+              "slowObservationCount": 204,
+              "congestedObservationCount": 124,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
@@ -3880,56 +3880,56 @@
               "blocked": true,
               "sampleCount": 876,
               "observedLinkCount": 73,
-              "smoothObservationCount": 753,
-              "slowObservationCount": 65,
-              "congestedObservationCount": 58,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 381,
+              "slowObservationCount": 333,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 46,
+              "congestedLinkCount": 25
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 29.1,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 377,
-              "slowObservationCount": 95,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 34,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 165,
+              "slowObservationCount": 151,
+              "congestedObservationCount": 195,
+              "slowLinkCount": 43,
+              "congestedLinkCount": 50
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 28.6,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 321,
-              "slowObservationCount": 155,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 46,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 144,
+              "slowObservationCount": 133,
+              "congestedObservationCount": 234,
+              "slowLinkCount": 41,
+              "congestedLinkCount": 52
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 26.7,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 267,
-              "slowObservationCount": 156,
-              "congestedObservationCount": 88,
-              "slowLinkCount": 44,
-              "congestedLinkCount": 27
+              "smoothObservationCount": 136,
+              "slowObservationCount": 79,
+              "congestedObservationCount": 296,
+              "slowLinkCount": 27,
+              "congestedLinkCount": 53
             }
           ]
         },
@@ -3945,11 +3945,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 430,
-              "slowObservationCount": 44,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 414,
+              "slowObservationCount": 23,
+              "congestedObservationCount": 74,
+              "slowLinkCount": 13,
+              "congestedLinkCount": 12
             },
             {
               "hour": 7,
@@ -3960,11 +3960,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 404,
+              "smoothObservationCount": 322,
               "slowObservationCount": 70,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 17,
-              "congestedLinkCount": 8
+              "congestedObservationCount": 119,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 22
             },
             {
               "hour": 8,
@@ -3975,11 +3975,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 398,
-              "slowObservationCount": 73,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 15,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 253,
+              "slowObservationCount": 127,
+              "congestedObservationCount": 131,
+              "slowLinkCount": 40,
+              "congestedLinkCount": 29
             },
             {
               "hour": 9,
@@ -3990,11 +3990,11 @@
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 381,
-              "slowObservationCount": 76,
-              "congestedObservationCount": 54,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 260,
+              "slowObservationCount": 116,
+              "congestedObservationCount": 135,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 34
             },
             {
               "hour": 10,
@@ -4005,11 +4005,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 451,
-              "slowObservationCount": 87,
-              "congestedObservationCount": 46,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 14
+              "smoothObservationCount": 281,
+              "slowObservationCount": 157,
+              "congestedObservationCount": 146,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 39
             },
             {
               "hour": 11,
@@ -4020,11 +4020,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 511,
-              "slowObservationCount": 43,
-              "congestedObservationCount": 30,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 367,
+              "slowObservationCount": 128,
+              "congestedObservationCount": 89,
+              "slowLinkCount": 36,
+              "congestedLinkCount": 18
             },
             {
               "hour": 12,
@@ -4035,11 +4035,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 500,
-              "slowObservationCount": 45,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 9,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 373,
+              "slowObservationCount": 123,
+              "congestedObservationCount": 88,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 15
             },
             {
               "hour": 13,
@@ -4050,11 +4050,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 490,
-              "slowObservationCount": 54,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 302,
+              "slowObservationCount": 185,
+              "congestedObservationCount": 97,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 25
             },
             {
               "hour": 14,
@@ -4065,11 +4065,11 @@
               "blocked": true,
               "sampleCount": 584,
               "observedLinkCount": 73,
-              "smoothObservationCount": 488,
-              "slowObservationCount": 57,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 19,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 257,
+              "slowObservationCount": 220,
+              "congestedObservationCount": 107,
+              "slowLinkCount": 44,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
@@ -4080,56 +4080,56 @@
               "blocked": true,
               "sampleCount": 876,
               "observedLinkCount": 73,
-              "smoothObservationCount": 629,
-              "slowObservationCount": 224,
-              "congestedObservationCount": 23,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 287,
+              "slowObservationCount": 257,
+              "congestedObservationCount": 332,
+              "slowLinkCount": 47,
+              "congestedLinkCount": 44
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 26.3,
               "minSpeedKmh": 10,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 273,
-              "slowObservationCount": 203,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 48,
-              "congestedLinkCount": 17
+              "smoothObservationCount": 123,
+              "slowObservationCount": 104,
+              "congestedObservationCount": 284,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 54
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 22.4,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 240,
-              "slowObservationCount": 170,
-              "congestedObservationCount": 101,
-              "slowLinkCount": 48,
-              "congestedLinkCount": 31
+              "smoothObservationCount": 133,
+              "slowObservationCount": 69,
+              "congestedObservationCount": 309,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 52
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 21.7,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 511,
               "observedLinkCount": 73,
-              "smoothObservationCount": 235,
-              "slowObservationCount": 117,
-              "congestedObservationCount": 159,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 31
+              "smoothObservationCount": 158,
+              "slowObservationCount": 48,
+              "congestedObservationCount": 305,
+              "slowLinkCount": 16,
+              "congestedLinkCount": 46
             }
           ]
         }
@@ -4147,15 +4147,15 @@
       "avgSpeedKmh": 32.8,
       "minSpeedKmh": 4,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 29,
+      "congestedHourCount": 10,
       "peakBlockedHour": {
         "date": "2026-05-15",
-        "hour": 18,
-        "avgSpeedKmh": 20.5,
+        "hour": 15,
+        "avgSpeedKmh": 31.1,
         "status": "서행",
-        "slowObservationCount": 117,
-        "congestedObservationCount": 159
+        "slowObservationCount": 255,
+        "congestedObservationCount": 332
       },
       "topBlockedSections": [
         {
@@ -4164,8 +4164,8 @@
           "sectionName": "잠두봉지하차도 → 잠두봉지하차도",
           "avgSpeedKmh": 12,
           "minSpeedKmh": 6,
-          "slowObservationCount": 45,
-          "congestedObservationCount": 258,
+          "slowObservationCount": 0,
+          "congestedObservationCount": 303,
           "blockedObservationCount": 303
         },
         {
@@ -4174,8 +4174,8 @@
           "sectionName": "잠두봉지하차도 → 잠두봉지하차도",
           "avgSpeedKmh": 12,
           "minSpeedKmh": 6,
-          "slowObservationCount": 45,
-          "congestedObservationCount": 258,
+          "slowObservationCount": 0,
+          "congestedObservationCount": 303,
           "blockedObservationCount": 303
         },
         {
@@ -4184,19 +4184,9 @@
           "sectionName": "서강8경아트홀 → 월드메르디앙아파트",
           "avgSpeedKmh": 15,
           "minSpeedKmh": 8,
-          "slowObservationCount": 125,
-          "congestedObservationCount": 168,
-          "blockedObservationCount": 293
-        },
-        {
-          "linkId": "1130001002",
-          "roadName": "강변북로",
-          "sectionName": "월드메르디앙아파트 → 상수리버베르빌아파트",
-          "avgSpeedKmh": 15.6,
-          "minSpeedKmh": 7,
-          "slowObservationCount": 75,
-          "congestedObservationCount": 197,
-          "blockedObservationCount": 272
+          "slowObservationCount": 5,
+          "congestedObservationCount": 298,
+          "blockedObservationCount": 303
         },
         {
           "linkId": "1130036500",
@@ -4204,9 +4194,19 @@
           "sectionName": "서강대교북측 → 서강대교북측",
           "avgSpeedKmh": 14.5,
           "minSpeedKmh": 10,
-          "slowObservationCount": 44,
-          "congestedObservationCount": 227,
-          "blockedObservationCount": 271
+          "slowObservationCount": 20,
+          "congestedObservationCount": 283,
+          "blockedObservationCount": 303
+        },
+        {
+          "linkId": "1130001002",
+          "roadName": "강변북로",
+          "sectionName": "월드메르디앙아파트 → 상수리버베르빌아파트",
+          "avgSpeedKmh": 15.6,
+          "minSpeedKmh": 7,
+          "slowObservationCount": 23,
+          "congestedObservationCount": 279,
+          "blockedObservationCount": 302
         },
         {
           "linkId": "1130001013",
@@ -4214,9 +4214,9 @@
           "sectionName": "상수리버베르빌아파트 → 잠두봉지하차도",
           "avgSpeedKmh": 18.7,
           "minSpeedKmh": 11,
-          "slowObservationCount": 72,
-          "congestedObservationCount": 173,
-          "blockedObservationCount": 245
+          "slowObservationCount": 53,
+          "congestedObservationCount": 249,
+          "blockedObservationCount": 302
         }
       ],
       "days": [
@@ -4232,11 +4232,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 391,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 372,
+              "slowObservationCount": 18,
+              "congestedObservationCount": 79,
+              "slowLinkCount": 11,
+              "congestedLinkCount": 13
             },
             {
               "hour": 7,
@@ -4247,11 +4247,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 372,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 13,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 302,
+              "slowObservationCount": 50,
+              "congestedObservationCount": 117,
+              "slowLinkCount": 18,
+              "congestedLinkCount": 24
             },
             {
               "hour": 8,
@@ -4262,11 +4262,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 354,
-              "slowObservationCount": 72,
-              "congestedObservationCount": 43,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 208,
+              "slowObservationCount": 131,
+              "congestedObservationCount": 130,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 28
             },
             {
               "hour": 9,
@@ -4277,11 +4277,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 362,
-              "slowObservationCount": 66,
-              "congestedObservationCount": 41,
-              "slowLinkCount": 15,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 234,
+              "slowObservationCount": 121,
+              "congestedObservationCount": 114,
+              "slowLinkCount": 33,
+              "congestedLinkCount": 23
             },
             {
               "hour": 10,
@@ -4292,11 +4292,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 405,
-              "slowObservationCount": 71,
-              "congestedObservationCount": 60,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 268,
+              "slowObservationCount": 129,
+              "congestedObservationCount": 139,
+              "slowLinkCount": 39,
+              "congestedLinkCount": 29
             },
             {
               "hour": 11,
@@ -4307,11 +4307,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 377,
-              "slowObservationCount": 74,
-              "congestedObservationCount": 85,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 32
+              "smoothObservationCount": 246,
+              "slowObservationCount": 121,
+              "congestedObservationCount": 169,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 40
             },
             {
               "hour": 12,
@@ -4322,11 +4322,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 417,
-              "slowObservationCount": 83,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 25,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 296,
+              "slowObservationCount": 119,
+              "congestedObservationCount": 121,
+              "slowLinkCount": 37,
+              "congestedLinkCount": 24
             },
             {
               "hour": 13,
@@ -4337,11 +4337,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 444,
-              "slowObservationCount": 53,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 17,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 287,
+              "slowObservationCount": 145,
+              "congestedObservationCount": 104,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 26
             },
             {
               "hour": 14,
@@ -4352,11 +4352,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 436,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 38,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 225,
+              "slowObservationCount": 201,
+              "congestedObservationCount": 110,
+              "slowLinkCount": 43,
+              "congestedLinkCount": 32
             },
             {
               "hour": 15,
@@ -4367,56 +4367,56 @@
               "blocked": true,
               "sampleCount": 804,
               "observedLinkCount": 67,
-              "smoothObservationCount": 645,
-              "slowObservationCount": 111,
-              "congestedObservationCount": 48,
-              "slowLinkCount": 30,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 300,
+              "slowObservationCount": 291,
+              "congestedObservationCount": 213,
+              "slowLinkCount": 43,
+              "congestedLinkCount": 42
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 28,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 315,
-              "slowObservationCount": 121,
-              "congestedObservationCount": 33,
+              "smoothObservationCount": 106,
+              "slowObservationCount": 168,
+              "congestedObservationCount": 195,
               "slowLinkCount": 42,
-              "congestedLinkCount": 13
+              "congestedLinkCount": 48
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 24.2,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 228,
-              "slowObservationCount": 176,
-              "congestedObservationCount": 65,
-              "slowLinkCount": 46,
-              "congestedLinkCount": 28
+              "smoothObservationCount": 86,
+              "slowObservationCount": 88,
+              "congestedObservationCount": 295,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 51
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 24.4,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 218,
-              "slowObservationCount": 121,
-              "congestedObservationCount": 130,
-              "slowLinkCount": 39,
-              "congestedLinkCount": 30
+              "smoothObservationCount": 119,
+              "slowObservationCount": 64,
+              "congestedObservationCount": 286,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 52
             }
           ]
         },
@@ -4432,11 +4432,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 393,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 7,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 377,
+              "slowObservationCount": 16,
+              "congestedObservationCount": 76,
+              "slowLinkCount": 8,
+              "congestedLinkCount": 12
             },
             {
               "hour": 7,
@@ -4447,26 +4447,26 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 374,
-              "slowObservationCount": 59,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 15,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 294,
+              "slowObservationCount": 73,
+              "congestedObservationCount": 102,
+              "slowLinkCount": 29,
+              "congestedLinkCount": 25
             },
             {
               "hour": 8,
               "label": "08:00",
               "avgSpeedKmh": 23.8,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 327,
-              "slowObservationCount": 78,
-              "congestedObservationCount": 64,
-              "slowLinkCount": 29,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 181,
+              "slowObservationCount": 135,
+              "congestedObservationCount": 153,
+              "slowLinkCount": 40,
+              "congestedLinkCount": 36
             },
             {
               "hour": 9,
@@ -4477,11 +4477,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 357,
-              "slowObservationCount": 60,
-              "congestedObservationCount": 52,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 225,
+              "slowObservationCount": 124,
+              "congestedObservationCount": 120,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 27
             },
             {
               "hour": 10,
@@ -4492,11 +4492,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 421,
-              "slowObservationCount": 65,
-              "congestedObservationCount": 50,
-              "slowLinkCount": 14,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 251,
+              "slowObservationCount": 159,
+              "congestedObservationCount": 126,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 22
             },
             {
               "hour": 11,
@@ -4507,11 +4507,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 441,
-              "slowObservationCount": 55,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 298,
+              "slowObservationCount": 138,
+              "congestedObservationCount": 100,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 19
             },
             {
               "hour": 12,
@@ -4522,11 +4522,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 450,
-              "slowObservationCount": 41,
-              "congestedObservationCount": 45,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 329,
+              "slowObservationCount": 115,
+              "congestedObservationCount": 92,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 17
             },
             {
               "hour": 13,
@@ -4537,11 +4537,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 451,
-              "slowObservationCount": 42,
-              "congestedObservationCount": 43,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 304,
+              "slowObservationCount": 137,
+              "congestedObservationCount": 95,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 22
             },
             {
               "hour": 14,
@@ -4552,11 +4552,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 438,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 20,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 208,
+              "slowObservationCount": 204,
+              "congestedObservationCount": 124,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
@@ -4567,56 +4567,56 @@
               "blocked": true,
               "sampleCount": 804,
               "observedLinkCount": 67,
-              "smoothObservationCount": 681,
-              "slowObservationCount": 65,
-              "congestedObservationCount": 58,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 309,
+              "slowObservationCount": 333,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 46,
+              "congestedLinkCount": 25
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 29,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 345,
-              "slowObservationCount": 90,
-              "congestedObservationCount": 34,
-              "slowLinkCount": 31,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 135,
+              "slowObservationCount": 150,
+              "congestedObservationCount": 184,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 45
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 28.2,
               "minSpeedKmh": 11,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 287,
-              "slowObservationCount": 151,
-              "congestedObservationCount": 31,
-              "slowLinkCount": 44,
-              "congestedLinkCount": 16
+              "smoothObservationCount": 114,
+              "slowObservationCount": 130,
+              "congestedObservationCount": 225,
+              "slowLinkCount": 39,
+              "congestedLinkCount": 49
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 25.5,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 225,
-              "slowObservationCount": 156,
-              "congestedObservationCount": 88,
-              "slowLinkCount": 44,
-              "congestedLinkCount": 27
+              "smoothObservationCount": 100,
+              "slowObservationCount": 75,
+              "congestedObservationCount": 294,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 51
             }
           ]
         },
@@ -4632,11 +4632,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 388,
-              "slowObservationCount": 44,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 8,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 373,
+              "slowObservationCount": 22,
+              "congestedObservationCount": 74,
+              "slowLinkCount": 12,
+              "congestedLinkCount": 12
             },
             {
               "hour": 7,
@@ -4647,11 +4647,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 381,
-              "slowObservationCount": 54,
-              "congestedObservationCount": 34,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 312,
+              "slowObservationCount": 63,
+              "congestedObservationCount": 94,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 16
             },
             {
               "hour": 8,
@@ -4662,11 +4662,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 376,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 37,
-              "slowLinkCount": 10,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 244,
+              "slowObservationCount": 117,
+              "congestedObservationCount": 108,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 24
             },
             {
               "hour": 9,
@@ -4677,11 +4677,11 @@
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 356,
-              "slowObservationCount": 64,
-              "congestedObservationCount": 49,
-              "slowLinkCount": 19,
-              "congestedLinkCount": 10
+              "smoothObservationCount": 246,
+              "slowObservationCount": 107,
+              "congestedObservationCount": 116,
+              "slowLinkCount": 27,
+              "congestedLinkCount": 28
             },
             {
               "hour": 10,
@@ -4692,11 +4692,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 416,
-              "slowObservationCount": 77,
-              "congestedObservationCount": 43,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 257,
+              "slowObservationCount": 148,
+              "congestedObservationCount": 131,
+              "slowLinkCount": 38,
+              "congestedLinkCount": 34
             },
             {
               "hour": 11,
@@ -4707,11 +4707,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 463,
-              "slowObservationCount": 43,
-              "congestedObservationCount": 30,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 321,
+              "slowObservationCount": 126,
+              "congestedObservationCount": 89,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 18
             },
             {
               "hour": 12,
@@ -4722,11 +4722,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 452,
-              "slowObservationCount": 45,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 9,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 325,
+              "slowObservationCount": 123,
+              "congestedObservationCount": 88,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 15
             },
             {
               "hour": 13,
@@ -4737,11 +4737,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 442,
-              "slowObservationCount": 54,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 254,
+              "slowObservationCount": 185,
+              "congestedObservationCount": 97,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 25
             },
             {
               "hour": 14,
@@ -4752,11 +4752,11 @@
               "blocked": true,
               "sampleCount": 536,
               "observedLinkCount": 67,
-              "smoothObservationCount": 440,
-              "slowObservationCount": 57,
-              "congestedObservationCount": 39,
-              "slowLinkCount": 19,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 210,
+              "slowObservationCount": 219,
+              "congestedObservationCount": 107,
+              "slowLinkCount": 43,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
@@ -4767,56 +4767,56 @@
               "blocked": true,
               "sampleCount": 804,
               "observedLinkCount": 67,
-              "smoothObservationCount": 557,
-              "slowObservationCount": 224,
-              "congestedObservationCount": 23,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 217,
+              "slowObservationCount": 255,
+              "congestedObservationCount": 332,
+              "slowLinkCount": 46,
+              "congestedLinkCount": 44
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 25.2,
               "minSpeedKmh": 10,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 232,
-              "slowObservationCount": 202,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 47,
-              "congestedLinkCount": 17
+              "smoothObservationCount": 89,
+              "slowObservationCount": 99,
+              "congestedObservationCount": 281,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 52
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 21.4,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 200,
-              "slowObservationCount": 169,
-              "congestedObservationCount": 100,
-              "slowLinkCount": 47,
-              "congestedLinkCount": 30
+              "smoothObservationCount": 97,
+              "slowObservationCount": 65,
+              "congestedObservationCount": 307,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 51
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 20.5,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 469,
               "observedLinkCount": 67,
-              "smoothObservationCount": 193,
-              "slowObservationCount": 117,
-              "congestedObservationCount": 159,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 31
+              "smoothObservationCount": 117,
+              "slowObservationCount": 47,
+              "congestedObservationCount": 305,
+              "slowLinkCount": 15,
+              "congestedLinkCount": 46
             }
           ]
         }
@@ -4834,26 +4834,46 @@
       "avgSpeedKmh": 32.9,
       "minSpeedKmh": 5,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 27,
+      "congestedHourCount": 12,
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 15,
         "avgSpeedKmh": 29,
-        "status": "서행",
-        "slowObservationCount": 90,
-        "congestedObservationCount": 108
+        "status": "정체",
+        "slowObservationCount": 94,
+        "congestedObservationCount": 225
       },
       "topBlockedSections": [
+        {
+          "linkId": "1020000101",
+          "roadName": "강변북로",
+          "sectionName": "장미맨션 → 동작대교북측",
+          "avgSpeedKmh": 24.7,
+          "minSpeedKmh": 7,
+          "slowObservationCount": 73,
+          "congestedObservationCount": 223,
+          "blockedObservationCount": 296
+        },
         {
           "linkId": "1020000501",
           "roadName": "강변북로",
           "sectionName": "노들직녀카페 → 장미맨션",
           "avgSpeedKmh": 19.1,
           "minSpeedKmh": 6,
-          "slowObservationCount": 163,
-          "congestedObservationCount": 99,
-          "blockedObservationCount": 262
+          "slowObservationCount": 11,
+          "congestedObservationCount": 283,
+          "blockedObservationCount": 294
+        },
+        {
+          "linkId": "1130007400",
+          "roadName": "강변북로",
+          "sectionName": "마포구-고양시덕양구 → 가양검문소",
+          "avgSpeedKmh": 28.9,
+          "minSpeedKmh": 12,
+          "slowObservationCount": 126,
+          "congestedObservationCount": 160,
+          "blockedObservationCount": 286
         },
         {
           "linkId": "1020000702",
@@ -4861,9 +4881,19 @@
           "sectionName": "이촌우성아파트 → 노들직녀카페",
           "avgSpeedKmh": 20.4,
           "minSpeedKmh": 5,
-          "slowObservationCount": 150,
-          "congestedObservationCount": 111,
-          "blockedObservationCount": 261
+          "slowObservationCount": 10,
+          "congestedObservationCount": 269,
+          "blockedObservationCount": 279
+        },
+        {
+          "linkId": "1130006902",
+          "roadName": "강변북로",
+          "sectionName": "가양대교 → 한강공원난지지구",
+          "avgSpeedKmh": 32.7,
+          "minSpeedKmh": 16,
+          "slowObservationCount": 136,
+          "congestedObservationCount": 142,
+          "blockedObservationCount": 278
         },
         {
           "linkId": "1020000701",
@@ -4871,39 +4901,9 @@
           "sectionName": "에린집 → 이촌우성아파트",
           "avgSpeedKmh": 21.2,
           "minSpeedKmh": 6,
-          "slowObservationCount": 152,
-          "congestedObservationCount": 108,
-          "blockedObservationCount": 260
-        },
-        {
-          "linkId": "1020001100",
-          "roadName": "강변북로",
-          "sectionName": "원효대교북측 → 에린집",
-          "avgSpeedKmh": 22.1,
-          "minSpeedKmh": 5,
-          "slowObservationCount": 161,
-          "congestedObservationCount": 92,
-          "blockedObservationCount": 253
-        },
-        {
-          "linkId": "1020001301",
-          "roadName": "강변북로",
-          "sectionName": "원효대교북측 → 원효대교북측",
-          "avgSpeedKmh": 27.8,
-          "minSpeedKmh": 8,
-          "slowObservationCount": 138,
-          "congestedObservationCount": 62,
-          "blockedObservationCount": 200
-        },
-        {
-          "linkId": "1020001304",
-          "roadName": "강변북로",
-          "sectionName": "용산구-마포구 → 청암동170",
-          "avgSpeedKmh": 28.6,
-          "minSpeedKmh": 8,
-          "slowObservationCount": 129,
-          "congestedObservationCount": 62,
-          "blockedObservationCount": 191
+          "slowObservationCount": 7,
+          "congestedObservationCount": 267,
+          "blockedObservationCount": 274
         }
       ],
       "days": [
@@ -4919,11 +4919,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 326,
-              "slowObservationCount": 66,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 248,
+              "slowObservationCount": 59,
+              "congestedObservationCount": 85,
+              "slowLinkCount": 28,
+              "congestedLinkCount": 28
             },
             {
               "hour": 7,
@@ -4934,41 +4934,41 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 230,
-              "slowObservationCount": 154,
-              "congestedObservationCount": 8,
-              "slowLinkCount": 37,
-              "congestedLinkCount": 7
+              "smoothObservationCount": 138,
+              "slowObservationCount": 60,
+              "congestedObservationCount": 194,
+              "slowLinkCount": 29,
+              "congestedLinkCount": 38
             },
             {
               "hour": 8,
               "label": "08:00",
               "avgSpeedKmh": 29.9,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 227,
-              "slowObservationCount": 153,
-              "congestedObservationCount": 12,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 9
+              "smoothObservationCount": 141,
+              "slowObservationCount": 60,
+              "congestedObservationCount": 191,
+              "slowLinkCount": 23,
+              "congestedLinkCount": 39
             },
             {
               "hour": 9,
               "label": "09:00",
               "avgSpeedKmh": 25.6,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 207,
-              "slowObservationCount": 115,
-              "congestedObservationCount": 70,
-              "slowLinkCount": 34,
-              "congestedLinkCount": 23
+              "smoothObservationCount": 116,
+              "slowObservationCount": 63,
+              "congestedObservationCount": 213,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 41
             },
             {
               "hour": 10,
@@ -4979,11 +4979,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 293,
-              "slowObservationCount": 119,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 16
+              "smoothObservationCount": 196,
+              "slowObservationCount": 75,
+              "congestedObservationCount": 177,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 32
             },
             {
               "hour": 11,
@@ -4994,11 +4994,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 375,
-              "slowObservationCount": 71,
-              "congestedObservationCount": 2,
+              "smoothObservationCount": 267,
+              "slowObservationCount": 74,
+              "congestedObservationCount": 107,
               "slowLinkCount": 23,
-              "congestedLinkCount": 2
+              "congestedLinkCount": 26
             },
             {
               "hour": 12,
@@ -5009,11 +5009,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 407,
-              "slowObservationCount": 39,
-              "congestedObservationCount": 2,
-              "slowLinkCount": 15,
-              "congestedLinkCount": 2
+              "smoothObservationCount": 331,
+              "slowObservationCount": 54,
+              "congestedObservationCount": 63,
+              "slowLinkCount": 20,
+              "congestedLinkCount": 18
             },
             {
               "hour": 13,
@@ -5024,11 +5024,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 387,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 26,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 259,
+              "slowObservationCount": 96,
+              "congestedObservationCount": 93,
+              "slowLinkCount": 29,
+              "congestedLinkCount": 28
             },
             {
               "hour": 14,
@@ -5039,11 +5039,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 373,
-              "slowObservationCount": 72,
-              "congestedObservationCount": 3,
-              "slowLinkCount": 18,
-              "congestedLinkCount": 3
+              "smoothObservationCount": 275,
+              "slowObservationCount": 65,
+              "congestedObservationCount": 108,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 23
             },
             {
               "hour": 15,
@@ -5054,11 +5054,11 @@
               "blocked": true,
               "sampleCount": 672,
               "observedLinkCount": 56,
-              "smoothObservationCount": 523,
-              "slowObservationCount": 138,
-              "congestedObservationCount": 11,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 8
+              "smoothObservationCount": 395,
+              "slowObservationCount": 98,
+              "congestedObservationCount": 179,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 26
             },
             {
               "hour": 16,
@@ -5069,26 +5069,26 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 303,
-              "slowObservationCount": 49,
-              "congestedObservationCount": 40,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 235,
+              "slowObservationCount": 55,
+              "congestedObservationCount": 102,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 24
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 24.9,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 251,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 85,
-              "slowLinkCount": 26,
-              "congestedLinkCount": 20
+              "smoothObservationCount": 164,
+              "slowObservationCount": 58,
+              "congestedObservationCount": 170,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 36
             },
             {
               "hour": 18,
@@ -5099,11 +5099,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 294,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 42,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 183,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 114,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 28
             }
           ]
         },
@@ -5119,11 +5119,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 336,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 25,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 226,
+              "slowObservationCount": 81,
+              "congestedObservationCount": 85,
+              "slowLinkCount": 33,
+              "congestedLinkCount": 27
             },
             {
               "hour": 7,
@@ -5134,26 +5134,26 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 255,
-              "slowObservationCount": 134,
-              "congestedObservationCount": 3,
-              "slowLinkCount": 36,
-              "congestedLinkCount": 2
+              "smoothObservationCount": 178,
+              "slowObservationCount": 44,
+              "congestedObservationCount": 170,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 37
             },
             {
               "hour": 8,
               "label": "08:00",
               "avgSpeedKmh": 29.9,
               "minSpeedKmh": 11,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 223,
-              "slowObservationCount": 156,
-              "congestedObservationCount": 13,
-              "slowLinkCount": 38,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 96,
+              "slowObservationCount": 82,
+              "congestedObservationCount": 214,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 39
             },
             {
               "hour": 9,
@@ -5164,26 +5164,26 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 250,
-              "slowObservationCount": 129,
-              "congestedObservationCount": 13,
-              "slowLinkCount": 29,
-              "congestedLinkCount": 6
+              "smoothObservationCount": 166,
+              "slowObservationCount": 60,
+              "congestedObservationCount": 166,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 35
             },
             {
               "hour": 10,
               "label": "10:00",
               "avgSpeedKmh": 27.8,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 275,
-              "slowObservationCount": 122,
-              "congestedObservationCount": 51,
-              "slowLinkCount": 32,
-              "congestedLinkCount": 17
+              "smoothObservationCount": 170,
+              "slowObservationCount": 82,
+              "congestedObservationCount": 196,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 33
             },
             {
               "hour": 11,
@@ -5194,11 +5194,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 329,
-              "slowObservationCount": 84,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 242,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 139,
+              "slowLinkCount": 24,
+              "congestedLinkCount": 23
             },
             {
               "hour": 12,
@@ -5209,11 +5209,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 354,
-              "slowObservationCount": 62,
-              "congestedObservationCount": 32,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 274,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 107,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 29
             },
             {
               "hour": 13,
@@ -5224,11 +5224,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 386,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 1,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 1
+              "smoothObservationCount": 269,
+              "slowObservationCount": 92,
+              "congestedObservationCount": 87,
+              "slowLinkCount": 34,
+              "congestedLinkCount": 28
             },
             {
               "hour": 14,
@@ -5239,11 +5239,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 326,
-              "slowObservationCount": 94,
-              "congestedObservationCount": 28,
-              "slowLinkCount": 21,
-              "congestedLinkCount": 15
+              "smoothObservationCount": 249,
+              "slowObservationCount": 56,
+              "congestedObservationCount": 143,
+              "slowLinkCount": 19,
+              "congestedLinkCount": 23
             },
             {
               "hour": 15,
@@ -5254,11 +5254,11 @@
               "blocked": true,
               "sampleCount": 672,
               "observedLinkCount": 56,
-              "smoothObservationCount": 559,
-              "slowObservationCount": 107,
-              "congestedObservationCount": 6,
-              "slowLinkCount": 26,
-              "congestedLinkCount": 5
+              "smoothObservationCount": 359,
+              "slowObservationCount": 146,
+              "congestedObservationCount": 167,
+              "slowLinkCount": 42,
+              "congestedLinkCount": 30
             },
             {
               "hour": 16,
@@ -5269,41 +5269,41 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 265,
-              "slowObservationCount": 94,
-              "congestedObservationCount": 33,
-              "slowLinkCount": 24,
-              "congestedLinkCount": 13
+              "smoothObservationCount": 193,
+              "slowObservationCount": 56,
+              "congestedObservationCount": 143,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 28
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 28.1,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 249,
-              "slowObservationCount": 97,
-              "congestedObservationCount": 46,
-              "slowLinkCount": 30,
-              "congestedLinkCount": 14
+              "smoothObservationCount": 134,
+              "slowObservationCount": 96,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 31,
+              "congestedLinkCount": 32
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 27.5,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 278,
-              "slowObservationCount": 42,
-              "congestedObservationCount": 72,
-              "slowLinkCount": 16,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 188,
+              "slowObservationCount": 79,
+              "congestedObservationCount": 125,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 26
             }
           ]
         },
@@ -5319,11 +5319,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 371,
-              "slowObservationCount": 21,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 11,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 249,
+              "slowObservationCount": 94,
+              "congestedObservationCount": 49,
+              "slowLinkCount": 32,
+              "congestedLinkCount": 20
             },
             {
               "hour": 7,
@@ -5334,11 +5334,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 285,
-              "slowObservationCount": 107,
-              "congestedObservationCount": 0,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 0
+              "smoothObservationCount": 175,
+              "slowObservationCount": 55,
+              "congestedObservationCount": 162,
+              "slowLinkCount": 27,
+              "congestedLinkCount": 33
             },
             {
               "hour": 8,
@@ -5349,11 +5349,11 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 262,
-              "slowObservationCount": 126,
-              "congestedObservationCount": 4,
-              "slowLinkCount": 31,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 149,
+              "slowObservationCount": 78,
+              "congestedObservationCount": 165,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 37
             },
             {
               "hour": 9,
@@ -5364,26 +5364,26 @@
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 275,
-              "slowObservationCount": 113,
-              "congestedObservationCount": 4,
-              "slowLinkCount": 28,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 164,
+              "slowObservationCount": 87,
+              "congestedObservationCount": 141,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 30
             },
             {
               "hour": 10,
               "label": "10:00",
               "avgSpeedKmh": 29.6,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 309,
-              "slowObservationCount": 105,
-              "congestedObservationCount": 34,
-              "slowLinkCount": 31,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 210,
+              "slowObservationCount": 71,
+              "congestedObservationCount": 167,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 32
             },
             {
               "hour": 11,
@@ -5394,11 +5394,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 361,
-              "slowObservationCount": 52,
-              "congestedObservationCount": 35,
-              "slowLinkCount": 23,
-              "congestedLinkCount": 14
+              "smoothObservationCount": 270,
+              "slowObservationCount": 76,
+              "congestedObservationCount": 102,
+              "slowLinkCount": 25,
+              "congestedLinkCount": 23
             },
             {
               "hour": 12,
@@ -5409,11 +5409,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 354,
-              "slowObservationCount": 58,
-              "congestedObservationCount": 36,
-              "slowLinkCount": 18,
-              "congestedLinkCount": 12
+              "smoothObservationCount": 275,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 106,
+              "slowLinkCount": 22,
+              "congestedLinkCount": 20
             },
             {
               "hour": 13,
@@ -5424,11 +5424,11 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 380,
-              "slowObservationCount": 61,
-              "congestedObservationCount": 7,
-              "slowLinkCount": 20,
-              "congestedLinkCount": 4
+              "smoothObservationCount": 265,
+              "slowObservationCount": 95,
+              "congestedObservationCount": 88,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 23
             },
             {
               "hour": 14,
@@ -5439,71 +5439,71 @@
               "blocked": true,
               "sampleCount": 448,
               "observedLinkCount": 56,
-              "smoothObservationCount": 306,
-              "slowObservationCount": 117,
-              "congestedObservationCount": 25,
-              "slowLinkCount": 27,
-              "congestedLinkCount": 11
+              "smoothObservationCount": 237,
+              "slowObservationCount": 51,
+              "congestedObservationCount": 160,
+              "slowLinkCount": 19,
+              "congestedLinkCount": 29
             },
             {
               "hour": 15,
               "label": "15:00",
               "avgSpeedKmh": 29,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 672,
               "observedLinkCount": 56,
-              "smoothObservationCount": 474,
-              "slowObservationCount": 90,
-              "congestedObservationCount": 108,
-              "slowLinkCount": 22,
-              "congestedLinkCount": 18
+              "smoothObservationCount": 353,
+              "slowObservationCount": 94,
+              "congestedObservationCount": 225,
+              "slowLinkCount": 30,
+              "congestedLinkCount": 29
             },
             {
               "hour": 16,
               "label": "16:00",
               "avgSpeedKmh": 24.8,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 265,
-              "slowObservationCount": 56,
-              "congestedObservationCount": 71,
+              "smoothObservationCount": 198,
+              "slowObservationCount": 50,
+              "congestedObservationCount": 144,
               "slowLinkCount": 23,
-              "congestedLinkCount": 19
+              "congestedLinkCount": 31
             },
             {
               "hour": 17,
               "label": "17:00",
               "avgSpeedKmh": 23.4,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 229,
-              "slowObservationCount": 95,
-              "congestedObservationCount": 68,
-              "slowLinkCount": 29,
-              "congestedLinkCount": 21
+              "smoothObservationCount": 146,
+              "slowObservationCount": 67,
+              "congestedObservationCount": 179,
+              "slowLinkCount": 28,
+              "congestedLinkCount": 34
             },
             {
               "hour": 18,
               "label": "18:00",
               "avgSpeedKmh": 24.9,
               "minSpeedKmh": 5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 392,
               "observedLinkCount": 56,
-              "smoothObservationCount": 239,
-              "slowObservationCount": 97,
-              "congestedObservationCount": 56,
-              "slowLinkCount": 39,
-              "congestedLinkCount": 19
+              "smoothObservationCount": 136,
+              "slowObservationCount": 73,
+              "congestedObservationCount": 183,
+              "slowLinkCount": 26,
+              "congestedLinkCount": 42
             }
           ]
         }
