@@ -428,7 +428,7 @@ function hourSummary(date, hour, group, route) {
   }
 
   const speeds = group.rows.map((row) => row["통행속도_kmh"]).filter((speed) => speed != null);
-  const avgSpeed = average(speeds);
+  const avgSpeed = routeAverageSpeed(group.rows);
   const minSpeed = speeds.length ? Math.min(...speeds) : null;
   const slowObservationCount = group.rows.filter((row) => row["혼잡상태"] === "서행").length;
   const congestedObservationCount = group.rows.filter((row) => row["혼잡상태"] === "정체").length;
@@ -563,7 +563,7 @@ function routeReport(route) {
     "observedLinkCount": route.output["관측요약"]["관측링크수"],
     "missingLinkCount": route.output["관측요약"]["미관측링크수"],
     "fiveMinuteRows": rows.length,
-    "avgSpeedKmh": roundOne(average(speeds)),
+    "avgSpeedKmh": roundOne(routeAverageSpeed(rows)),
     "minSpeedKmh": speeds.length ? roundOne(Math.min(...speeds)) : null,
     "blockedHourCount": blockedHours.length,
     "slowHourCount": hourlyRows.filter((row) => row["시간대혼잡상태"] === "서행").length,
@@ -662,6 +662,25 @@ function isExpressRoad(roadRank) {
 function average(values) {
   if (!values.length) return null;
   return sum(values) / values.length;
+}
+
+function routeAverageSpeed(rows) {
+  const totals = rows.reduce(
+    (acc, row) => {
+      const lengthMeters = nullableNumber(Number(row["연장_m"]));
+      const speedKmh = nullableNumber(Number(row["통행속도_kmh"]));
+      if (lengthMeters == null || lengthMeters <= 0 || speedKmh == null || speedKmh <= 0) return acc;
+
+      const lengthKm = lengthMeters / 1000;
+      acc.distanceKm += lengthKm;
+      acc.travelHours += lengthKm / speedKmh;
+      return acc;
+    },
+    { distanceKm: 0, travelHours: 0 }
+  );
+
+  if (totals.distanceKm <= 0 || totals.travelHours <= 0) return null;
+  return totals.distanceKm / totals.travelHours;
 }
 
 function sum(values) {

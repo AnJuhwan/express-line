@@ -22,15 +22,15 @@
       "observedLinkCount": 10,
       "missingLinkCount": 0,
       "fiveMinuteRows": 3030,
-      "avgSpeedKmh": 35,
+      "avgSpeedKmh": 30,
       "minSpeedKmh": 1.4,
       "blockedHourCount": 39,
-      "slowHourCount": 33,
-      "congestedHourCount": 6,
+      "slowHourCount": 18,
+      "congestedHourCount": 21,
       "peakBlockedHour": {
         "date": "2026-05-14",
         "hour": 15,
-        "avgSpeedKmh": 32.6,
+        "avgSpeedKmh": 30.5,
         "status": "서행",
         "slowObservationCount": 31,
         "congestedObservationCount": 68
@@ -104,7 +104,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 39.6,
+              "avgSpeedKmh": 35.1,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -119,9 +119,9 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 32.3,
+              "avgSpeedKmh": 28.1,
               "minSpeedKmh": 15,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -134,7 +134,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 33.6,
+              "avgSpeedKmh": 31.3,
               "minSpeedKmh": 18,
               "status": "서행",
               "blocked": true,
@@ -149,9 +149,9 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 30.1,
+              "avgSpeedKmh": 25,
               "minSpeedKmh": 2.4,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -164,7 +164,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 29.6,
+              "avgSpeedKmh": 25.8,
               "minSpeedKmh": 13,
               "status": "정체",
               "blocked": true,
@@ -179,9 +179,9 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 33.8,
+              "avgSpeedKmh": 29.6,
               "minSpeedKmh": 14,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 80,
               "observedLinkCount": 10,
@@ -194,7 +194,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 55.8,
+              "avgSpeedKmh": 51.8,
               "minSpeedKmh": 28,
               "status": "서행",
               "blocked": true,
@@ -209,7 +209,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 48.7,
+              "avgSpeedKmh": 45.4,
               "minSpeedKmh": 28.7,
               "status": "서행",
               "blocked": true,
@@ -224,7 +224,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 38.4,
+              "avgSpeedKmh": 36.3,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -239,7 +239,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 34.5,
+              "avgSpeedKmh": 31.2,
               "minSpeedKmh": 2.7,
               "status": "서행",
               "blocked": true,
@@ -254,7 +254,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 34.2,
+              "avgSpeedKmh": 30.9,
               "minSpeedKmh": 14.3,
               "status": "서행",
               "blocked": true,
@@ -269,9 +269,9 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 33.3,
+              "avgSpeedKmh": 29.1,
               "minSpeedKmh": 13.5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -284,7 +284,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 36.6,
+              "avgSpeedKmh": 31.4,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -304,7 +304,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 36.4,
+              "avgSpeedKmh": 32.5,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -319,9 +319,9 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 32.1,
+              "avgSpeedKmh": 29.1,
               "minSpeedKmh": 14,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -334,7 +334,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 34.4,
+              "avgSpeedKmh": 32.2,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -349,9 +349,9 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 30.9,
+              "avgSpeedKmh": 27.8,
               "minSpeedKmh": 13,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -364,7 +364,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 29,
+              "avgSpeedKmh": 25.8,
               "minSpeedKmh": 14.5,
               "status": "정체",
               "blocked": true,
@@ -379,7 +379,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 29.4,
+              "avgSpeedKmh": 25.9,
               "minSpeedKmh": 13,
               "status": "정체",
               "blocked": true,
@@ -394,7 +394,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 50.2,
+              "avgSpeedKmh": 44.1,
               "minSpeedKmh": 18,
               "status": "서행",
               "blocked": true,
@@ -409,7 +409,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 47,
+              "avgSpeedKmh": 45,
               "minSpeedKmh": 23,
               "status": "서행",
               "blocked": true,
@@ -424,7 +424,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 34.2,
+              "avgSpeedKmh": 33.2,
               "minSpeedKmh": 19,
               "status": "서행",
               "blocked": true,
@@ -439,7 +439,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 32.6,
+              "avgSpeedKmh": 30.5,
               "minSpeedKmh": 17,
               "status": "서행",
               "blocked": true,
@@ -454,9 +454,9 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 31.1,
+              "avgSpeedKmh": 25.3,
               "minSpeedKmh": 2.8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -469,9 +469,9 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 32.3,
+              "avgSpeedKmh": 25.4,
               "minSpeedKmh": 3.3,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -484,9 +484,9 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 34.4,
+              "avgSpeedKmh": 28.5,
               "minSpeedKmh": 7.2,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -504,7 +504,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 38.8,
+              "avgSpeedKmh": 34.9,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -519,7 +519,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 35.8,
+              "avgSpeedKmh": 31.2,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -534,7 +534,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 35.1,
+              "avgSpeedKmh": 33.5,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -549,9 +549,9 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 30.6,
+              "avgSpeedKmh": 26.9,
               "minSpeedKmh": 14.4,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -564,7 +564,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 29.4,
+              "avgSpeedKmh": 25.2,
               "minSpeedKmh": 13,
               "status": "정체",
               "blocked": true,
@@ -579,7 +579,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 29.4,
+              "avgSpeedKmh": 25.9,
               "minSpeedKmh": 15,
               "status": "정체",
               "blocked": true,
@@ -594,7 +594,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 35.1,
+              "avgSpeedKmh": 31.6,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -609,9 +609,9 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 37.6,
+              "avgSpeedKmh": 29.1,
               "minSpeedKmh": 1.4,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 80,
               "observedLinkCount": 10,
@@ -624,9 +624,9 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 33.7,
+              "avgSpeedKmh": 27.3,
               "minSpeedKmh": 2.7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 80,
               "observedLinkCount": 10,
@@ -639,9 +639,9 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 31.1,
+              "avgSpeedKmh": 25.8,
               "minSpeedKmh": 2.6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 120,
               "observedLinkCount": 10,
@@ -654,7 +654,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 29.1,
+              "avgSpeedKmh": 24,
               "minSpeedKmh": 12,
               "status": "정체",
               "blocked": true,
@@ -669,9 +669,9 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 30.7,
+              "avgSpeedKmh": 25.3,
               "minSpeedKmh": 11.7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -684,9 +684,9 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 33.5,
+              "avgSpeedKmh": 28.7,
               "minSpeedKmh": 13,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -709,16 +709,16 @@
       "observedLinkCount": 10,
       "missingLinkCount": 0,
       "fiveMinuteRows": 3030,
-      "avgSpeedKmh": 49.2,
+      "avgSpeedKmh": 39.3,
       "minSpeedKmh": 3.4,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 35,
+      "congestedHourCount": 4,
       "peakBlockedHour": {
         "date": "2026-05-13",
         "hour": 10,
-        "avgSpeedKmh": 32.7,
-        "status": "서행",
+        "avgSpeedKmh": 22.5,
+        "status": "정체",
         "slowObservationCount": 14,
         "congestedObservationCount": 44
       },
@@ -791,7 +791,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 57.2,
+              "avgSpeedKmh": 52.7,
               "minSpeedKmh": 30.1,
               "status": "서행",
               "blocked": true,
@@ -806,7 +806,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 40.6,
+              "avgSpeedKmh": 35.8,
               "minSpeedKmh": 18.8,
               "status": "서행",
               "blocked": true,
@@ -821,9 +821,9 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 34.4,
+              "avgSpeedKmh": 28.8,
               "minSpeedKmh": 15,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -836,7 +836,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 47.3,
+              "avgSpeedKmh": 40.2,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -851,9 +851,9 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 32.7,
+              "avgSpeedKmh": 22.5,
               "minSpeedKmh": 9,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 80,
               "observedLinkCount": 10,
@@ -866,9 +866,9 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 43.9,
+              "avgSpeedKmh": 27.7,
               "minSpeedKmh": 10,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 80,
               "observedLinkCount": 10,
@@ -881,7 +881,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 54.1,
+              "avgSpeedKmh": 48,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -896,7 +896,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 45.5,
+              "avgSpeedKmh": 39.3,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -911,7 +911,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 48.1,
+              "avgSpeedKmh": 40.9,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -926,7 +926,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 49.6,
+              "avgSpeedKmh": 41.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -941,7 +941,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 45.9,
+              "avgSpeedKmh": 38.9,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -956,7 +956,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 53.4,
+              "avgSpeedKmh": 40.2,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -971,7 +971,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 53.3,
+              "avgSpeedKmh": 41.3,
               "minSpeedKmh": 16.3,
               "status": "서행",
               "blocked": true,
@@ -991,7 +991,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 53.7,
+              "avgSpeedKmh": 48.6,
               "minSpeedKmh": 15.2,
               "status": "서행",
               "blocked": true,
@@ -1006,7 +1006,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 41.8,
+              "avgSpeedKmh": 37.5,
               "minSpeedKmh": 18,
               "status": "서행",
               "blocked": true,
@@ -1021,9 +1021,9 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 34,
+              "avgSpeedKmh": 28.4,
               "minSpeedKmh": 14,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 70,
               "observedLinkCount": 10,
@@ -1036,7 +1036,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 45.7,
+              "avgSpeedKmh": 36.8,
               "minSpeedKmh": 15.5,
               "status": "서행",
               "blocked": true,
@@ -1051,7 +1051,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 45.5,
+              "avgSpeedKmh": 35.9,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -1066,7 +1066,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 52,
+              "avgSpeedKmh": 41.3,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1081,7 +1081,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 55,
+              "avgSpeedKmh": 48.5,
               "minSpeedKmh": 17,
               "status": "서행",
               "blocked": true,
@@ -1096,7 +1096,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 53.4,
+              "avgSpeedKmh": 46.7,
               "minSpeedKmh": 19.7,
               "status": "서행",
               "blocked": true,
@@ -1111,7 +1111,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 50.4,
+              "avgSpeedKmh": 41.2,
               "minSpeedKmh": 15.7,
               "status": "서행",
               "blocked": true,
@@ -1126,7 +1126,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 53.4,
+              "avgSpeedKmh": 45,
               "minSpeedKmh": 17,
               "status": "서행",
               "blocked": true,
@@ -1141,7 +1141,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 53.8,
+              "avgSpeedKmh": 43.3,
               "minSpeedKmh": 17.5,
               "status": "서행",
               "blocked": true,
@@ -1156,7 +1156,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 50.3,
+              "avgSpeedKmh": 39.8,
               "minSpeedKmh": 16.3,
               "status": "서행",
               "blocked": true,
@@ -1171,7 +1171,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 53,
+              "avgSpeedKmh": 42,
               "minSpeedKmh": 18,
               "status": "서행",
               "blocked": true,
@@ -1191,7 +1191,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 58.8,
+              "avgSpeedKmh": 56.7,
               "minSpeedKmh": 38,
               "status": "서행",
               "blocked": true,
@@ -1206,7 +1206,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 50.8,
+              "avgSpeedKmh": 46.7,
               "minSpeedKmh": 26,
               "status": "서행",
               "blocked": true,
@@ -1221,7 +1221,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 40.8,
+              "avgSpeedKmh": 30.7,
               "minSpeedKmh": 5.8,
               "status": "서행",
               "blocked": true,
@@ -1236,7 +1236,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 45.9,
+              "avgSpeedKmh": 32.3,
               "minSpeedKmh": 3.4,
               "status": "서행",
               "blocked": true,
@@ -1251,7 +1251,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 52.3,
+              "avgSpeedKmh": 40.5,
               "minSpeedKmh": 3.4,
               "status": "서행",
               "blocked": true,
@@ -1266,7 +1266,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 53.7,
+              "avgSpeedKmh": 44.6,
               "minSpeedKmh": 20,
               "status": "서행",
               "blocked": true,
@@ -1281,7 +1281,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 52.4,
+              "avgSpeedKmh": 42.5,
               "minSpeedKmh": 6.9,
               "status": "서행",
               "blocked": true,
@@ -1296,7 +1296,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 52.6,
+              "avgSpeedKmh": 44.1,
               "minSpeedKmh": 20.3,
               "status": "서행",
               "blocked": true,
@@ -1311,7 +1311,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 49.4,
+              "avgSpeedKmh": 39.8,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -1326,7 +1326,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 51.4,
+              "avgSpeedKmh": 42.2,
               "minSpeedKmh": 16.5,
               "status": "서행",
               "blocked": true,
@@ -1341,7 +1341,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 48.3,
+              "avgSpeedKmh": 39,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -1356,7 +1356,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 47.8,
+              "avgSpeedKmh": 35.9,
               "minSpeedKmh": 8.2,
               "status": "서행",
               "blocked": true,
@@ -1371,7 +1371,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 59.5,
+              "avgSpeedKmh": 49.6,
               "minSpeedKmh": 27.5,
               "status": "서행",
               "blocked": true,
@@ -1396,15 +1396,15 @@
       "observedLinkCount": 13,
       "missingLinkCount": 0,
       "fiveMinuteRows": 3939,
-      "avgSpeedKmh": 50.5,
+      "avgSpeedKmh": 37.8,
       "minSpeedKmh": 6,
       "blockedHourCount": 39,
-      "slowHourCount": 38,
-      "congestedHourCount": 1,
+      "slowHourCount": 32,
+      "congestedHourCount": 7,
       "peakBlockedHour": {
         "date": "2026-05-13",
         "hour": 8,
-        "avgSpeedKmh": 28.4,
+        "avgSpeedKmh": 20.5,
         "status": "정체",
         "slowObservationCount": 16,
         "congestedObservationCount": 58
@@ -1478,7 +1478,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 46.4,
+              "avgSpeedKmh": 38.2,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -1493,9 +1493,9 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 33.6,
+              "avgSpeedKmh": 21.9,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1508,7 +1508,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 28.4,
+              "avgSpeedKmh": 20.5,
               "minSpeedKmh": 7,
               "status": "정체",
               "blocked": true,
@@ -1523,9 +1523,9 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 34.8,
+              "avgSpeedKmh": 25.5,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1538,7 +1538,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 48.3,
+              "avgSpeedKmh": 36,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1553,7 +1553,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 56.2,
+              "avgSpeedKmh": 45.5,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -1568,7 +1568,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 62.1,
+              "avgSpeedKmh": 49.4,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1583,7 +1583,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 60.7,
+              "avgSpeedKmh": 47.9,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -1598,7 +1598,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 61,
+              "avgSpeedKmh": 53.6,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1613,7 +1613,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 59.7,
+              "avgSpeedKmh": 50.9,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1628,7 +1628,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 55.5,
+              "avgSpeedKmh": 45.8,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -1643,7 +1643,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 47.4,
+              "avgSpeedKmh": 37.2,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1658,7 +1658,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 47.9,
+              "avgSpeedKmh": 35.3,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -1678,7 +1678,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 45.5,
+              "avgSpeedKmh": 38,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -1693,9 +1693,9 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 37.1,
+              "avgSpeedKmh": 26.2,
               "minSpeedKmh": 7,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1708,7 +1708,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 40.9,
+              "avgSpeedKmh": 30.8,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -1723,7 +1723,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 42.4,
+              "avgSpeedKmh": 35.2,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -1738,7 +1738,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 45.9,
+              "avgSpeedKmh": 38.5,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -1753,7 +1753,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 61.4,
+              "avgSpeedKmh": 48.3,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1768,7 +1768,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 62.7,
+              "avgSpeedKmh": 49.5,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -1783,7 +1783,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 58.2,
+              "avgSpeedKmh": 48.4,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -1798,7 +1798,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 58.7,
+              "avgSpeedKmh": 47.3,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1813,7 +1813,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 59.7,
+              "avgSpeedKmh": 48.1,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1828,7 +1828,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 51.5,
+              "avgSpeedKmh": 40.9,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -1843,7 +1843,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 45.9,
+              "avgSpeedKmh": 33.3,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -1858,7 +1858,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 47.6,
+              "avgSpeedKmh": 32.6,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1878,7 +1878,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 47.1,
+              "avgSpeedKmh": 39.4,
               "minSpeedKmh": 14.5,
               "status": "서행",
               "blocked": true,
@@ -1893,9 +1893,9 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 36.3,
+              "avgSpeedKmh": 28.2,
               "minSpeedKmh": 8,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1908,9 +1908,9 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 32.5,
+              "avgSpeedKmh": 27.6,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1923,9 +1923,9 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 37.2,
+              "avgSpeedKmh": 29,
               "minSpeedKmh": 6,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 91,
               "observedLinkCount": 13,
@@ -1938,7 +1938,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 51.7,
+              "avgSpeedKmh": 38.5,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -1953,7 +1953,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 61.4,
+              "avgSpeedKmh": 49.2,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -1968,7 +1968,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 60.3,
+              "avgSpeedKmh": 48.7,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -1983,7 +1983,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 60,
+              "avgSpeedKmh": 48.4,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -1998,7 +1998,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 61.9,
+              "avgSpeedKmh": 50,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -2013,7 +2013,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 53.7,
+              "avgSpeedKmh": 44.5,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -2028,7 +2028,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 48.9,
+              "avgSpeedKmh": 41,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -2043,7 +2043,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 44.9,
+              "avgSpeedKmh": 34.9,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -2058,7 +2058,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 43.1,
+              "avgSpeedKmh": 31.7,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -2083,16 +2083,16 @@
       "observedLinkCount": 12,
       "missingLinkCount": 1,
       "fiveMinuteRows": 3636,
-      "avgSpeedKmh": 62.4,
+      "avgSpeedKmh": 62.5,
       "minSpeedKmh": 8,
       "blockedHourCount": 39,
-      "slowHourCount": 39,
-      "congestedHourCount": 0,
+      "slowHourCount": 38,
+      "congestedHourCount": 1,
       "peakBlockedHour": {
         "date": "2026-05-14",
         "hour": 8,
-        "avgSpeedKmh": 42,
-        "status": "서행",
+        "avgSpeedKmh": 27.1,
+        "status": "정체",
         "slowObservationCount": 0,
         "congestedObservationCount": 42
       },
@@ -2165,7 +2165,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 71.1,
+              "avgSpeedKmh": 80.6,
               "minSpeedKmh": 43,
               "status": "서행",
               "blocked": true,
@@ -2180,7 +2180,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 64.8,
+              "avgSpeedKmh": 70.1,
               "minSpeedKmh": 33.5,
               "status": "서행",
               "blocked": true,
@@ -2195,7 +2195,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 66,
+              "avgSpeedKmh": 71.6,
               "minSpeedKmh": 44,
               "status": "서행",
               "blocked": true,
@@ -2210,7 +2210,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 68.1,
+              "avgSpeedKmh": 75.6,
               "minSpeedKmh": 40,
               "status": "서행",
               "blocked": true,
@@ -2225,7 +2225,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 66.7,
+              "avgSpeedKmh": 73.5,
               "minSpeedKmh": 40,
               "status": "서행",
               "blocked": true,
@@ -2240,7 +2240,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 66.1,
+              "avgSpeedKmh": 73,
               "minSpeedKmh": 42,
               "status": "서행",
               "blocked": true,
@@ -2255,7 +2255,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 65.4,
+              "avgSpeedKmh": 71.6,
               "minSpeedKmh": 45,
               "status": "서행",
               "blocked": true,
@@ -2270,7 +2270,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 64.5,
+              "avgSpeedKmh": 68.6,
               "minSpeedKmh": 42,
               "status": "서행",
               "blocked": true,
@@ -2285,7 +2285,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 62.2,
+              "avgSpeedKmh": 68,
               "minSpeedKmh": 38,
               "status": "서행",
               "blocked": true,
@@ -2300,7 +2300,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 62.1,
+              "avgSpeedKmh": 68.2,
               "minSpeedKmh": 37,
               "status": "서행",
               "blocked": true,
@@ -2315,7 +2315,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 50,
+              "avgSpeedKmh": 46,
               "minSpeedKmh": 15.5,
               "status": "서행",
               "blocked": true,
@@ -2330,7 +2330,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 47,
+              "avgSpeedKmh": 45.7,
               "minSpeedKmh": 14.5,
               "status": "서행",
               "blocked": true,
@@ -2345,7 +2345,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 54.3,
+              "avgSpeedKmh": 49.4,
               "minSpeedKmh": 25,
               "status": "서행",
               "blocked": true,
@@ -2365,7 +2365,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 70,
+              "avgSpeedKmh": 79.3,
               "minSpeedKmh": 45,
               "status": "서행",
               "blocked": true,
@@ -2380,7 +2380,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 56.4,
+              "avgSpeedKmh": 48.4,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -2395,9 +2395,9 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 42,
+              "avgSpeedKmh": 27.1,
               "minSpeedKmh": 8.5,
-              "status": "서행",
+              "status": "정체",
               "blocked": true,
               "sampleCount": 84,
               "observedLinkCount": 12,
@@ -2410,7 +2410,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 56.4,
+              "avgSpeedKmh": 51.2,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -2425,7 +2425,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 64.5,
+              "avgSpeedKmh": 63.1,
               "minSpeedKmh": 33,
               "status": "서행",
               "blocked": true,
@@ -2440,7 +2440,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 68.3,
+              "avgSpeedKmh": 76.2,
               "minSpeedKmh": 41,
               "status": "서행",
               "blocked": true,
@@ -2455,7 +2455,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 68.1,
+              "avgSpeedKmh": 76.4,
               "minSpeedKmh": 27.5,
               "status": "서행",
               "blocked": true,
@@ -2470,7 +2470,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 64.3,
+              "avgSpeedKmh": 70.3,
               "minSpeedKmh": 42,
               "status": "서행",
               "blocked": true,
@@ -2485,7 +2485,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 66,
+              "avgSpeedKmh": 73.2,
               "minSpeedKmh": 43,
               "status": "서행",
               "blocked": true,
@@ -2500,7 +2500,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 64.6,
+              "avgSpeedKmh": 71.9,
               "minSpeedKmh": 40,
               "status": "서행",
               "blocked": true,
@@ -2515,7 +2515,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 61.1,
+              "avgSpeedKmh": 66.6,
               "minSpeedKmh": 34,
               "status": "서행",
               "blocked": true,
@@ -2530,7 +2530,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 56.3,
+              "avgSpeedKmh": 52.4,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -2545,7 +2545,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 56.5,
+              "avgSpeedKmh": 53.7,
               "minSpeedKmh": 21,
               "status": "서행",
               "blocked": true,
@@ -2565,7 +2565,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 71.5,
+              "avgSpeedKmh": 81,
               "minSpeedKmh": 43,
               "status": "서행",
               "blocked": true,
@@ -2580,7 +2580,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 66.3,
+              "avgSpeedKmh": 72.9,
               "minSpeedKmh": 34.5,
               "status": "서행",
               "blocked": true,
@@ -2595,7 +2595,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 65.8,
+              "avgSpeedKmh": 69.9,
               "minSpeedKmh": 30,
               "status": "서행",
               "blocked": true,
@@ -2610,7 +2610,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 66,
+              "avgSpeedKmh": 71.6,
               "minSpeedKmh": 24,
               "status": "서행",
               "blocked": true,
@@ -2625,7 +2625,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 65.4,
+              "avgSpeedKmh": 73.2,
               "minSpeedKmh": 32,
               "status": "서행",
               "blocked": true,
@@ -2640,7 +2640,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 66.9,
+              "avgSpeedKmh": 74.2,
               "minSpeedKmh": 41,
               "status": "서행",
               "blocked": true,
@@ -2655,7 +2655,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 67,
+              "avgSpeedKmh": 74.6,
               "minSpeedKmh": 43,
               "status": "서행",
               "blocked": true,
@@ -2670,7 +2670,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 65.1,
+              "avgSpeedKmh": 72.3,
               "minSpeedKmh": 44,
               "status": "서행",
               "blocked": true,
@@ -2685,7 +2685,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 64.3,
+              "avgSpeedKmh": 71.5,
               "minSpeedKmh": 41,
               "status": "서행",
               "blocked": true,
@@ -2700,7 +2700,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 61.8,
+              "avgSpeedKmh": 67.7,
               "minSpeedKmh": 24,
               "status": "서행",
               "blocked": true,
@@ -2715,7 +2715,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 56.2,
+              "avgSpeedKmh": 54.6,
               "minSpeedKmh": 18,
               "status": "서행",
               "blocked": true,
@@ -2730,7 +2730,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 55.7,
+              "avgSpeedKmh": 48.3,
               "minSpeedKmh": 19,
               "status": "서행",
               "blocked": true,
@@ -2745,7 +2745,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 52.7,
+              "avgSpeedKmh": 38.5,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -2770,7 +2770,7 @@
       "observedLinkCount": 60,
       "missingLinkCount": 0,
       "fiveMinuteRows": 18180,
-      "avgSpeedKmh": 46.8,
+      "avgSpeedKmh": 34.4,
       "minSpeedKmh": 5,
       "blockedHourCount": 39,
       "slowHourCount": 39,
@@ -2778,7 +2778,7 @@
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 15,
-        "avgSpeedKmh": 45.2,
+        "avgSpeedKmh": 30.7,
         "status": "서행",
         "slowObservationCount": 90,
         "congestedObservationCount": 108
@@ -2852,7 +2852,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 54.7,
+              "avgSpeedKmh": 45.6,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -2867,7 +2867,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 42.3,
+              "avgSpeedKmh": 33.2,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -2882,7 +2882,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 41.5,
+              "avgSpeedKmh": 31.6,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -2897,7 +2897,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 37.9,
+              "avgSpeedKmh": 27.2,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -2912,7 +2912,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 43.8,
+              "avgSpeedKmh": 32.1,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -2927,7 +2927,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 51.3,
+              "avgSpeedKmh": 42.6,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -2942,7 +2942,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 57.9,
+              "avgSpeedKmh": 48.8,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -2957,7 +2957,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 51.8,
+              "avgSpeedKmh": 45.8,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -2972,7 +2972,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 51.1,
+              "avgSpeedKmh": 41.9,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -2987,7 +2987,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 49.1,
+              "avgSpeedKmh": 39.4,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -3002,7 +3002,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 50,
+              "avgSpeedKmh": 34.8,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3017,7 +3017,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 41.3,
+              "avgSpeedKmh": 26.4,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -3032,7 +3032,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 45,
+              "avgSpeedKmh": 32.1,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3052,7 +3052,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 53.3,
+              "avgSpeedKmh": 46.2,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -3067,7 +3067,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 44.9,
+              "avgSpeedKmh": 35.4,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -3082,7 +3082,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 39.3,
+              "avgSpeedKmh": 31.7,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3097,7 +3097,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 43.5,
+              "avgSpeedKmh": 32.4,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -3112,7 +3112,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 41.6,
+              "avgSpeedKmh": 29.5,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3127,7 +3127,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 47.6,
+              "avgSpeedKmh": 34.3,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3142,7 +3142,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 51.9,
+              "avgSpeedKmh": 38,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3157,7 +3157,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 52,
+              "avgSpeedKmh": 42.6,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -3172,7 +3172,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 48.2,
+              "avgSpeedKmh": 34,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3187,7 +3187,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 48.5,
+              "avgSpeedKmh": 40.4,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -3202,7 +3202,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 44.8,
+              "avgSpeedKmh": 33.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3217,7 +3217,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 39.8,
+              "avgSpeedKmh": 29.4,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3232,7 +3232,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 43.5,
+              "avgSpeedKmh": 27.9,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3252,7 +3252,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 57.2,
+              "avgSpeedKmh": 51.8,
               "minSpeedKmh": 19,
               "status": "서행",
               "blocked": true,
@@ -3267,7 +3267,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 45.7,
+              "avgSpeedKmh": 38.2,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -3282,7 +3282,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 43.5,
+              "avgSpeedKmh": 35.5,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -3297,7 +3297,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 45.1,
+              "avgSpeedKmh": 35.7,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -3312,7 +3312,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 45.5,
+              "avgSpeedKmh": 31.2,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3327,7 +3327,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 51,
+              "avgSpeedKmh": 37.3,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3342,7 +3342,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 51,
+              "avgSpeedKmh": 36.8,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3357,7 +3357,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 51.6,
+              "avgSpeedKmh": 41.2,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3372,7 +3372,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 46.1,
+              "avgSpeedKmh": 33.4,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3387,7 +3387,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 45.2,
+              "avgSpeedKmh": 30.7,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3402,7 +3402,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 43.8,
+              "avgSpeedKmh": 26,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
@@ -3417,7 +3417,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 36.6,
+              "avgSpeedKmh": 23,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -3432,7 +3432,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 36.8,
+              "avgSpeedKmh": 23.3,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
@@ -3457,7 +3457,7 @@
       "observedLinkCount": 73,
       "missingLinkCount": 0,
       "fiveMinuteRows": 22119,
-      "avgSpeedKmh": 45.3,
+      "avgSpeedKmh": 33.3,
       "minSpeedKmh": 4,
       "blockedHourCount": 39,
       "slowHourCount": 39,
@@ -3465,7 +3465,7 @@
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 18,
-        "avgSpeedKmh": 33.2,
+        "avgSpeedKmh": 21.7,
         "status": "서행",
         "slowObservationCount": 117,
         "congestedObservationCount": 159
@@ -3539,7 +3539,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 59.1,
+              "avgSpeedKmh": 47.9,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3554,7 +3554,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 48.5,
+              "avgSpeedKmh": 33.8,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3569,7 +3569,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 42.4,
+              "avgSpeedKmh": 29.3,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3584,7 +3584,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 44.8,
+              "avgSpeedKmh": 32,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3599,7 +3599,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 43.6,
+              "avgSpeedKmh": 30.7,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3614,7 +3614,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 45.9,
+              "avgSpeedKmh": 33.4,
               "minSpeedKmh": 4,
               "status": "서행",
               "blocked": true,
@@ -3629,7 +3629,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 49.9,
+              "avgSpeedKmh": 41,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3644,7 +3644,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 50.6,
+              "avgSpeedKmh": 39.6,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3659,7 +3659,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 47.4,
+              "avgSpeedKmh": 37.1,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3674,7 +3674,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 44.9,
+              "avgSpeedKmh": 34.5,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3689,7 +3689,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 38.9,
+              "avgSpeedKmh": 29.3,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3704,7 +3704,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 33.8,
+              "avgSpeedKmh": 25.5,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3719,7 +3719,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 34.8,
+              "avgSpeedKmh": 25.7,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -3739,7 +3739,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 59.6,
+              "avgSpeedKmh": 50.1,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3754,7 +3754,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 48.3,
+              "avgSpeedKmh": 35.6,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3769,7 +3769,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 39.9,
+              "avgSpeedKmh": 23.2,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3784,7 +3784,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 43.5,
+              "avgSpeedKmh": 29.7,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3799,7 +3799,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 44.2,
+              "avgSpeedKmh": 32.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3814,7 +3814,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 50,
+              "avgSpeedKmh": 40.7,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3829,7 +3829,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 52.8,
+              "avgSpeedKmh": 43.8,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3844,7 +3844,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 51.2,
+              "avgSpeedKmh": 40,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3859,7 +3859,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 46.2,
+              "avgSpeedKmh": 35.4,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3874,7 +3874,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 46.3,
+              "avgSpeedKmh": 34.9,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3889,7 +3889,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 39.4,
+              "avgSpeedKmh": 29.1,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -3904,7 +3904,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 37.1,
+              "avgSpeedKmh": 28.6,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3919,7 +3919,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 33.2,
+              "avgSpeedKmh": 26.7,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -3939,7 +3939,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 59.3,
+              "avgSpeedKmh": 48.9,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3954,7 +3954,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 49.9,
+              "avgSpeedKmh": 36.5,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -3969,7 +3969,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 45.3,
+              "avgSpeedKmh": 32.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -3984,7 +3984,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 46.8,
+              "avgSpeedKmh": 34.2,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -3999,7 +3999,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 45.8,
+              "avgSpeedKmh": 36.2,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4014,7 +4014,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 51.9,
+              "avgSpeedKmh": 45.6,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4029,7 +4029,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 52,
+              "avgSpeedKmh": 42.7,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4044,7 +4044,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 48.9,
+              "avgSpeedKmh": 41.4,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4059,7 +4059,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 46.1,
+              "avgSpeedKmh": 34.4,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4074,7 +4074,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 40.6,
+              "avgSpeedKmh": 32.4,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4089,7 +4089,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 34,
+              "avgSpeedKmh": 26.3,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4104,7 +4104,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 32.4,
+              "avgSpeedKmh": 22.4,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -4119,7 +4119,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 33.2,
+              "avgSpeedKmh": 21.7,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
@@ -4144,7 +4144,7 @@
       "observedLinkCount": 67,
       "missingLinkCount": 0,
       "fiveMinuteRows": 20301,
-      "avgSpeedKmh": 44.2,
+      "avgSpeedKmh": 32.8,
       "minSpeedKmh": 4,
       "blockedHourCount": 39,
       "slowHourCount": 39,
@@ -4152,7 +4152,7 @@
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 18,
-        "avgSpeedKmh": 29.9,
+        "avgSpeedKmh": 20.5,
         "status": "서행",
         "slowObservationCount": 117,
         "congestedObservationCount": 159
@@ -4226,7 +4226,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 58.3,
+              "avgSpeedKmh": 46.7,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4241,7 +4241,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 49.8,
+              "avgSpeedKmh": 35.1,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4256,7 +4256,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 44,
+              "avgSpeedKmh": 31.1,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4271,7 +4271,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 46.4,
+              "avgSpeedKmh": 34.7,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -4286,7 +4286,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 44,
+              "avgSpeedKmh": 32.2,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -4301,7 +4301,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 44.1,
+              "avgSpeedKmh": 32.4,
               "minSpeedKmh": 4,
               "status": "서행",
               "blocked": true,
@@ -4316,7 +4316,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 48,
+              "avgSpeedKmh": 39.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4331,7 +4331,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 48.8,
+              "avgSpeedKmh": 38.2,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4346,7 +4346,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 45.5,
+              "avgSpeedKmh": 35.8,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4361,7 +4361,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 42.8,
+              "avgSpeedKmh": 33.1,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4376,7 +4376,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 36.4,
+              "avgSpeedKmh": 28,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -4391,7 +4391,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 30.7,
+              "avgSpeedKmh": 24.2,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -4406,7 +4406,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 31.9,
+              "avgSpeedKmh": 24.4,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -4426,7 +4426,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 58.8,
+              "avgSpeedKmh": 49,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4441,7 +4441,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 50,
+              "avgSpeedKmh": 37,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4456,7 +4456,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 41,
+              "avgSpeedKmh": 23.8,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -4471,7 +4471,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 45.4,
+              "avgSpeedKmh": 32.5,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4486,7 +4486,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 44.9,
+              "avgSpeedKmh": 33.5,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4501,7 +4501,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 48.3,
+              "avgSpeedKmh": 39.4,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4516,7 +4516,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 51.1,
+              "avgSpeedKmh": 42.4,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -4531,7 +4531,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 49.5,
+              "avgSpeedKmh": 38.6,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4546,7 +4546,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 44.1,
+              "avgSpeedKmh": 34,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4561,7 +4561,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 44.3,
+              "avgSpeedKmh": 33.5,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -4576,7 +4576,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 38.4,
+              "avgSpeedKmh": 29,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4591,7 +4591,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 35.6,
+              "avgSpeedKmh": 28.2,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4606,7 +4606,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 30.5,
+              "avgSpeedKmh": 25.5,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4626,7 +4626,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 58.5,
+              "avgSpeedKmh": 47.7,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4641,7 +4641,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 51.4,
+              "avgSpeedKmh": 38.2,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4656,7 +4656,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 46.5,
+              "avgSpeedKmh": 33.6,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4671,7 +4671,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 47.6,
+              "avgSpeedKmh": 35.6,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -4686,7 +4686,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 45.7,
+              "avgSpeedKmh": 36.6,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4701,7 +4701,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 50.4,
+              "avgSpeedKmh": 44.4,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4716,7 +4716,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 50.3,
+              "avgSpeedKmh": 41.3,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4731,7 +4731,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 47.1,
+              "avgSpeedKmh": 40,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4746,7 +4746,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 44.2,
+              "avgSpeedKmh": 33,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -4761,7 +4761,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 38.3,
+              "avgSpeedKmh": 31.1,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4776,7 +4776,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 31.7,
+              "avgSpeedKmh": 25.2,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -4791,7 +4791,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 29.7,
+              "avgSpeedKmh": 21.4,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -4806,7 +4806,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 29.9,
+              "avgSpeedKmh": 20.5,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
@@ -4831,7 +4831,7 @@
       "observedLinkCount": 56,
       "missingLinkCount": 0,
       "fiveMinuteRows": 16968,
-      "avgSpeedKmh": 44.9,
+      "avgSpeedKmh": 32.9,
       "minSpeedKmh": 5,
       "blockedHourCount": 39,
       "slowHourCount": 39,
@@ -4839,7 +4839,7 @@
       "peakBlockedHour": {
         "date": "2026-05-15",
         "hour": 15,
-        "avgSpeedKmh": 43.1,
+        "avgSpeedKmh": 29,
         "status": "서행",
         "slowObservationCount": 90,
         "congestedObservationCount": 108
@@ -4913,7 +4913,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 52.6,
+              "avgSpeedKmh": 43.7,
               "minSpeedKmh": 16,
               "status": "서행",
               "blocked": true,
@@ -4928,7 +4928,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 39.3,
+              "avgSpeedKmh": 31.4,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -4943,7 +4943,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 38.7,
+              "avgSpeedKmh": 29.9,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -4958,7 +4958,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 35.1,
+              "avgSpeedKmh": 25.6,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -4973,7 +4973,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 41.7,
+              "avgSpeedKmh": 30.5,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -4988,7 +4988,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 50,
+              "avgSpeedKmh": 41.3,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -5003,7 +5003,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 56.5,
+              "avgSpeedKmh": 47.1,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -5018,7 +5018,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 49.9,
+              "avgSpeedKmh": 44,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -5033,7 +5033,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 49.3,
+              "avgSpeedKmh": 40.1,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -5048,7 +5048,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 47.2,
+              "avgSpeedKmh": 37.6,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -5063,7 +5063,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 48.2,
+              "avgSpeedKmh": 33.1,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -5078,7 +5078,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 39.3,
+              "avgSpeedKmh": 24.9,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -5093,7 +5093,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 44.5,
+              "avgSpeedKmh": 31.2,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -5113,7 +5113,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 51.1,
+              "avgSpeedKmh": 44.3,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -5128,7 +5128,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 42.2,
+              "avgSpeedKmh": 33.5,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -5143,7 +5143,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 36.3,
+              "avgSpeedKmh": 29.9,
               "minSpeedKmh": 11,
               "status": "서행",
               "blocked": true,
@@ -5158,7 +5158,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 40.9,
+              "avgSpeedKmh": 30.7,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -5173,7 +5173,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 39.1,
+              "avgSpeedKmh": 27.8,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -5188,7 +5188,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 45.6,
+              "avgSpeedKmh": 32.6,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -5203,7 +5203,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 50.2,
+              "avgSpeedKmh": 36.2,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -5218,7 +5218,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 50.2,
+              "avgSpeedKmh": 40.8,
               "minSpeedKmh": 13,
               "status": "서행",
               "blocked": true,
@@ -5233,7 +5233,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 46.2,
+              "avgSpeedKmh": 32.3,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -5248,7 +5248,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 46.6,
+              "avgSpeedKmh": 38.6,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -5263,7 +5263,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 42.6,
+              "avgSpeedKmh": 31.8,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -5278,7 +5278,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 38.2,
+              "avgSpeedKmh": 28.1,
               "minSpeedKmh": 9,
               "status": "서행",
               "blocked": true,
@@ -5293,7 +5293,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 43.5,
+              "avgSpeedKmh": 27.5,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -5313,7 +5313,7 @@
             {
               "hour": 6,
               "label": "06:00",
-              "avgSpeedKmh": 55.2,
+              "avgSpeedKmh": 50,
               "minSpeedKmh": 19,
               "status": "서행",
               "blocked": true,
@@ -5328,7 +5328,7 @@
             {
               "hour": 7,
               "label": "07:00",
-              "avgSpeedKmh": 43,
+              "avgSpeedKmh": 36.2,
               "minSpeedKmh": 15,
               "status": "서행",
               "blocked": true,
@@ -5343,7 +5343,7 @@
             {
               "hour": 8,
               "label": "08:00",
-              "avgSpeedKmh": 40.8,
+              "avgSpeedKmh": 33.6,
               "minSpeedKmh": 14,
               "status": "서행",
               "blocked": true,
@@ -5358,7 +5358,7 @@
             {
               "hour": 9,
               "label": "09:00",
-              "avgSpeedKmh": 42.7,
+              "avgSpeedKmh": 34,
               "minSpeedKmh": 12,
               "status": "서행",
               "blocked": true,
@@ -5373,7 +5373,7 @@
             {
               "hour": 10,
               "label": "10:00",
-              "avgSpeedKmh": 43.2,
+              "avgSpeedKmh": 29.6,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -5388,7 +5388,7 @@
             {
               "hour": 11,
               "label": "11:00",
-              "avgSpeedKmh": 49.2,
+              "avgSpeedKmh": 35.6,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -5403,7 +5403,7 @@
             {
               "hour": 12,
               "label": "12:00",
-              "avgSpeedKmh": 49.2,
+              "avgSpeedKmh": 35.1,
               "minSpeedKmh": 8,
               "status": "서행",
               "blocked": true,
@@ -5418,7 +5418,7 @@
             {
               "hour": 13,
               "label": "13:00",
-              "avgSpeedKmh": 49.8,
+              "avgSpeedKmh": 39.4,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -5433,7 +5433,7 @@
             {
               "hour": 14,
               "label": "14:00",
-              "avgSpeedKmh": 44.1,
+              "avgSpeedKmh": 31.7,
               "minSpeedKmh": 10,
               "status": "서행",
               "blocked": true,
@@ -5448,7 +5448,7 @@
             {
               "hour": 15,
               "label": "15:00",
-              "avgSpeedKmh": 43.1,
+              "avgSpeedKmh": 29,
               "minSpeedKmh": 7,
               "status": "서행",
               "blocked": true,
@@ -5463,7 +5463,7 @@
             {
               "hour": 16,
               "label": "16:00",
-              "avgSpeedKmh": 43.1,
+              "avgSpeedKmh": 24.8,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
@@ -5478,7 +5478,7 @@
             {
               "hour": 17,
               "label": "17:00",
-              "avgSpeedKmh": 37.5,
+              "avgSpeedKmh": 23.4,
               "minSpeedKmh": 6,
               "status": "서행",
               "blocked": true,
@@ -5493,7 +5493,7 @@
             {
               "hour": 18,
               "label": "18:00",
-              "avgSpeedKmh": 38.1,
+              "avgSpeedKmh": 24.9,
               "minSpeedKmh": 5,
               "status": "서행",
               "blocked": true,
