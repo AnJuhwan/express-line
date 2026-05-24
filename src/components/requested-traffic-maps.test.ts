@@ -162,14 +162,14 @@ describe("RequestedTrafficMaps", () => {
     assert.match(directionListRule, /grid-template-columns:\s*1fr/);
     assert.match(boardRule, /grid-template-columns:\s*1fr/);
     assert.match(splitMapRule, /min-height/);
-    assert.match(legendRule, /top:\s*14px/);
+    assert.match(legendRule, /bottom:\s*14px/);
     assert.match(legendRule, /left:\s*14px/);
-    assert.match(legendRule, /font-size:\s*18px/);
+    assert.match(legendRule, /font-size:\s*12px/);
     assert.match(css, /@media print/);
     assert.match(css, /break-inside:\s*avoid/);
   });
 
-  it("keeps the map route strokes prominent enough to read at a glance", () => {
+  it("keeps the map route strokes aligned with the generated PDF weight", () => {
     const css = readFileSync("src/app/globals.css", "utf8");
     const routeLineRule =
       [...css.matchAll(/^\.traffic-route-line\s*\{(?<body>[^}]+)\}/gm)]
@@ -178,8 +178,8 @@ describe("RequestedTrafficMaps", () => {
     const splitRouteLineRule =
       css.match(/^\.traffic-map-display\.split \.traffic-route-line\s*\{(?<body>[^}]+)\}/m)?.groups?.body ?? "";
 
-    assert.match(routeLineRule, /stroke-width:\s*25/);
-    assert.match(splitRouteLineRule, /stroke-width:\s*30/);
+    assert.match(routeLineRule, /stroke-width:\s*1\.05/);
+    assert.match(splitRouteLineRule, /stroke-width:\s*1\.05/);
   });
 
   it("stretches the svg traffic overlay to the map box so lines align with markers", () => {
