@@ -9,8 +9,16 @@ import {
   REQUESTED_TRAFFIC_DAY_END_HOUR,
   REQUESTED_TRAFFIC_DAY_START_HOUR
 } from "../src/lib/requested-traffic-five-minute-shared";
-import { loadRequestedTrafficMapGroups } from "../src/lib/requested-traffic-maps";
-import type { RequestedTrafficMapDirectionHour, RequestedTrafficMapSegment } from "../src/lib/requested-traffic-maps";
+import {
+  BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS,
+  REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS,
+  loadRequestedTrafficMapGroups
+} from "../src/lib/requested-traffic-maps";
+import type {
+  RequestedTrafficMapDirectionHour,
+  RequestedTrafficMapGroupDefinition,
+  RequestedTrafficMapSegment
+} from "../src/lib/requested-traffic-maps";
 import {
   REQUESTED_TRAFFIC_MAP_VIEWPORTS,
   buildCenteredRouteViewport,
@@ -22,9 +30,11 @@ import {
 import type { ProjectedPoint, ProjectedTrafficSegmentPath } from "../src/lib/requested-traffic-map-geometry";
 
 const cwd = process.cwd();
-const outputDir = resolve(cwd, "requested-traffic-hourly-pdfs");
-const zipPath = resolve(cwd, "requested-traffic-hourly-pdfs.zip");
-const workDir = "/tmp/requested-traffic-line-pdf";
+const variant = process.argv.includes("--bucheon") ? "bucheon" : "incheon";
+const config = pdfConfig(variant);
+const outputDir = resolve(cwd, config.outputDirName);
+const zipPath = resolve(cwd, config.zipName);
+const workDir = config.workDir;
 const tileDir = "/tmp/requested-traffic-hourly-pdf-tiles";
 const imageDir = join(workDir, "maps");
 const htmlDir = join(workDir, "html");
@@ -55,8 +65,10 @@ mkdirSync(tileDir, { recursive: true });
 const dataset = getRequestedTrafficDataset("20260520");
 const routes = requestedTrafficRoutesForReport(dataset.report);
 const groups = loadRequestedTrafficMapGroups(routes, {
+  baseDir: dataset.dataDir,
   startHour: REQUESTED_TRAFFIC_DAY_START_HOUR,
-  endHour: REQUESTED_TRAFFIC_DAY_END_HOUR
+  endHour: REQUESTED_TRAFFIC_DAY_END_HOUR,
+  groupDefinitions: config.groupDefinitions
 });
 const hours = Array.from(
   { length: REQUESTED_TRAFFIC_DAY_END_HOUR - REQUESTED_TRAFFIC_DAY_START_HOUR + 1 },
@@ -70,17 +82,46 @@ main().catch((error) => {
 
 async function main(): Promise<void> {
   for (const hour of hours) {
-    const htmlPath = join(htmlDir, `requested-traffic-2026-05-20-${padHour(hour)}.html`);
+    const htmlPath = join(htmlDir, `${config.filePrefix}-${padHour(hour)}.html`);
     writeFileSync(htmlPath, await htmlForHour(hour), "utf8");
     console.log(`${padHour(hour)}시 HTML/지도 준비 완료`);
   }
 
   for (const hour of hours) {
-    const htmlPath = join(htmlDir, `requested-traffic-2026-05-20-${padHour(hour)}.html`);
-    const pdfPath = join(outputDir, `requested-traffic-2026-05-20-${padHour(hour)}.pdf`);
+    const htmlPath = join(htmlDir, `${config.filePrefix}-${padHour(hour)}.html`);
+    const pdfPath = join(outputDir, `${config.filePrefix}-${padHour(hour)}.pdf`);
     const size = await printPdf(hour, htmlPath, pdfPath);
     console.log(`${padHour(hour)}시 PDF 생성: ${(size / 1024 / 1024).toFixed(1)}MB`);
   }
+
+  const zipSize = await zipOutput();
+  console.log(`ZIP 생성: ${(zipSize / 1024 / 1024).toFixed(1)}MB`);
+}
+
+function pdfConfig(name: "incheon" | "bucheon"): {
+  outputDirName: string;
+  zipName: string;
+  workDir: string;
+  filePrefix: string;
+  groupDefinitions: RequestedTrafficMapGroupDefinition[];
+} {
+  if (name === "bucheon") {
+    return {
+      outputDirName: "bucheon-requested-traffic-hourly-pdfs",
+      zipName: "bucheon-requested-traffic-hourly-pdfs.zip",
+      workDir: "/tmp/bucheon-requested-traffic-line-pdf",
+      filePrefix: "bucheon-requested-traffic-2026-05-20",
+      groupDefinitions: BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS
+    };
+  }
+
+  return {
+    outputDirName: "requested-traffic-hourly-pdfs",
+    zipName: "requested-traffic-hourly-pdfs.zip",
+    workDir: "/tmp/requested-traffic-line-pdf",
+    filePrefix: "requested-traffic-2026-05-20",
+    groupDefinitions: REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS
+  };
 }
 
 function tileFileName(url: string): string {
@@ -103,10 +144,10 @@ function splitMapFor(groupId: string, routeId: string) {
   return buildRouteDistanceSplitViewports(routeId, buildCenteredRouteViewport(routeId, fallbackViewport), 1)[0] ?? null;
 }
 
-async function mapImage(groupId: string, routeId: string, direction: RequestedTrafficMapDirectionHour): Promise<string> {
-  const splitMap = splitMapFor(groupId, routeId);
+async function mapImage(groupId: string, direction: RequestedTrafficMapDirectionHour): Promise<string> {
+  const splitMap = splitMapFor(groupId, direction.mapRouteId);
   if (!splitMap) return "";
-  const imageName = `${padHour(direction.hour)}-${groupId}-${direction.routeId}.jpg`;
+  const imageName = `${padHour(direction.hour)}-${groupId}-${direction.mapRouteId}.jpg`;
   const imagePath = join(imageDir, imageName);
   if (existsSync(imagePath)) return imagePath;
 
@@ -120,8 +161,8 @@ async function mapImage(groupId: string, routeId: string, direction: RequestedTr
     );
   }
 
-  const basePath = buildProjectedRoutePath(direction.routeId, viewport, splitMap);
-  const paths = buildProjectedTrafficSegmentPaths(direction.routeId, direction.segments, viewport, splitMap);
+  const basePath = buildProjectedRoutePath(direction.mapRouteId, viewport, splitMap);
+  const paths = buildProjectedTrafficSegmentPaths(direction.mapRouteId, direction.segments, viewport, splitMap);
   const pathByLinkId = new Map(paths.map((path) => [path.segment.linkId, path]));
   const orderedPaths = [...paths].sort((first, second) => statusRank(first.segment.status) - statusRank(second.segment.status));
   const markerRows = buildMarkerLayout(direction, pathByLinkId);
@@ -248,7 +289,7 @@ function terminal(point: ProjectedPoint, label: string, fill: string): string {
 async function mapCards(groupId: string, directions: RequestedTrafficMapDirectionHour[]): Promise<string> {
   const cards = [];
   for (const direction of directions) {
-    const imagePath = await mapImage(groupId, direction.routeId, direction);
+    const imagePath = await mapImage(groupId, direction);
     cards.push(`
       <article class="map-card status-${statusClass(direction.status)}">
         <div class="map-card-title">
@@ -407,6 +448,23 @@ async function printPdf(hour: number, htmlPath: string, pdfPath: string): Promis
   }
   child.kill("SIGKILL");
   throw new Error(`PDF generation timed out for ${padHour(hour)}:00`);
+}
+
+async function zipOutput(): Promise<number> {
+  rmSync(zipPath, { force: true });
+  await runCommand("ditto", ["-c", "-k", "--keepParent", outputDir, zipPath]);
+  return statSync(zipPath).size;
+}
+
+function runCommand(command: string, args: string[]): Promise<void> {
+  return new Promise((resolveCommand, rejectCommand) => {
+    const child = spawn(command, args, { stdio: "ignore" });
+    child.on("error", rejectCommand);
+    child.on("exit", (code) => {
+      if (code === 0) resolveCommand();
+      else rejectCommand(new Error(`${command} exited with code ${code ?? "unknown"}`));
+    });
+  });
 }
 
 function sleep(ms: number): Promise<void> {

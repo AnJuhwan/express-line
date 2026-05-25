@@ -7,6 +7,25 @@ import { RequestedTrafficMaps } from "./requested-traffic-maps";
 import type { RequestedTrafficMapGroup, RequestedTrafficMapSegment } from "@/lib/requested-traffic-maps";
 
 describe("RequestedTrafficMaps", () => {
+  it("allows page-specific hero wording for the Bucheon map page", () => {
+    const html = renderToStaticMarkup(
+      createElement(RequestedTrafficMaps, {
+        groups: [trafficMapGroup()],
+        reportHref: "/report",
+        fiveMinuteHref: "/five-minute",
+        hourlyHref: "/hourly",
+        periodLabel: "06:00-18:00",
+        dataLabel: "test",
+        pageTitle: "부천 한일시멘트 ↔ 방화대교 지도",
+        heroCopy: "부천 한일시멘트 기준 구간을 정리했습니다."
+      })
+    );
+
+    assert.match(html, /부천 한일시멘트 ↔ 방화대교 지도/);
+    assert.match(html, /부천 한일시멘트 기준 구간/);
+    assert.doesNotMatch(html, /인천 한일시멘트 기준 요청 구간/);
+  });
+
   it("renders a red/yellow/green status summary for every route direction", () => {
     const html = renderToStaticMarkup(
       createElement(RequestedTrafficMaps, {
@@ -221,6 +240,7 @@ function trafficMapGroup(overrides: {
     directions: [
       {
         routeId,
+        mapRouteId: routeId,
         requestLabel,
         matchedLabel,
         linkCount: 3
@@ -233,6 +253,7 @@ function trafficMapGroup(overrides: {
         directions: [
           {
             routeId,
+            mapRouteId: routeId,
             requestLabel,
             matchedLabel,
             linkCount: 3,

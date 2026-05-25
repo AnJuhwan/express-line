@@ -82,6 +82,26 @@ export const REQUESTED_TRAFFIC_MAP_VIEWPORTS: Record<string, RequestedTrafficMap
 };
 
 const MAP_DISPLAY_ASPECT_RATIO = 16 / 9;
+const BUCHEON_HANIL_CEMENT: LatLng = { lat: 37.5295147, lng: 126.7710287 };
+const BUCHEON_TO_GYEONGIN_CONNECTOR: LatLng[] = [
+  BUCHEON_HANIL_CEMENT,
+  { lat: 37.5287, lng: 126.7743 },
+  { lat: 37.5267, lng: 126.7787 },
+  { lat: 37.523736, lng: 126.782528 }
+];
+const BUCHEON_TO_RING_CONNECTOR: LatLng[] = [
+  BUCHEON_HANIL_CEMENT,
+  { lat: 37.5293, lng: 126.7642 },
+  { lat: 37.5278, lng: 126.7573 },
+  { lat: 37.527007, lng: 126.75199 }
+];
+const BUCHEON_TO_BANGHWA_CONNECTOR: LatLng[] = [
+  BUCHEON_HANIL_CEMENT,
+  { lat: 37.5357, lng: 126.7854 },
+  { lat: 37.5482, lng: 126.7994 },
+  { lat: 37.568, lng: 126.8158 },
+  { lat: 37.591591, lng: 126.831507 }
+];
 
 // Extracted from ITS National Transport Information Center NODELINKDATA standard link shapefile.
 
@@ -2178,6 +2198,15 @@ const JANGSU_TO_GEYANG: LatLng[] = [
   { lat: 37.541177, lng: 126.749789 }
 ];
 
+const BUCHEON_HANIL_TO_OLYMPIC = connectToRoute(BUCHEON_TO_GYEONGIN_CONNECTOR, INCHEON_TOLL_TO_MOKDONG_UNDERPASS);
+const OLYMPIC_TO_BUCHEON_HANIL = connectFromRoute(MOKDONG_UNDERPASS_TO_INCHEON_TOLL, BUCHEON_TO_GYEONGIN_CONNECTOR);
+const BUCHEON_HANIL_TO_JANGSU = connectToRoute(BUCHEON_TO_RING_CONNECTOR, GEYANG_TO_JANGSU);
+const JANGSU_TO_BUCHEON_HANIL = connectFromRoute(JANGSU_TO_GEYANG, BUCHEON_TO_RING_CONNECTOR);
+const BUCHEON_HANIL_TO_BANGHWA = BUCHEON_TO_BANGHWA_CONNECTOR;
+const BANGHWA_TO_BUCHEON_HANIL = [...BUCHEON_TO_BANGHWA_CONNECTOR].reverse();
+const BUCHEON_HANIL_TO_GANGBYEONBUKRO = [...BUCHEON_TO_BANGHWA_CONNECTOR, ...BANGHWA_TO_CHEONHO.slice(1)];
+const GANGBYEONBUKRO_TO_BUCHEON_HANIL = [...CHEONHO_TO_BANGHWA, ...BUCHEON_TO_BANGHWA_CONNECTOR.slice(0, -1).reverse()];
+
 export const REQUESTED_TRAFFIC_ROUTE_GEOMETRIES: Record<string, LatLng[]> = {
   incheon_toll_to_mokdong_underpass: densifyRoutePath(INCHEON_TOLL_TO_MOKDONG_UNDERPASS),
   mokdong_underpass_to_incheon_toll: densifyRoutePath(MOKDONG_UNDERPASS_TO_INCHEON_TOLL),
@@ -2186,7 +2215,15 @@ export const REQUESTED_TRAFFIC_ROUTE_GEOMETRIES: Record<string, LatLng[]> = {
   gangbyeonbukro_banghwa_to_jamsil: densifyRoutePath(BANGHWA_TO_JAMSIL),
   gangbyeonbukro_jamsil_to_banghwa: densifyRoutePath(JAMSIL_TO_BANGHWA),
   gangbyeonbukro_banghwa_to_cheonho: densifyRoutePath(BANGHWA_TO_CHEONHO),
-  gangbyeonbukro_cheonho_to_banghwa: densifyRoutePath(CHEONHO_TO_BANGHWA)
+  gangbyeonbukro_cheonho_to_banghwa: densifyRoutePath(CHEONHO_TO_BANGHWA),
+  bucheon_hanil_to_olympic: densifyRoutePath(BUCHEON_HANIL_TO_OLYMPIC),
+  olympic_to_bucheon_hanil: densifyRoutePath(OLYMPIC_TO_BUCHEON_HANIL),
+  bucheon_hanil_to_jangsu: densifyRoutePath(BUCHEON_HANIL_TO_JANGSU),
+  jangsu_to_bucheon_hanil: densifyRoutePath(JANGSU_TO_BUCHEON_HANIL),
+  bucheon_hanil_to_banghwa: densifyRoutePath(BUCHEON_HANIL_TO_BANGHWA),
+  banghwa_to_bucheon_hanil: densifyRoutePath(BANGHWA_TO_BUCHEON_HANIL),
+  bucheon_hanil_to_gangbyeonbukro: densifyRoutePath(BUCHEON_HANIL_TO_GANGBYEONBUKRO),
+  gangbyeonbukro_to_bucheon_hanil: densifyRoutePath(GANGBYEONBUKRO_TO_BUCHEON_HANIL)
 };
 
 const BANGHWA_TO_JAMSIL_LANDMARKS = [
@@ -2234,7 +2271,39 @@ export const REQUESTED_TRAFFIC_ROUTE_LANDMARKS: Record<string, Array<{ label: st
   gangbyeonbukro_banghwa_to_jamsil: BANGHWA_TO_JAMSIL_LANDMARKS,
   gangbyeonbukro_jamsil_to_banghwa: [...BANGHWA_TO_JAMSIL_LANDMARKS].reverse(),
   gangbyeonbukro_banghwa_to_cheonho: BANGHWA_TO_CHEONHO_LANDMARKS,
-  gangbyeonbukro_cheonho_to_banghwa: [...BANGHWA_TO_CHEONHO_LANDMARKS].reverse()
+  gangbyeonbukro_cheonho_to_banghwa: [...BANGHWA_TO_CHEONHO_LANDMARKS].reverse(),
+  bucheon_hanil_to_olympic: [
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng),
+    landmark("목동", 37.529857, 126.864557)
+  ],
+  olympic_to_bucheon_hanil: [
+    landmark("목동", 37.529789, 126.863391),
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng)
+  ],
+  bucheon_hanil_to_jangsu: [
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng),
+    landmark("장수IC", 37.463791, 126.753103)
+  ],
+  jangsu_to_bucheon_hanil: [
+    landmark("장수IC", 37.463715, 126.753193),
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng)
+  ],
+  bucheon_hanil_to_banghwa: [
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng),
+    landmark("방화대교", 37.591591, 126.831507)
+  ],
+  banghwa_to_bucheon_hanil: [
+    landmark("방화대교", 37.591591, 126.831507),
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng)
+  ],
+  bucheon_hanil_to_gangbyeonbukro: [
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng),
+    ...BANGHWA_TO_CHEONHO_LANDMARKS
+  ],
+  gangbyeonbukro_to_bucheon_hanil: [
+    ...BANGHWA_TO_CHEONHO_LANDMARKS.slice().reverse(),
+    landmark("부천 한일시멘트", BUCHEON_HANIL_CEMENT.lat, BUCHEON_HANIL_CEMENT.lng)
+  ]
 };
 
 export function buildOsmTiles(viewport: RequestedTrafficMapViewport): OsmTile[] {
@@ -2490,6 +2559,27 @@ function densifyRoutePath(path: LatLng[], maxEdgeMeters = 900): LatLng[] {
 
     return points;
   });
+}
+
+function connectToRoute(connector: LatLng[], route: LatLng[]): LatLng[] {
+  const joinPoint = connector.at(-1);
+  if (!joinPoint) return route;
+  const index = nearestPointIndex(route, joinPoint);
+  return [...connector, ...route.slice(index + 1)];
+}
+
+function connectFromRoute(route: LatLng[], connector: LatLng[]): LatLng[] {
+  const joinPoint = connector.at(-1);
+  if (!joinPoint) return route;
+  const index = nearestPointIndex(route, joinPoint);
+  return [...route.slice(0, index + 1), ...connector.slice(0, -1).reverse()];
+}
+
+function nearestPointIndex(path: LatLng[], target: LatLng): number {
+  if (!path.length) return 0;
+  return path.reduce((nearest, point, index) => (
+    distanceMeters(point, target) < distanceMeters(path[nearest], target) ? index : nearest
+  ), 0);
 }
 
 function normalizeRouteWindow(routeWindow?: RequestedTrafficRouteRatioWindow): RequestedTrafficRouteRatioWindow {

@@ -141,6 +141,34 @@ describe("requested traffic map geometry", () => {
     assert.ok(Math.abs(northbound.at(-1)!.lng - 126.75) < 0.003);
   });
 
+  it("starts and ends Bucheon map-only routes at Bucheon Hanil Cement", () => {
+    const bucheon = { lat: 37.5295147, lng: 126.7710287 };
+    const bucheonOutboundRouteIds = [
+      "bucheon_hanil_to_olympic",
+      "bucheon_hanil_to_jangsu",
+      "bucheon_hanil_to_banghwa",
+      "bucheon_hanil_to_gangbyeonbukro"
+    ];
+    const bucheonInboundRouteIds = [
+      "olympic_to_bucheon_hanil",
+      "jangsu_to_bucheon_hanil",
+      "banghwa_to_bucheon_hanil",
+      "gangbyeonbukro_to_bucheon_hanil"
+    ];
+
+    for (const routeId of bucheonOutboundRouteIds) {
+      const geometry = REQUESTED_TRAFFIC_ROUTE_GEOMETRIES[routeId];
+      assert.ok(geometry.length >= 5, `${routeId} should include the Bucheon connector path`);
+      assert.ok(distanceMeters(geometry[0], bucheon) < 5, `${routeId} should start at Bucheon Hanil Cement`);
+    }
+
+    for (const routeId of bucheonInboundRouteIds) {
+      const geometry = REQUESTED_TRAFFIC_ROUTE_GEOMETRIES[routeId];
+      assert.ok(geometry.length >= 5, `${routeId} should include the Bucheon connector path`);
+      assert.ok(distanceMeters(geometry.at(-1)!, bucheon) < 5, `${routeId} should end at Bucheon Hanil Cement`);
+    }
+  });
+
   it("projects major route landmarks for the callout labels on the map", () => {
     const viewport = buildCenteredRouteViewport(
       "gangbyeonbukro_banghwa_to_jamsil",

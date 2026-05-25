@@ -8,6 +8,7 @@ import {
   requestedTrafficRoutesForReport
 } from "./requested-traffic-datasets";
 import {
+  BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS,
   REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS,
   loadRequestedTrafficMapGroups
 } from "./requested-traffic-maps";
@@ -43,6 +44,37 @@ describe("requested traffic map data", () => {
     assert.ok(groups.every((group) => group.directions.length === 2));
     assert.ok(groups[0].directions.some((direction) => direction.routeId === "incheon_toll_to_mokdong_underpass"));
     assert.ok(groups[1].directions.some((direction) => direction.routeId === "jangsu_ic_to_geyang_ic"));
+  });
+
+  it("builds Bucheon Hanil Cement map groups for every May 20 map bundle", () => {
+    const dataset = getRequestedTrafficDataset("20260520");
+    const routes = requestedTrafficRoutesForReport(dataset.report);
+    const groups = loadRequestedTrafficMapGroups(routes, {
+      baseDir: dataset.dataDir,
+      startHour: 6,
+      endHour: 18,
+      groupDefinitions: BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS
+    });
+
+    assert.deepEqual(
+      BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS.map((group) => group.displayLabel),
+      [
+        "부천 한일시멘트 ↔ 올림픽대로",
+        "부천 한일시멘트 ↔ 장수IC",
+        "부천 한일시멘트 ↔ 방화대교",
+        "부천 한일시멘트 ↔ 강변북로"
+      ]
+    );
+    assert.equal(groups.length, 4);
+    assert.ok(groups.every((group) => group.displayLabel.startsWith("부천 한일시멘트 ↔ ")));
+    assert.ok(groups.every((group) => group.hours.length === 13));
+    assert.ok(groups.every((group) => group.directions.length === 2));
+    assert.ok(groups[0].directions.some((direction) => direction.mapRouteId === "bucheon_hanil_to_olympic"));
+    assert.ok(groups[1].directions.some((direction) => direction.mapRouteId === "jangsu_to_bucheon_hanil"));
+    assert.ok(groups[2].directions.some((direction) => direction.mapRouteId === "bucheon_hanil_to_banghwa"));
+    assert.ok(groups[3].directions.some((direction) => direction.mapRouteId === "gangbyeonbukro_to_bucheon_hanil"));
+    assert.ok(groups[0].hours[0].directions.some((direction) => direction.requestLabel === "부천 한일시멘트 → 올림픽대로"));
+    assert.ok(groups[2].hours[0].directions.some((direction) => direction.requestLabel === "방화대교 → 부천 한일시멘트"));
   });
 
   it("classifies each map segment by worst observed hourly congestion without exposing average speed", () => {

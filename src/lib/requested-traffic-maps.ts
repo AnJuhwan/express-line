@@ -18,6 +18,13 @@ export interface RequestedTrafficMapGroupDefinition {
   displayLabel: string;
   actualLabel: string;
   routeIds: string[];
+  routeOverrides?: Record<string, RequestedTrafficMapRouteOverride>;
+}
+
+export interface RequestedTrafficMapRouteOverride {
+  requestLabel?: string;
+  matchedLabel?: string;
+  mapRouteId?: string;
 }
 
 export interface RequestedTrafficMapGroup {
@@ -31,6 +38,7 @@ export interface RequestedTrafficMapGroup {
 
 export interface RequestedTrafficMapDirection {
   routeId: string;
+  mapRouteId: string;
   requestLabel: string;
   matchedLabel: string;
   linkCount: number;
@@ -150,6 +158,85 @@ export const REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS: RequestedTrafficMapGroupDe
   }
 ];
 
+export const BUCHEON_REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS: RequestedTrafficMapGroupDefinition[] = [
+  {
+    id: "incheon-hanil-cement-olympic",
+    title: "부천 한일시멘트 ~ 올림픽대로",
+    displayLabel: "부천 한일시멘트 ↔ 올림픽대로",
+    actualLabel: "부천 한일시멘트 ↔ 목동지하차도서측",
+    routeIds: ["incheon_toll_to_mokdong_underpass", "mokdong_underpass_to_incheon_toll"],
+    routeOverrides: {
+      incheon_toll_to_mokdong_underpass: {
+        requestLabel: "부천 한일시멘트 → 올림픽대로",
+        matchedLabel: "부천 한일시멘트 → 목동지하차도서측",
+        mapRouteId: "bucheon_hanil_to_olympic"
+      },
+      mokdong_underpass_to_incheon_toll: {
+        requestLabel: "올림픽대로 → 부천 한일시멘트",
+        matchedLabel: "목동지하차도서측 → 부천 한일시멘트",
+        mapRouteId: "olympic_to_bucheon_hanil"
+      }
+    }
+  },
+  {
+    id: "incheon-junction-jangsu",
+    title: "부천 한일시멘트 ~ 장수IC",
+    displayLabel: "부천 한일시멘트 ↔ 장수IC",
+    actualLabel: "부천 한일시멘트 ↔ 장수IC남측",
+    routeIds: ["geyang_ic_to_jangsu_ic", "jangsu_ic_to_geyang_ic"],
+    routeOverrides: {
+      geyang_ic_to_jangsu_ic: {
+        requestLabel: "부천 한일시멘트 → 장수IC",
+        matchedLabel: "부천 한일시멘트 → 장수IC남측",
+        mapRouteId: "bucheon_hanil_to_jangsu"
+      },
+      jangsu_ic_to_geyang_ic: {
+        requestLabel: "장수IC → 부천 한일시멘트",
+        matchedLabel: "장수IC남측 → 부천 한일시멘트",
+        mapRouteId: "jangsu_to_bucheon_hanil"
+      }
+    }
+  },
+  {
+    id: "olympic-gangbyeonbukro-banghwa",
+    title: "부천 한일시멘트 ~ 방화대교",
+    displayLabel: "부천 한일시멘트 ↔ 방화대교",
+    actualLabel: "부천 한일시멘트 ↔ 방화대교",
+    routeIds: ["gangbyeonbukro_jamsil_to_banghwa", "gangbyeonbukro_banghwa_to_jamsil"],
+    routeOverrides: {
+      gangbyeonbukro_jamsil_to_banghwa: {
+        requestLabel: "부천 한일시멘트 → 방화대교",
+        matchedLabel: "부천 한일시멘트 → 방화대교",
+        mapRouteId: "bucheon_hanil_to_banghwa"
+      },
+      gangbyeonbukro_banghwa_to_jamsil: {
+        requestLabel: "방화대교 → 부천 한일시멘트",
+        matchedLabel: "방화대교 → 부천 한일시멘트",
+        mapRouteId: "banghwa_to_bucheon_hanil"
+      }
+    }
+  },
+  {
+    id: "incheon-hanil-cement-gangbyeonbukro",
+    title: "부천 한일시멘트 ~ 강변북로",
+    displayLabel: "부천 한일시멘트 ↔ 강변북로",
+    actualLabel: "부천 한일시멘트 ↔ 천호대교북측",
+    routeIds: ["gangbyeonbukro_banghwa_to_cheonho", "gangbyeonbukro_cheonho_to_banghwa"],
+    routeOverrides: {
+      gangbyeonbukro_banghwa_to_cheonho: {
+        requestLabel: "부천 한일시멘트 → 강변북로",
+        matchedLabel: "부천 한일시멘트 → 천호대교북측",
+        mapRouteId: "bucheon_hanil_to_gangbyeonbukro"
+      },
+      gangbyeonbukro_cheonho_to_banghwa: {
+        requestLabel: "강변북로 → 부천 한일시멘트",
+        matchedLabel: "천호대교북측 → 부천 한일시멘트",
+        mapRouteId: "gangbyeonbukro_to_bucheon_hanil"
+      }
+    }
+  }
+];
+
 const mapFileCache = new Map<string, RequestedTrafficMapRawFile>();
 
 export function loadRequestedTrafficMapGroups(
@@ -174,20 +261,29 @@ export function loadRequestedTrafficMapGroups(
         title: definition.title,
         displayLabel: definition.displayLabel,
         actualLabel: definition.actualLabel,
-        directions: sources.map((source) => ({
-          routeId: source.route.id,
-          requestLabel: source.route.requestLabel,
-          matchedLabel: source.route.matchedLabel,
-          linkCount: source.links.length
-        })),
+        directions: sources.map((source) => buildDirection(source, definition)),
         hours: hourRange(timeWindow).map((hour) => ({
           hour,
           label: `${padHour(hour)}:00`,
-          directions: sources.map((source) => buildDirectionHour(source, hour))
+          directions: sources.map((source) => buildDirectionHour(source, definition, hour))
         }))
       };
     })
     .filter((group) => group.directions.length > 0);
+}
+
+function buildDirection(
+  source: RequestedTrafficMapRouteSource,
+  definition: RequestedTrafficMapGroupDefinition
+): RequestedTrafficMapDirection {
+  const override = definition.routeOverrides?.[source.route.id];
+  return {
+    routeId: source.route.id,
+    mapRouteId: override?.mapRouteId ?? source.route.id,
+    requestLabel: override?.requestLabel ?? source.route.requestLabel,
+    matchedLabel: override?.matchedLabel ?? source.route.matchedLabel,
+    linkCount: source.links.length
+  };
 }
 
 function loadRouteSource(route: RequestedTrafficFiveMinuteRouteMeta, baseDir: string): RequestedTrafficMapRouteSource {
@@ -213,7 +309,12 @@ function readRouteFile(routeId: string, baseDir: string): RequestedTrafficMapRaw
   return parsed;
 }
 
-function buildDirectionHour(source: RequestedTrafficMapRouteSource, hour: number): RequestedTrafficMapDirectionHour {
+function buildDirectionHour(
+  source: RequestedTrafficMapRouteSource,
+  definition: RequestedTrafficMapGroupDefinition,
+  hour: number
+): RequestedTrafficMapDirectionHour {
+  const direction = buildDirection(source, definition);
   const rowsByLink = observationsByLinkForHour(source.observations, hour);
   const segments = source.links.map((link, index) => buildSegment(link, index, rowsByLink.get(text(link["링크아이디"])) ?? []));
   const blockedSections = segments
@@ -231,10 +332,7 @@ function buildDirectionHour(source: RequestedTrafficMapRouteSource, hour: number
   const slowSegmentCount = segments.filter((segment) => segment.status === "서행").length;
 
   return {
-    routeId: source.route.id,
-    requestLabel: source.route.requestLabel,
-    matchedLabel: source.route.matchedLabel,
-    linkCount: source.links.length,
+    ...direction,
     hour,
     label: `${padHour(hour)}:00`,
     date: firstDate(rowsByLink),

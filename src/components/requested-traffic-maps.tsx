@@ -28,6 +28,8 @@ interface RequestedTrafficMapsProps {
   hourlyHref: string;
   periodLabel: string;
   dataLabel: string;
+  pageTitle?: string;
+  heroCopy?: string;
 }
 
 export function RequestedTrafficMaps({
@@ -36,7 +38,9 @@ export function RequestedTrafficMaps({
   fiveMinuteHref,
   hourlyHref,
   periodLabel,
-  dataLabel
+  dataLabel,
+  pageTitle = "2026년 5월 20일 시간대별 막히는 구간 지도",
+  heroCopy = `${periodLabel}, 오전 6시부터 오후 6시까지 인천 한일시멘트 기준 요청 구간과 강변북로 구간을 대한민국 실제 지도 위에 양방향으로 정리했습니다.`
 }: RequestedTrafficMapsProps) {
   const hourSections = useMemo(() => buildHourSections(groups), [groups]);
   const hourCount = hourSections.length;
@@ -64,10 +68,8 @@ export function RequestedTrafficMaps({
       <section className="hero-band requested-maps-hero">
         <div>
           <p className="eyebrow">Traffic congestion maps</p>
-          <h1>2026년 5월 20일 시간대별 막히는 구간 지도</h1>
-          <p className="hero-copy">
-            {periodLabel}, 오전 6시부터 오후 6시까지 인천 한일시멘트 기준 요청 구간과 강변북로 구간을 대한민국 실제 지도 위에 양방향으로 정리했습니다.
-          </p>
+          <h1>{pageTitle}</h1>
+          <p className="hero-copy">{heroCopy}</p>
         </div>
         <div className="hero-actions">
           <Link className="icon-button" href={reportHref} title="리포트로 돌아가기">
@@ -162,7 +164,7 @@ export function RequestedTrafficMaps({
                         <TrafficStatusOverview segments={direction.segments} />
 
                         <div className="traffic-map-board">
-                          {buildDirectionSplitMaps(direction.routeId, group.id).map((splitMap) => (
+                          {buildDirectionSplitMaps(direction.mapRouteId, group.id).map((splitMap) => (
                             <div className="traffic-map-display split" key={`${group.id}-${hour.hour}-${splitMap.key}`}>
                               <div className="traffic-map-caption">
                                 <strong>{splitMap.caption} 지도</strong>
@@ -240,10 +242,10 @@ function KoreaTrafficMap({
 }) {
   const viewport = splitMap.viewport;
   const tiles = buildOsmTiles(viewport);
-  const basePath = buildProjectedRoutePath(direction.routeId, viewport, splitMap);
+  const basePath = buildProjectedRoutePath(direction.mapRouteId, viewport, splitMap);
   const routeStart = basePath[0];
   const routeEnd = basePath.at(-1);
-  const paths = buildProjectedTrafficSegmentPaths(direction.routeId, direction.segments, viewport, splitMap);
+  const paths = buildProjectedTrafficSegmentPaths(direction.mapRouteId, direction.segments, viewport, splitMap);
   const orderedPaths = [...paths].sort(
     (first, second) => statusLayer(first.segment.status) - statusLayer(second.segment.status)
   );
@@ -275,7 +277,7 @@ function KoreaTrafficMap({
         {orderedPaths.map((path) => (
           <polyline
             className={`traffic-route-line ${statusClass(path.segment.status)}`}
-            key={`${direction.routeId}-${direction.hour}-${splitMap.key}-${path.segment.linkId}`}
+            key={`${direction.mapRouteId}-${direction.hour}-${splitMap.key}-${path.segment.linkId}`}
             points={pointsAttribute(path.points)}
           >
             <title>{segmentTitle(path.segment)}</title>
