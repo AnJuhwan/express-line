@@ -3,7 +3,6 @@ import { join, resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
-import sharp from "sharp";
 import { getRequestedTrafficDataset, requestedTrafficRoutesForReport } from "../src/lib/requested-traffic-datasets";
 import {
   REQUESTED_TRAFFIC_DAY_END_HOUR,
@@ -150,6 +149,7 @@ async function mapImage(groupId: string, direction: RequestedTrafficMapDirection
   const imageName = `${padHour(direction.hour)}-${groupId}-${direction.mapRouteId}.jpg`;
   const imagePath = join(imageDir, imageName);
   if (existsSync(imagePath)) return imagePath;
+  const svgPath = join(imageDir, `${padHour(direction.hour)}-${groupId}-${direction.mapRouteId}.svg`);
 
   const viewport = splitMap.viewport;
   const tileImages = [];
@@ -209,7 +209,9 @@ async function mapImage(groupId: string, direction: RequestedTrafficMapDirection
     <text x="97.5" y="95" text-anchor="end" font-family="Arial, sans-serif" font-size="1.9" font-weight="700" fill="#475569">© OpenStreetMap</text>
   </svg>`;
 
-  await sharp(Buffer.from(svg)).jpeg({ quality: 92, mozjpeg: true }).toFile(imagePath);
+  writeFileSync(svgPath, svg, "utf8");
+  await runCommand("sips", ["-s", "format", "jpeg", "-s", "formatOptions", "88", svgPath, "--out", imagePath]);
+  rmSync(svgPath, { force: true });
   return imagePath;
 }
 
@@ -234,8 +236,8 @@ function buildMarkerLayout(
         segment,
         anchorX: anchor.xPercent,
         anchorY: anchor.yPercent,
-        labelX: clamp(anchor.xPercent + offset.x, 4.8, 95.2),
-        labelY: clamp(anchor.yPercent + offset.y, 7, 90.5)
+        labelX: clamp(anchor.xPercent + offset.x, 6.2, 93.8),
+        labelY: clamp(anchor.yPercent + offset.y, 10.5, 87.5)
       };
     })
     .filter((marker): marker is MarkerRow => Boolean(marker));
@@ -248,8 +250,8 @@ function buildMarkerLayout(
         const dx = second.labelX - first.labelX;
         const dy = second.labelY - first.labelY;
         if (Math.abs(dx) < 5.4 && Math.abs(dy) < 5.4) {
-          second.labelY = clamp(second.labelY + (dy >= 0 ? 4.3 : -4.3), 7, 90.5);
-          second.labelX = clamp(second.labelX + (dx >= 0 ? 2.8 : -2.8), 4.8, 95.2);
+          second.labelY = clamp(second.labelY + (dy >= 0 ? 4.3 : -4.3), 10.5, 87.5);
+          second.labelX = clamp(second.labelX + (dx >= 0 ? 2.8 : -2.8), 6.2, 93.8);
         }
       }
     }
@@ -307,7 +309,9 @@ function detailRows(directions: RequestedTrafficMapDirectionHour[]): string {
   for (const direction of directions) {
     const sections = numberedSegments(direction);
     if (!sections.length) {
-      rows.push(`<tr><td>${escapeHtml(direction.requestLabel)}</td><td>-</td><td><span class="status-pill smooth">원활</span></td><td>막히는 구간 없음</td><td>-</td></tr>`);
+      const status = direction.status === "정보없음" ? "정보없음" : "원활";
+      const description = direction.status === "정보없음" ? "관측 데이터 없음" : "막히는 구간 없음";
+      rows.push(`<tr><td>${escapeHtml(direction.requestLabel)}</td><td>-</td><td><span class="status-pill ${statusClass(status)}">${status}</span></td><td>${description}</td><td>-</td></tr>`);
       continue;
     }
     sections.forEach((section, index) => {

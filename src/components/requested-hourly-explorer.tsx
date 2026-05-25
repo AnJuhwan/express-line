@@ -176,7 +176,6 @@ function RequestedHourlyTable({ rows, dataAvailable }: { rows: RequestedTrafficH
             <th>요청구간</th>
             <th>날짜</th>
             <th>시간대</th>
-            <th>평균속도</th>
             <th>최저속도</th>
             <th>혼잡</th>
             <th>자료수</th>
@@ -193,7 +192,6 @@ function RequestedHourlyTable({ rows, dataAvailable }: { rows: RequestedTrafficH
               <td className="strong" title={row.requestLabel}>{row.requestLabel}</td>
               <td className="mono">{row.date}</td>
               <td className="mono">{row.label}</td>
-              <td className="mono">{formatSpeed(row.avgSpeedKmh)}</td>
               <td className="mono">{formatSpeed(row.minSpeedKmh)}</td>
               <td>
                 <span className={`pill ${statusClass(row.status)}`}>{row.status || "-"}</span>

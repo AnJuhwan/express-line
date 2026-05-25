@@ -34,16 +34,28 @@ describe("requested traffic map data", () => {
       REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS.map((group) => group.title),
       [
         "인천 한일시멘트 ~ 올림픽대로",
-        "인천 분기점 ~ 장수IC",
+        "인천 한일시멘트 ~ 장수IC",
         "올림픽대로 강변북로 ~ 방화대교",
-        "인천 한일시멘트 ~ 강변북로"
+        "인천 한일시멘트 ~ 강변북로",
+        "인천 한일시멘트 ~ 송도해안도로",
+        "인천 한일시멘트 ~ 안동포사거리",
+        "인천 한일시멘트 ~ 목동 운동장"
       ]
     );
-    assert.equal(groups.length, 4);
+    assert.equal(groups.length, 7);
     assert.ok(groups.every((group) => group.hours.length === 13));
     assert.ok(groups.every((group) => group.directions.length === 2));
-    assert.ok(groups[0].directions.some((direction) => direction.routeId === "incheon_toll_to_mokdong_underpass"));
-    assert.ok(groups[1].directions.some((direction) => direction.routeId === "jangsu_ic_to_geyang_ic"));
+    assert.ok(groups[0].directions.some((direction) => direction.routeId === "incheon_hanil_to_mokdong_underpass"));
+    assert.ok(groups[0].directions.some((direction) => direction.requestLabel === "인천 한일시멘트 → 올림픽대로"));
+    assert.ok(groups[1].directions.some((direction) => direction.routeId === "jangsu_to_incheon_hanil"));
+    assert.ok(groups[1].directions.some((direction) => direction.requestLabel === "인천 한일시멘트 → 장수IC"));
+    assert.ok(groups[4].directions.some((direction) => direction.routeId === "incheon_hanil_to_songdo_yonsei"));
+    assert.ok(groups[4].directions.some((direction) => direction.requestLabel === "인천 한일시멘트 → 송도해안도로"));
+    assert.ok(groups[4].directions[0].linkCount > 1);
+    assert.ok(groups[4].hours[0].directions[0].observationCount > 0);
+    assert.notEqual(groups[4].hours[0].directions[0].status, "정보없음");
+    assert.ok(groups[5].directions.some((direction) => direction.routeId === "incheon_hanil_to_andongpo_sageori"));
+    assert.ok(groups[5].directions.some((direction) => direction.requestLabel === "안동포사거리 → 인천 한일시멘트"));
   });
 
   it("builds Bucheon Hanil Cement map groups for every May 20 map bundle", () => {

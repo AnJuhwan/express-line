@@ -24,7 +24,7 @@ export const REQUESTED_TRAFFIC_DATASETS: Record<RequestedTrafficDatasetId, Reque
     label: "2026-05-13 ~ 2026-05-15",
     report: defaultRequestedTrafficReport as RequestedTrafficReport,
     dataDir: join(process.cwd(), "data", "csv-20260513-20260515"),
-    dataLabel: "data/csv-20260513-20260515",
+    dataLabel: "2026년 5월 13~15일 데이터",
     reportHref: "/",
     fiveMinuteHref: "/five-minute",
     hourlyHref: "/hourly"
@@ -34,7 +34,7 @@ export const REQUESTED_TRAFFIC_DATASETS: Record<RequestedTrafficDatasetId, Reque
     label: "2026-05-20",
     report: may20RequestedTrafficReport as RequestedTrafficReport,
     dataDir: join(process.cwd(), "data", "csv-20260520"),
-    dataLabel: "data/csv-20260520",
+    dataLabel: "2026년 5월 20일 데이터",
     reportHref: "/2026-05-20",
     fiveMinuteHref: "/2026-05-20/five-minute",
     hourlyHref: "/2026-05-20/hourly",

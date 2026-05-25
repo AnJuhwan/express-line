@@ -156,10 +156,6 @@ export function RequestedTrafficHome({
             </div>
             <dl>
               <div>
-                <dt>평균</dt>
-                <dd>{formatSpeed(route.avgSpeedKmh)}</dd>
-              </div>
-              <div>
                 <dt>최저</dt>
                 <dd>{formatSpeed(route.minSpeedKmh)}</dd>
               </div>
@@ -264,7 +260,7 @@ function RouteHourMatrix({ route }: { route: RequestedRouteReport }) {
                   <td key={hour.hour} className={`river-cell ${statusClass(hour.status)} ${hour.blocked ? "has-blocked-link" : ""}`}>
                     <div title={hourTitle(hour)}>
                       <strong>{hour.status}</strong>
-                      <span>{formatSpeed(hour.avgSpeedKmh)}</span>
+                      <span>최저 {formatSpeed(hour.minSpeedKmh)}</span>
                       <small>
                         정체 {hour.congestedLinkCount} · 서행 {hour.slowLinkCount}
                       </small>
@@ -296,7 +292,6 @@ function hourTitle(hour: RequestedRouteHour): string {
   return [
     `${hour.label}`,
     hour.status,
-    formatSpeed(hour.avgSpeedKmh),
     `최저 ${formatSpeed(hour.minSpeedKmh)}`,
     `원활 ${hour.smoothObservationCount.toLocaleString("ko-KR")}건`,
     `정체 ${hour.congestedObservationCount.toLocaleString("ko-KR")}건`,

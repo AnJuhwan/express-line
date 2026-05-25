@@ -25,6 +25,14 @@ export interface RequestedTrafficMapRouteOverride {
   requestLabel?: string;
   matchedLabel?: string;
   mapRouteId?: string;
+  syntheticLink?: RequestedTrafficMapSyntheticLink;
+}
+
+export interface RequestedTrafficMapSyntheticLink {
+  roadName?: string;
+  fromName: string;
+  toName: string;
+  lengthMeters: number;
 }
 
 export interface RequestedTrafficMapGroup {
@@ -132,15 +140,15 @@ export const REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS: RequestedTrafficMapGroupDe
     id: "incheon-hanil-cement-olympic",
     title: "인천 한일시멘트 ~ 올림픽대로",
     displayLabel: "인천 한일시멘트 ↔ 올림픽대로",
-    actualLabel: "인천TG ↔ 목동지하차도서측",
-    routeIds: ["incheon_toll_to_mokdong_underpass", "mokdong_underpass_to_incheon_toll"]
+    actualLabel: "인천 한일시멘트 ↔ 목동지하차도서측",
+    routeIds: ["incheon_hanil_to_mokdong_underpass", "mokdong_underpass_to_incheon_hanil"]
   },
   {
     id: "incheon-junction-jangsu",
-    title: "인천 분기점 ~ 장수IC",
-    displayLabel: "인천 분기점 ↔ 장수IC",
-    actualLabel: "계양IC남측 ↔ 장수IC남측",
-    routeIds: ["geyang_ic_to_jangsu_ic", "jangsu_ic_to_geyang_ic"]
+    title: "인천 한일시멘트 ~ 장수IC",
+    displayLabel: "인천 한일시멘트 ↔ 장수IC",
+    actualLabel: "인천 한일시멘트 ↔ 장수IC남측",
+    routeIds: ["incheon_hanil_to_jangsu", "jangsu_to_incheon_hanil"]
   },
   {
     id: "olympic-gangbyeonbukro-banghwa",
@@ -155,6 +163,99 @@ export const REQUESTED_TRAFFIC_MAP_GROUP_DEFINITIONS: RequestedTrafficMapGroupDe
     displayLabel: "인천 한일시멘트 ↔ 강변북로",
     actualLabel: "방화대교 ↔ 천호대교북측",
     routeIds: ["gangbyeonbukro_banghwa_to_cheonho", "gangbyeonbukro_cheonho_to_banghwa"]
+  },
+  {
+    id: "incheon-hanil-cement-songdo-yonsei",
+    title: "인천 한일시멘트 ~ 송도해안도로",
+    displayLabel: "인천 한일시멘트 ↔ 송도해안도로",
+    actualLabel: "인천 한일시멘트 ↔ 송도해안도로",
+    routeIds: ["incheon_hanil_to_songdo_yonsei", "songdo_yonsei_to_incheon_hanil"],
+    routeOverrides: {
+      incheon_hanil_to_songdo_yonsei: {
+        requestLabel: "인천 한일시멘트 → 송도해안도로",
+        matchedLabel: "인천 한일시멘트 → 송도해안도로",
+        mapRouteId: "incheon_hanil_to_songdo_yonsei",
+        syntheticLink: {
+          roadName: "아암대로",
+          fromName: "인천 한일시멘트",
+          toName: "송도해안도로",
+          lengthMeters: 9500
+        }
+      },
+      songdo_yonsei_to_incheon_hanil: {
+        requestLabel: "송도해안도로 → 인천 한일시멘트",
+        matchedLabel: "송도해안도로 → 인천 한일시멘트",
+        mapRouteId: "songdo_yonsei_to_incheon_hanil",
+        syntheticLink: {
+          roadName: "아암대로",
+          fromName: "송도해안도로",
+          toName: "인천 한일시멘트",
+          lengthMeters: 9500
+        }
+      }
+    }
+  },
+  {
+    id: "incheon-hanil-cement-andongpo",
+    title: "인천 한일시멘트 ~ 안동포사거리",
+    displayLabel: "인천 한일시멘트 ↔ 안동포사거리",
+    actualLabel: "인천 한일시멘트 ↔ 안동포사거리",
+    routeIds: ["incheon_hanil_to_andongpo_sageori", "andongpo_sageori_to_incheon_hanil"],
+    routeOverrides: {
+      incheon_hanil_to_andongpo_sageori: {
+        requestLabel: "인천 한일시멘트 → 안동포사거리",
+        matchedLabel: "인천 한일시멘트 → 안동포사거리",
+        mapRouteId: "incheon_hanil_to_andongpo_sageori",
+        syntheticLink: {
+          roadName: "지도 전용",
+          fromName: "인천 한일시멘트",
+          toName: "안동포사거리",
+          lengthMeters: 23000
+        }
+      },
+      andongpo_sageori_to_incheon_hanil: {
+        requestLabel: "안동포사거리 → 인천 한일시멘트",
+        matchedLabel: "안동포사거리 → 인천 한일시멘트",
+        mapRouteId: "andongpo_sageori_to_incheon_hanil",
+        syntheticLink: {
+          roadName: "지도 전용",
+          fromName: "안동포사거리",
+          toName: "인천 한일시멘트",
+          lengthMeters: 23000
+        }
+      }
+    }
+  },
+  {
+    id: "incheon-hanil-cement-mokdong-stadium",
+    title: "인천 한일시멘트 ~ 목동 운동장",
+    displayLabel: "인천 한일시멘트 ↔ 목동 운동장",
+    actualLabel: "인천 한일시멘트 ↔ 목동 운동장",
+    routeIds: ["incheon_hanil_to_mokdong_stadium", "mokdong_stadium_to_incheon_hanil"],
+    routeOverrides: {
+      incheon_hanil_to_mokdong_stadium: {
+        requestLabel: "인천 한일시멘트 → 목동 운동장",
+        matchedLabel: "인천 한일시멘트 → 목동 운동장",
+        mapRouteId: "incheon_hanil_to_mokdong_stadium",
+        syntheticLink: {
+          roadName: "지도 전용",
+          fromName: "인천 한일시멘트",
+          toName: "목동 운동장",
+          lengthMeters: 11000
+        }
+      },
+      mokdong_stadium_to_incheon_hanil: {
+        requestLabel: "목동 운동장 → 인천 한일시멘트",
+        matchedLabel: "목동 운동장 → 인천 한일시멘트",
+        mapRouteId: "mokdong_stadium_to_incheon_hanil",
+        syntheticLink: {
+          roadName: "지도 전용",
+          fromName: "목동 운동장",
+          toName: "인천 한일시멘트",
+          lengthMeters: 11000
+        }
+      }
+    }
   }
 ];
 
@@ -251,9 +352,8 @@ export function loadRequestedTrafficMapGroups(
   return groupDefinitions
     .map((definition) => {
       const sources = definition.routeIds
-        .map((routeId) => routeById.get(routeId))
-        .filter((route): route is RequestedTrafficFiveMinuteRouteMeta => Boolean(route))
-        .map((route) => loadRouteSource(route, baseDir))
+        .map((routeId) => loadRouteSourceForDefinition(routeId, routeById.get(routeId), definition, baseDir))
+        .filter((source): source is RequestedTrafficMapRouteSource => Boolean(source))
         .filter((source) => source.links.length > 0);
 
       return {
@@ -286,13 +386,59 @@ function buildDirection(
   };
 }
 
-function loadRouteSource(route: RequestedTrafficFiveMinuteRouteMeta, baseDir: string): RequestedTrafficMapRouteSource {
+function loadRouteSourceForDefinition(
+  routeId: string,
+  route: RequestedTrafficFiveMinuteRouteMeta | undefined,
+  definition: RequestedTrafficMapGroupDefinition,
+  baseDir: string
+): RequestedTrafficMapRouteSource | null {
+  const override = definition.routeOverrides?.[routeId];
+  const routeMeta = route ?? syntheticRouteMeta(routeId, override);
+  if (!routeMeta) return null;
+  return loadRouteSource(routeMeta, baseDir, override);
+}
+
+function syntheticRouteMeta(
+  routeId: string,
+  override: RequestedTrafficMapRouteOverride | undefined
+): RequestedTrafficFiveMinuteRouteMeta | null {
+  if (!override?.syntheticLink) return null;
+  return {
+    id: routeId,
+    requestLabel: override.requestLabel ?? `${override.syntheticLink.fromName} → ${override.syntheticLink.toName}`,
+    matchedLabel: override.matchedLabel ?? `${override.syntheticLink.fromName} → ${override.syntheticLink.toName}`,
+    fiveMinuteRows: 0
+  };
+}
+
+function loadRouteSource(
+  route: RequestedTrafficFiveMinuteRouteMeta,
+  baseDir: string,
+  override?: RequestedTrafficMapRouteOverride
+): RequestedTrafficMapRouteSource {
   const parsed = readRouteFile(route.id, baseDir);
+  const links = Array.isArray(parsed["구간목록"]) ? parsed["구간목록"] : [];
   return {
     route,
-    links: Array.isArray(parsed["구간목록"]) ? parsed["구간목록"] : [],
+    links: links.length ? links : syntheticLinks(route.id, override),
     observations: Array.isArray(parsed["오분단위자료"]) ? parsed["오분단위자료"] : []
   };
+}
+
+function syntheticLinks(routeId: string, override?: RequestedTrafficMapRouteOverride): RequestedTrafficMapRawLink[] {
+  const link = override?.syntheticLink;
+  if (!link) return [];
+  return [
+    {
+      "순번": 1,
+      "링크아이디": routeId,
+      "도로명": link.roadName ?? "지도 전용",
+      "시점명": link.fromName,
+      "종점명": link.toName,
+      "구간명": `${link.fromName} → ${link.toName}`,
+      "연장_m": link.lengthMeters
+    }
+  ];
 }
 
 function readRouteFile(routeId: string, baseDir: string): RequestedTrafficMapRawFile {

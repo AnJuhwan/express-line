@@ -48,8 +48,9 @@ describe("requested traffic hourly data", () => {
       const csv = requestedHourlyRowsToCsv(rows);
       assert.match(csv, /^요청구간,실제매칭구간,날짜,시간대/);
       assert.doesNotMatch(csv.split("\n")[0], /막힘/);
+      assert.doesNotMatch(csv.split("\n")[0], /평균속도/);
       assert.match(csv.split("\n")[0], /원활관측수/);
-      assert.match(csv, /2026-05-13,06:00,62.5/);
+      assert.match(csv, /2026-05-13,06:00,38.2/);
       assert.equal(csv.split("\n").length, 3);
     } finally {
       rmSync(dir, { recursive: true, force: true });

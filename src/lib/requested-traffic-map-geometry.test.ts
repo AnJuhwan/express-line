@@ -169,6 +169,36 @@ describe("requested traffic map geometry", () => {
     }
   });
 
+  it("starts and ends Incheon Hanil Cement map-only routes at the Incheon endpoint", () => {
+    const incheon = { lat: 37.452628, lng: 126.626383 };
+    const outboundRouteIds = [
+      "incheon_hanil_to_mokdong_underpass",
+      "incheon_hanil_to_jangsu",
+      "incheon_hanil_to_songdo_yonsei",
+      "incheon_hanil_to_andongpo_sageori",
+      "incheon_hanil_to_mokdong_stadium"
+    ];
+    const inboundRouteIds = [
+      "mokdong_underpass_to_incheon_hanil",
+      "jangsu_to_incheon_hanil",
+      "songdo_yonsei_to_incheon_hanil",
+      "andongpo_sageori_to_incheon_hanil",
+      "mokdong_stadium_to_incheon_hanil"
+    ];
+
+    for (const routeId of outboundRouteIds) {
+      const geometry = REQUESTED_TRAFFIC_ROUTE_GEOMETRIES[routeId];
+      assert.ok(geometry.length >= 5, `${routeId} should include the Incheon connector path`);
+      assert.ok(distanceMeters(geometry[0], incheon) < 5, `${routeId} should start at Incheon Hanil Cement`);
+    }
+
+    for (const routeId of inboundRouteIds) {
+      const geometry = REQUESTED_TRAFFIC_ROUTE_GEOMETRIES[routeId];
+      assert.ok(geometry.length >= 5, `${routeId} should include the Incheon connector path`);
+      assert.ok(distanceMeters(geometry.at(-1)!, incheon) < 5, `${routeId} should end at Incheon Hanil Cement`);
+    }
+  });
+
   it("projects major route landmarks for the callout labels on the map", () => {
     const viewport = buildCenteredRouteViewport(
       "gangbyeonbukro_banghwa_to_jamsil",
